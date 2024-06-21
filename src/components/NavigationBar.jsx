@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { close, menu } from "../assets";
+import close from '../assets/close.svg';
+import menu from '../assets/menu.svg';
 
-const TopNavigationBar = () => {
+const NavigationBar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
 
@@ -24,7 +25,8 @@ const TopNavigationBar = () => {
     <div className="sm:px-16 px-6">
       <div className="xl:max-w-[1280px] w-full">
         <nav className="w-full flex py-6 justify-between items-center navbar">
-          <img src={"../assets/react.svg"} alt="hoobank" className="w-[124px] h-[32px]" />
+          {/* <img src={react} alt="hoobank" className="w-[124px] h-[32px]" /> */}
+          <h1 className="text-white font-poppins font-medium cursor-pointer text-[18px]">EazyVote</h1>
 
           <ul className="list-none sm:flex hidden justify-end items-center flex-1">
             {navLinks.map((nav, index) => (
@@ -74,4 +76,4 @@ const TopNavigationBar = () => {
   );
 };
 
-export default TopNavigationBar;
+export default NavigationBar;

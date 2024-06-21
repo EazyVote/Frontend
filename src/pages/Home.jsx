@@ -1,5 +1,5 @@
 import React from 'react'
-import TopNavigationBar from '../components/TopNavigationBar'
+import TopNavigationBar from '../components/NavigationBar'
 import HeroSection from '../components/HeroSection'
 
 const Home = () => {
