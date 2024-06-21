@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import close from '../assets/close.svg';
-import menu from '../assets/menu.svg';
+import close from "../assets/close.svg";
+import menu from "../assets/menu.svg";
 
 const NavigationBar = () => {
   const [active, setActive] = useState("Home");
@@ -26,9 +26,13 @@ const NavigationBar = () => {
       <div className="xl:max-w-[1280px] w-full">
         <nav className="w-full flex py-6 justify-between items-center navbar">
           {/* <img src={react} alt="hoobank" className="w-[124px] h-[32px]" /> */}
-          <h1 className="text-white font-poppins font-medium cursor-pointer text-[18px]">EazyVote</h1>
+          <div className="flex-1 flex-start">
+            <h1 className="text-white font-poppins font-medium cursor-pointer text-[18px]">
+              EazyVote
+            </h1>
+          </div>
 
-          <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+          <ul className="list-none flex sm:flex hidden justify-center items-center flex-1">
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
@@ -41,6 +45,15 @@ const NavigationBar = () => {
               </li>
             ))}
           </ul>
+
+          <div className="sm:flex hidden flex-1 flex justify-end">
+            <button
+              type="button"
+              className="px-6 py-2.5 text-white font-poppins font-normal text-[16px] rounded-full shadow-md border border-white border-opacity-50"
+            >
+              Connect Wallet
+            </button>
+          </div>
 
           <div className="sm:hidden flex flex-1 justify-end items-center">
             <img
