@@ -46,6 +46,27 @@
   );
 }
 
+.border-blue-gradient {
+  border: 3px solid;
+  border-image: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+  border-image-slice: 1;
+}
+
+.custom-border {
+  border-width: 5px; /* Lebar border */
+  border-style: solid; /* Gaya border */
+  border-image: linear-gradient(to right, #f00, #00f); /* Gradien warna dari merah ke biru */
+  border-image-slice: 1; /* Potong satu saja untuk gradien sepanjang border */
+}
+
 .bg-black-gradient {
   background: linear-gradient(
     144.39deg,
