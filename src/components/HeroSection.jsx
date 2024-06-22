@@ -1,6 +1,6 @@
 import React from "react";
 import ReusableButton from "./ReusableButton";
-import { FaLocationArrow } from "react-icons/fa6";
+import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
   return (
@@ -20,11 +20,20 @@ const HeroSection = () => {
                 <h1 className="mr-2 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
                   The Next
                 </h1>
-                <span className="font-poppins font-semibold ss:text-[72px] text-[52px] text-gradient ss:leading-[100.8px] leading-[75px] md:ml-2">
-                  Generation
+                <span className="font-poppins flex font-semibold ss:text-[72px] text-[52px] text-gradient ss:leading-[100.8px] leading-[75px] md:ml-2">
+                  <Typewriter
+                    words={["Generation", "Evolution", "Future"]}
+                    loop
+                    cursor
+                    cursorStyle="|"
+                    cursorBlinking={true}
+                    typeSpeed={100}
+                    deleteSpeed={100}
+                    delaySpeed={1000}                    
+                  />
                 </span>
               </div>
-              <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
+              <h1 className="font-poppins font-semibold flex items-center ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
                 of Modern Voting.
               </h1>
             </div>
@@ -36,9 +45,7 @@ const HeroSection = () => {
             </p>
 
             <a href="/">
-              <ReusableButton
-                title="Explore Elections"
-              />
+              <ReusableButton title="Explore Elections" />
             </a>
           </div>
         </section>
