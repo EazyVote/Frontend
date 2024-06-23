@@ -1,5 +1,4 @@
 import React from "react";
-import ReusableButton from "./ReusableButton";
 import { Typewriter } from "react-simple-typewriter";
 
 const HeroSection = () => {
@@ -29,7 +28,7 @@ const HeroSection = () => {
                     cursorBlinking={true}
                     typeSpeed={100}
                     deleteSpeed={100}
-                    delaySpeed={1000}                    
+                    delaySpeed={1000}
                   />
                 </span>
               </div>
@@ -44,9 +43,9 @@ const HeroSection = () => {
               cutting-edge blockchain technology.
             </p>
 
-            <a href="/">
-              <ReusableButton title="Explore Elections" />
-            </a>
+            <button className="mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg">
+              Explore Elections
+            </button>
           </div>
         </section>
       </div>

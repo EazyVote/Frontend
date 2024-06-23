@@ -46,9 +46,14 @@
   );
 }
 
-.border-blue-gradient {
-  border: 3px solid;
-  border-image: linear-gradient(
+.btn-blue-gradient {
+  padding: 20px 50px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  background: linear-gradient(
     157.81deg,
     #def9fa -43.27%,
     #bef3f5 -21.24%,
@@ -57,14 +62,50 @@
     #5ce1e6 51.94%,
     #33bbcf 90.29%
   );
-  border-image-slice: 1;
+  cursor: pointer;
 }
 
-.custom-border {
-  border-width: 5px; /* Lebar border */
-  border-style: solid; /* Gaya border */
-  border-image: linear-gradient(to right, #f00, #00f); /* Gradien warna dari merah ke biru */
-  border-image-slice: 1; /* Potong satu saja untuk gradien sepanjang border */
+.btn-blue-gradient::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 19px;
+  background-color: #00040f;
+  z-index: -1;
+}
+
+.btn-blue-gradient-2 {
+  padding: 14px 30px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+  cursor: pointer;
+}
+
+.btn-blue-gradient-2::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 19px;
+  background-color: #00040f;
+  z-index: -1;
 }
 
 .bg-black-gradient {
