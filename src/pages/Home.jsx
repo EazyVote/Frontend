@@ -3,7 +3,7 @@ import TopNavigationBar from '../components/NavigationBar'
 import HeroSection from '../components/HeroSection'
 import DescriptionSection from '../components/DescriptionSection'
 import Feedbacks from '../components/Feedbacks'
-import Responsive from '../components/try'
+import ShowRecommendedElection from '../components/ShowRecommendedElection'
 
 const Home = () => {
   return (
@@ -11,8 +11,8 @@ const Home = () => {
       <TopNavigationBar />
       <HeroSection />
       <DescriptionSection />
+      <ShowRecommendedElection />
       <Feedbacks />
-      {/* <Responsive/> */}
     </div>
   )
 }
