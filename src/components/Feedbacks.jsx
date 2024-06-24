@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import { getRandomId } from "../services/Helper";
 
 const dummyFeedbacks = [
@@ -64,14 +64,21 @@ const Feedbacks = () => {
     adaptiveHeight: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280, 
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 1024, 
+        settings: {
+          slidesToShow: 2, 
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600, 
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -80,7 +87,7 @@ const Feedbacks = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1, 
           slidesToScroll: 1,
         },
       },
@@ -95,14 +102,14 @@ const Feedbacks = () => {
     <section id="feedbacks" class="py-10 sm:py-32">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
-          <div class="mb-12 space-y-5 md:mb-16 md:text-center">
-            <div class="inline-block font-poppins px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
+          <div class="mb-12 space-y-5 md:mb-16 text-center">
+            <div class="inline-block font-poppins px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
               Words from Others
             </div>
-            <h1 class="mb-5 text-3xl font-poppins font-semibold text-white md:text-center md:text-5xl">
+            <h1 class="mb-5 text-3xl font-poppins font-semibold text-white text-center md:text-5xl">
               It's not <span className="text-gradient">just</span> us.
             </h1>
-            <p class="text-xl text-gray-100 font-poppins font-normal md:text-center md:text-2xl">
+            <p class="text-xl text-gray-100 font-poppins font-normal text-center md:text-2xl">
               Here's what <span className="text-gradient">others</span> have to
               say about us.
             </p>
@@ -111,7 +118,7 @@ const Feedbacks = () => {
         <div className="slider-container">
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
             {dummyFeedbacks.map((feedback, index) => {
-              const id = getRandomId(0, 19)
+              const id = getRandomId(0, 19);
               return (
                 <div>
                   <div
@@ -127,11 +134,11 @@ const Feedbacks = () => {
                         <div className="flex items-center space-x-2">
                           <img
                             src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${names[id]}`}
-                            className="w-16 h-16 bg-center"
+                            className="w-6 h-6 bg-center md:w-16 md:-12 lg:w-12 lg:h-12"
                             alt="avatar"
                           />
                           <div>
-                            <h3 className="text-lg font-semibold text-white">
+                            <h3 className="text-md font-semibold text-white lg:text-lg md:text-lg">
                               {feedback.name}
                             </h3>
                           </div>
