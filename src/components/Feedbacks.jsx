@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const dummyFeedbacks = [
   {
@@ -14,13 +17,66 @@ const dummyFeedbacks = [
     feedbacks:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque bibendum augue, eget lacinia ante molestie ut. Etiam dignissim turpis dolor, ac pharetra diam varius vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id euismod nisi. Fusce sollicitudin condimentum tincidunt. Proin fringilla, mauris a cursus ultricies, ante dolor convallis nunc, convallis placerat enim odio vitae turpis. Cras rutrum condimentum tempor. Duis at rhoncus sapien.",
   },
+  {
+    name: "Tyler",
+    feedbacks:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque bibendum augue, eget lacinia ante molestie ut. Etiam dignissim turpis dolor, ac pharetra diam varius vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id euismod nisi. Fusce sollicitudin condimentum tincidunt. Proin fringilla, mauris a cursus ultricies, ante dolor convallis nunc, convallis placerat enim odio vitae turpis. Cras rutrum condimentum tempor. Duis at rhoncus sapien.",
+  },
+  {
+    name: "Tyler",
+    feedbacks:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque bibendum augue, eget lacinia ante molestie ut. Etiam dignissim turpis dolor, ac pharetra diam varius vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id euismod nisi. Fusce sollicitudin condimentum tincidunt. Proin fringilla, mauris a cursus ultricies, ante dolor convallis nunc, convallis placerat enim odio vitae turpis. Cras rutrum condimentum tempor. Duis at rhoncus sapien.",
+  },
+  {
+    name: "Tyler",
+    feedbacks:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque bibendum augue, eget lacinia ante molestie ut. Etiam dignissim turpis dolor, ac pharetra diam varius vitae. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id euismod nisi. Fusce sollicitudin condimentum tincidunt. Proin fringilla, mauris a cursus ultricies, ante dolor convallis nunc, convallis placerat enim odio vitae turpis. Cras rutrum condimentum tempor. Duis at rhoncus sapien.",
+  },
 ];
 
 const Feedbacks = () => {
-  const [expanded, setExpanded] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
-  const toggleExpand = () => {
-    setExpanded(!expanded);
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  var settings = {
+    dots: false,
+    className: "center",
+    focusOnSelect: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    swipeToSlide: true,
+    adaptiveHeight: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -40,51 +96,45 @@ const Feedbacks = () => {
             </p>
           </div>
         </div>
-
-        <ul
-          role="list"
-          class="mx-auto font-poppins mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
-        >
-          {dummyFeedbacks.map((feedback) => (
-            <li class="text-sm leading-6">
-              <div class="relative group">
+        <div className="slider-container">
+          <Slider {...settings}>
+            {dummyFeedbacks.map((feedback, index) => (
+              <div>
                 <div
-                  className={`absolute transition rounded-lg opacity-50 -inset-1 bg-blue-gradient blur duration-400 ${
-                    expanded ? "opacity-100 duration-200" : ""
-                  }`}
-                ></div>
-                <a
-                  href="#testimonials"
-                  className="cursor-pointer"
-                  onClick={toggleExpand}
+                  key={index}
+                  className="font-normal font-poppins text-white feedback-gradient mx-6"
                 >
-                  <div
-                    className="relative p-6 space-y-6 leading-none rounded-lg bg-primary ring-1 ring-gray-900/5"
+                  <a
+                    href="#testimonials"
+                    className="cursor-pointer"
+                    onClick={() => toggleExpand(index)}
                   >
-                    <div class="flex items-center space-x-4">
-                      <img
-                        src="https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_400x400.jpg"
-                        class="w-12 h-12 bg-center bg-cover border rounded-full"
-                      />
-                      <div>
-                        <h3 class="text-lg font-semibold text-white">
-                          {feedback.name}
-                        </h3>
+                    <div className="relative p-6 space-y-6 leading-none rounded-lg">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src="https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_400x400.jpg"
+                          className="w-12 h-12 bg-center bg-cover border rounded-full"
+                        />
+                        <div>
+                          <h3 className="text-lg font-semibold text-white">
+                            {feedback.name}
+                          </h3>
+                        </div>
                       </div>
+                      <p
+                        className={`leading-normal text-gray-300 text-md ${
+                          expandedIndex === index ? "" : "line-clamp-1"
+                        }`}
+                      >
+                        {feedback.feedbacks}
+                      </p>
                     </div>
-                    <p
-                      className={`leading-normal text-gray-300 text-md ${
-                        expanded ? "" : "line-clamp-2"
-                      }`}
-                    >
-                      {feedback.feedbacks}
-                    </p>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </Slider>
+        </div>
       </div>
     </section>
   );

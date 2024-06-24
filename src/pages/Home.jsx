@@ -3,6 +3,7 @@ import TopNavigationBar from '../components/NavigationBar'
 import HeroSection from '../components/HeroSection'
 import DescriptionSection from '../components/DescriptionSection'
 import Feedbacks from '../components/Feedbacks'
+import Responsive from '../components/try'
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <HeroSection />
       <DescriptionSection />
       <Feedbacks />
+      {/* <Responsive/> */}
     </div>
   )
 }
