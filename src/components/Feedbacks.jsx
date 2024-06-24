@@ -99,17 +99,17 @@ const Feedbacks = () => {
   }, []);
 
   return (
-    <section id="feedbacks" class="py-10 sm:py-32">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
-          <div class="mb-12 space-y-5 md:mb-16 text-center">
-            <div class="inline-block font-poppins px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
+    <section id="feedbacks" className="py-10 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
+          <div className="mb-12 space-y-5 md:mb-16 text-center">
+            <div className="inline-block font-poppins px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40">
               Words from Others
             </div>
-            <h1 class="mb-5 text-3xl font-poppins font-semibold text-white text-center md:text-5xl">
+            <h1 className="mb-5 text-3xl font-poppins font-semibold text-white text-center md:text-5xl">
               It's not <span className="text-gradient">just</span> us.
             </h1>
-            <p class="text-xl text-gray-100 font-poppins font-normal text-center md:text-2xl">
+            <p className="text-xl text-gray-100 font-poppins font-normal text-center md:text-2xl">
               Here's what <span className="text-gradient">others</span> have to
               say about us.
             </p>
