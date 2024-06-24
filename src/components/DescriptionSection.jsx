@@ -1,26 +1,29 @@
-import { features } from "../services/ContentList";
+import { features, iconMap } from "../services/ContentList";
 
-const FeatureCard = ({ title, content, index }) => (
-  <div
-    className={`flex flex-row p-6 rounded-[20px] ${
-      index !== features.length - 1 ? "mb-6" : "mb-0"
-    } feature-card`}
-  >
+const FeatureCard = ({ title, icon, content, index }) => {
+  const IconComponent = iconMap[icon];
+  return (
     <div
-      className={`w-[64px] h-[64px] rounded-full flex justify-center items-center bg-dimBlue`}
+      className={`flex flex-row p-6 rounded-[20px] ${
+        index !== features.length - 1 ? "mb-6" : "mb-0"
+      } feature-card`}
     >
-      {/* <img src={icon} alt="star" className="w-[50%] h-[50%] object-contain" /> */}
+      <div
+        className={`w-[64px] h-[64px] mr-2 rounded-full flex justify-center items-center bg-dimBlue`}
+      >
+        <IconComponent color='#33bbcf' className="w-[50%] h-[50%] object-contain" />
+      </div>
+      <div className="flex-1 flex flex-col ml-3">
+        <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
+          {title}
+        </h4>
+        <p className="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">
+          {content}
+        </p>
+      </div>
     </div>
-    <div className="flex-1 flex flex-col ml-3">
-      <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
-        {title}
-      </h4>
-      <p className="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">
-        {content}
-      </p>
-    </div>
-  </div>
-);
+  );
+};
 
 const DescriptionSection = () => {
   return (

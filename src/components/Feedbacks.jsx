@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { faker } from '@faker-js/faker';
+import { getRandomId } from "../services/Helper";
 
 const dummyFeedbacks = [
   {
@@ -35,17 +37,25 @@ const dummyFeedbacks = [
 ];
 
 const Feedbacks = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+  const names = Array.from({ length: 20 }, () => faker.person.fullName());
 
+  const [expandedIndex, setExpandedIndex] = useState(null);
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
-  var settings = {
+  let sliderRef = useRef(null);
+  const play = () => {
+    sliderRef.slickPlay();
+  };
+
+  const settings = {
     dots: false,
     className: "center",
     focusOnSelect: true,
     infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -58,7 +68,6 @@ const Feedbacks = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
         },
       },
       {
@@ -66,7 +75,6 @@ const Feedbacks = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2,
         },
       },
       {
@@ -79,8 +87,12 @@ const Feedbacks = () => {
     ],
   };
 
+  useEffect(() => {
+    play();
+  }, []);
+
   return (
-    <section id="testimonials" class="py-10 sm:py-32">
+    <section id="feedbacks" class="py-10 sm:py-32">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
           <div class="mb-12 space-y-5 md:mb-16 md:text-center">
@@ -97,42 +109,46 @@ const Feedbacks = () => {
           </div>
         </div>
         <div className="slider-container">
-          <Slider {...settings}>
-            {dummyFeedbacks.map((feedback, index) => (
-              <div>
-                <div
-                  key={index}
-                  className="font-normal font-poppins text-white feedback-gradient mx-6"
-                >
-                  <a
-                    href="#testimonials"
-                    className="cursor-pointer"
-                    onClick={() => toggleExpand(index)}
+          <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
+            {dummyFeedbacks.map((feedback, index) => {
+              const id = getRandomId(0, 19)
+              return (
+                <div>
+                  <div
+                    key={index}
+                    className="font-normal font-poppins text-white feedback-gradient mx-6"
                   >
-                    <div className="relative p-6 space-y-6 leading-none rounded-lg">
-                      <div className="flex items-center space-x-4">
-                        <img
-                          src="https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_400x400.jpg"
-                          className="w-12 h-12 bg-center bg-cover border rounded-full"
-                        />
-                        <div>
-                          <h3 className="text-lg font-semibold text-white">
-                            {feedback.name}
-                          </h3>
+                    <a
+                      href="#feedbacks"
+                      className="cursor-pointer"
+                      onClick={() => toggleExpand(index)}
+                    >
+                      <div className="relative p-6 space-y-6 leading-none rounded-lg">
+                        <div className="flex items-center space-x-2">
+                          <img
+                            src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${names[id]}`}
+                            className="w-16 h-16 bg-center"
+                            alt="avatar"
+                          />
+                          <div>
+                            <h3 className="text-lg font-semibold text-white">
+                              {feedback.name}
+                            </h3>
+                          </div>
                         </div>
+                        <p
+                          className={`leading-normal text-gray-300 text-md ${
+                            expandedIndex === index ? "" : "line-clamp-1"
+                          }`}
+                        >
+                          {feedback.feedbacks}
+                        </p>
                       </div>
-                      <p
-                        className={`leading-normal text-gray-300 text-md ${
-                          expandedIndex === index ? "" : "line-clamp-1"
-                        }`}
-                      >
-                        {feedback.feedbacks}
-                      </p>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </Slider>
         </div>
       </div>

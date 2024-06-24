@@ -1,3 +1,7 @@
+import { FaShieldAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
+
 const navLinks = [
   {
     id: "home",
@@ -13,28 +17,34 @@ const navLinks = [
   },
 ];
 
+const iconMap = {
+  star: FaStar,
+  shield: FaShieldAlt,
+  paperPlane: FaPaperPlane
+}
+
 const features = [
   {
     id: "feature-1",
-    //   icon: "star",
+    icon: "star",
     title: "Advantages",
     content:
       "Our blockchain voting system offers a unique combination of transparency and efficiency.",
   },
   {
     id: "feature-2",
-    //   icon: "shield",
+    icon: "shield",
     title: "100% Secured",
     content:
       "We take proactive steps to ensure your votes and information are secure.",
   },
   {
     id: "feature-3",
-    //   icon: "send",
+    icon: "paperPlane",
     title: "Eazy Voting",
     content:
       "Our platform makes casting and counting votes simple and accurate, saving time and reducing errors.",
   },
 ];
 
-export { features, navLinks };
+export { features, navLinks, iconMap };
