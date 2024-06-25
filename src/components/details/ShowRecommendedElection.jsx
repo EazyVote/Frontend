@@ -4,7 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ElectionCard from "../cards/ElectionCard";
 import { Link } from "react-router-dom";
-// import Identicon from "react-identicons";
+import { useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 const elections = [
   {
@@ -113,9 +114,22 @@ const ShowRecommendedElection = () => {
   useEffect(() => {
     play();
   }, []);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["0 1", "0.7 1"],
+  });
 
   return (
-    <section id="recommended" className="py-6 sm:py-32">
+    <motion.section
+      ref={ref}
+      style={{
+        scale: scrollYProgress,
+        opacity: scrollYProgress,
+      }}
+      id="recommended"
+      className="py-6 sm:py-32"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
           <div className="mb-12 space-y-5 md:mb-12 text-center">
@@ -139,7 +153,7 @@ const ShowRecommendedElection = () => {
           </Slider>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

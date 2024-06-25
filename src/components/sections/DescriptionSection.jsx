@@ -1,4 +1,7 @@
 import { features, iconMap } from "../../services/ContentList";
+import { useScroll } from "framer-motion";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
 const FeatureCard = ({ title, icon, content, index }) => {
   const IconComponent = iconMap[icon];
@@ -11,7 +14,10 @@ const FeatureCard = ({ title, icon, content, index }) => {
       <div
         className={`w-[64px] h-[64px] mr-2 rounded-full flex justify-center items-center bg-dimBlue`}
       >
-        <IconComponent color='#33bbcf' className="w-[50%] h-[50%] object-contain" />
+        <IconComponent
+          color="#33bbcf"
+          className="w-[50%] h-[50%] object-contain"
+        />
       </div>
       <div className="flex-1 flex flex-col ml-3">
         <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
@@ -26,8 +32,19 @@ const FeatureCard = ({ title, icon, content, index }) => {
 };
 
 const DescriptionSection = () => {
+  const ref = useRef(null)
+  const { scrollYProgress }  = useScroll({
+    target: ref,
+    offset: ["0 1", "1 1"],
+  });
+
   return (
-    <section
+    <motion.section
+      ref={ref}
+      style={{
+        scale: scrollYProgress,
+        opacity: scrollYProgress,
+      }}
       id="features"
       className="flex items-center md:flex-row flex-col sm:py-16 py-6"
     >
@@ -42,7 +59,7 @@ const DescriptionSection = () => {
           security, and trust in elections. However, with many platforms
           available.
         </p>
-        <button className="mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+        <button className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
           Create New Election
         </button>
       </div>
@@ -54,7 +71,7 @@ const DescriptionSection = () => {
           <FeatureCard key={feature.id} {...feature} index={index} />
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

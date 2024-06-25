@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FeedbackCard from "../cards/FeedbackCard";
+import { useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 
 const dummyFeedbacks = [
   {
@@ -90,13 +92,22 @@ const ShowFeedbacks = () => {
       },
     ],
   };
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["0 1", "0.7 1"],
+  });
 
   useEffect(() => {
     play();
   }, []);
 
   return (
-    <section id="feedbacks" className="py-6 sm:pb-32">
+    <motion.section ref={ref}
+    style={{
+      scale: scrollYProgress,
+      opacity: scrollYProgress,
+    }} id="feedbacks" className="py-6 sm:pb-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
           <div className="mb-12 space-y-5 md:mb-16 text-center">
@@ -110,18 +121,26 @@ const ShowFeedbacks = () => {
               Here's what <span className="text-gradient">others</span> have to
               say about us.
             </p>
+            <button className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+             Add Yours
+            </button>
           </div>
         </div>
         <div className="slider-container">
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
-            
             {dummyFeedbacks.map((feedback, index) => (
-              <FeedbackCard key={index} id={index} feedback={feedback} isExpanded={expandedIndex === index} toggleExpand={toggleExpand} />
+              <FeedbackCard
+                key={index}
+                id={index}
+                feedback={feedback}
+                isExpanded={expandedIndex === index}
+                toggleExpand={toggleExpand}
+              />
             ))}
           </Slider>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

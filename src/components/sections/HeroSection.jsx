@@ -43,7 +43,7 @@ const HeroSection = () => {
               cutting-edge blockchain technology.
             </p>
 
-            <button className="mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg">
+            <button className="hover:scale-105 duration-200 mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg">
               Explore Elections
             </button>
           </div>
