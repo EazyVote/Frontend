@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import close from "../assets/close.svg";
-import menu from "../assets/menu.svg";
-import { navLinks } from "../services/ContentList";
+import close from "../../assets/close.svg";
+import menu from "../../assets/menu.svg";
+import { navLinks } from "../../services/ContentList";
 
 const NavigationBar = () => {
   const [active, setActive] = useState("Home");

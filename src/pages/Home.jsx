@@ -1,9 +1,9 @@
 import React from 'react'
-import TopNavigationBar from '../components/NavigationBar'
-import HeroSection from '../components/HeroSection'
-import DescriptionSection from '../components/DescriptionSection'
-import Feedbacks from '../components/Feedbacks'
-import ShowRecommendedElection from '../components/ShowRecommendedElection'
+import TopNavigationBar from '../components/fixed/NavigationBar'
+import HeroSection from '../components/sections/HeroSection'
+import DescriptionSection from '../components/sections/DescriptionSection'
+import Feedbacks from '../components/details/ShowFeedbacks'
+import ShowRecommendedElection from '../components/details/ShowRecommendedElection'
 
 const Home = () => {
   return (

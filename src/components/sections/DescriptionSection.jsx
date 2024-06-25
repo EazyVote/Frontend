@@ -1,4 +1,4 @@
-import { features, iconMap } from "../services/ContentList";
+import { features, iconMap } from "../../services/ContentList";
 
 const FeatureCard = ({ title, icon, content, index }) => {
   const IconComponent = iconMap[icon];
