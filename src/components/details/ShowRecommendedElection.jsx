@@ -11,7 +11,7 @@ const elections = [
     electionTitle: "VOTE 1",
     electionPicture:
       "https://d2v9ipibika81v.cloudfront.net/uploads/sites/33/2-1080x684.jpg",
-    electionCreator: "0x...789",
+    electionCreator: "0x...788",
     electionStart: "Today at 12:00:00",
     electionEnd: "Today at 18:00:00",
     electionDescription:
@@ -31,7 +31,7 @@ const elections = [
     electionTitle: "VOTE 1",
     electionPicture:
       "https://cdn.britannica.com/56/193556-131-7D3D1EDD/Election---Button-Vote-stripes-politics-campaign.jpg?w=840&h=460&c=crop",
-    electionCreator: "0x...789",
+    electionCreator: "0x...790",
     electionStart: "July 24th 2024 at 12:00:00",
     electionEnd: "July 24th 2024 at 18:00:00",
     electionDescription:
@@ -41,7 +41,7 @@ const elections = [
     electionTitle: "VOTE 1",
     electionPicture:
       "https://saifulmujani.com/wp-content/uploads/2020/06/depositphotos_110340254-stock-illustration-election-campaign-election-vote-election.jpg",
-    electionCreator: "0x...789",
+    electionCreator: "0x...791",
     electionStart: "Today at 18:00:00",
     electionEnd: "Today at 23:00:00",
     electionDescription:
@@ -51,7 +51,7 @@ const elections = [
     electionTitle: "VOTE 1",
     electionPicture:
       "https://img.etimg.com/thumb/width-1600,height-900,imgsize-64666,resizemode-75,msid-108516210/news/elections/lok-sabha/india/general-elections-2024-schedule-to-be-announce-on-march-16.jpg",
-    electionCreator: "0x...789",
+    electionCreator: "0x...801",
     electionStart: "Today at 12:00:00",
     electionEnd: "Today at 18:00:00",
     electionDescription:

@@ -64,6 +64,10 @@
   cursor: pointer;
 }
 
+.line-gradient {
+  
+}
+
 .election-gradient::before {
   content: "";
   position: absolute;

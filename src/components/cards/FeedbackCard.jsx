@@ -1,14 +1,9 @@
 import { faker } from "@faker-js/faker";
-import React, { useState } from "react";
+import React from "react";
 import { getRandomId } from "../../services/Helper";
 
-const FeedbackCard = ({ id, feedback }) => {
+const FeedbackCard = ({ id, feedback,  isExpanded, toggleExpand }) => {
   const names = Array.from({ length: 20 }, () => faker.person.fullName());
-
-  const [expandedIndex, setExpandedIndex] = useState(null);
-  const toggleExpand = (id) => {
-    setExpandedIndex(expandedIndex === id ? null : id);
-  };
   const randId = getRandomId(0, 19);
 
   return (
@@ -34,7 +29,7 @@ const FeedbackCard = ({ id, feedback }) => {
             </div>
             <p
               className={`leading-normal text-gray-300 text-md ${
-                expandedIndex === id ? "" : "line-clamp-1"
+                isExpanded ? "" : "line-clamp-1"
               }`}
             >
               {feedback.feedbacks}

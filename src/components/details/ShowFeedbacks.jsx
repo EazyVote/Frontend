@@ -36,6 +36,11 @@ const dummyFeedbacks = [
 ];
 
 const ShowFeedbacks = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const toggleExpand = (index) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   let sliderRef = useRef(null);
   const play = () => {
     sliderRef.slickPlay();
@@ -91,7 +96,7 @@ const ShowFeedbacks = () => {
   }, []);
 
   return (
-    <section id="feedbacks" className="py-6 sm:py-32">
+    <section id="feedbacks" className="py-6 sm:pb-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
           <div className="mb-12 space-y-5 md:mb-16 text-center">
@@ -109,42 +114,10 @@ const ShowFeedbacks = () => {
         </div>
         <div className="slider-container">
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
-            {dummyFeedbacks.map((feedback, index) => {
-              return (
-                <div key={index}>
-                  <div className="font-normal hover:scale-105 duration-500 font-poppins text-white feedback-gradient m-4">
-                    <a
-                      href="#feedbacks"
-                      className="cursor-pointer"
-                      onClick={() => toggleExpand(index)}
-                    >
-                      <div className="relative p-6 space-y-6 leading-none rounded-lg">
-                        <div className="flex items-center space-x-2">
-                          <img
-                            src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${names[id]}`}
-                            className="w-6 h-6 bg-center md:w-16 md:-12 lg:w-12 lg:h-12"
-                            alt="avatar"
-                          />
-                          <div>
-                            <h3 className="text-md font-semibold text-white lg:text-lg md:text-lg">
-                              {feedback.name}
-                            </h3>
-                          </div>
-                        </div>
-                        <p
-                          className={`leading-normal text-gray-300 text-md ${
-                            expandedIndex === index ? "" : "line-clamp-1"
-                          }`}
-                        >
-                          {feedback.feedbacks}
-                        </p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              )
-              // <FeedbackCard key={index} id={index} feedback={feedback}/>
-            })}
+            
+            {dummyFeedbacks.map((feedback, index) => (
+              <FeedbackCard key={index} id={index} feedback={feedback} isExpanded={expandedIndex === index} toggleExpand={toggleExpand} />
+            ))}
           </Slider>
         </div>
       </div>
@@ -153,3 +126,39 @@ const ShowFeedbacks = () => {
 };
 
 export default ShowFeedbacks;
+
+// {dummyFeedbacks.map((feedback, index) => {
+//   return (
+//     <div key={index}>
+//       <div className="font-normal hover:scale-105 duration-500 font-poppins text-white feedback-gradient m-4">
+//         <a
+//           href="#feedbacks"
+//           className="cursor-pointer"
+//           onClick={() => toggleExpand(index)}
+//         >
+//           <div className="relative p-6 space-y-6 leading-none rounded-lg">
+//             <div className="flex items-center space-x-2">
+//               <img
+//                 src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${names[id]}`}
+//                 className="w-6 h-6 bg-center md:w-16 md:-12 lg:w-12 lg:h-12"
+//                 alt="avatar"
+//               />
+//               <div>
+//                 <h3 className="text-md font-semibold text-white lg:text-lg md:text-lg">
+//                   {feedback.name}
+//                 </h3>
+//               </div>
+//             </div>
+//             <p
+//               className={`leading-normal text-gray-300 text-md ${
+//                 expandedIndex === index ? "" : "line-clamp-1"
+//               }`}
+//             >
+//               {feedback.feedbacks}
+//             </p>
+//           </div>
+//         </a>
+//       </div>
+//     </div>
+//   );
+// })}
