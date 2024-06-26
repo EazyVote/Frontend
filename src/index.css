@@ -18,6 +18,17 @@
   scroll-behavior: smooth;
 }
 
+.custom-text-placeholder::placeholder {
+  color: #00040f;
+  opacity: 1;
+}
+
+.custom-text-placeholder:focus {
+  outline: none;
+  border: none;
+  box-shadow: none; /* Untuk menghilangkan shadow di beberapa browser */
+}
+
 .text-gradient {
   background: radial-gradient(
     64.18% 64.18% at 71.16% 35.69%,
@@ -64,9 +75,7 @@
   cursor: pointer;
 }
 
-.line-gradient {
-  
-}
+
 
 .election-gradient::before {
   content: "";

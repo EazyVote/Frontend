@@ -20,11 +20,27 @@ const voteCandidate = async () => {
 
 }
 
+const getAllCandidates = async (electionId) => {
+    
+}
+
+const getAllElections = async () => {
+
+}
+
+const getAllFeedbacks = async () => {
+
+}
+
 const structuredElections = async (elections) => {
 
 }
 
 const structuredCandidates = async (candidates) => {
+
+}
+
+const structuredFeedbacks = async (feedbacks) => {
 
 }
 
