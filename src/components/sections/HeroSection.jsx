@@ -30,8 +30,8 @@ const HeroSection = () => {
       }}
       className="bg-primary flex justify-center items-center"
     >
-      <div className="xl:max-w-[1280px] w-full">
-        <section id="home" className="flex md:flex-row flex-col sm:py-16 py-6">
+      <div id="home" className="xl:max-w-[1280px] w-full">
+        <section className="flex md:flex-row flex-col sm:py-16 py-6">
           <div className="flex-1 flex flex-col xl:px-0 sm:px-16 px-6 items-center text-center">
             <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
               <p className="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] ml-2">

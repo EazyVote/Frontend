@@ -2,7 +2,7 @@ import React from 'react'
 
 const Elections = () => {
   return (
-    <div>Elections</div>
+    <div>AllElections</div>
   )
 }
 

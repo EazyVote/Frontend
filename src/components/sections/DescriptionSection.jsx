@@ -33,7 +33,7 @@ const FeatureCard = ({ title, icon, content, index }) => {
 
 const DescriptionSection = () => {
   const ref = useRef(null)
-  const [offset, setOffset] = useState(["0 1", "1 1"])
+  const [offset, setOffset] = useState(["0 1", "1.05 1"])
 
   useEffect(() => {
     const handleResize = () => {
