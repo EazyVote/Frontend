@@ -1,7 +1,7 @@
 import { features, iconMap } from "../../services/ContentList";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FeatureCard = ({ title, icon, content, index }) => {
   const IconComponent = iconMap[icon];
@@ -33,9 +33,20 @@ const FeatureCard = ({ title, icon, content, index }) => {
 
 const DescriptionSection = () => {
   const ref = useRef(null)
+  const [offset, setOffset] = useState(["0 1", "1 1"])
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setOffset(["0 1", "0.5 1"])
+      }
+    }
+    handleResize()
+  }, [])
+
   const { scrollYProgress }  = useScroll({
     target: ref,
-    offset: ["0 1", "1 1"],
+    offset: offset,
   });
 
   return (

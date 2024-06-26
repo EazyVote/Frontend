@@ -1,9 +1,35 @@
-import React from "react";
+import { useScroll } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const ref = useRef(null);
+  const [offset, setOffset] = useState(["0 1", "1 1"]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setOffset(["0 1", "0.5 1"]);
+      }
+    };
+    handleResize();
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: offset,
+  });
+
   return (
-    <div className="bg-primary flex justify-center items-center">
+    <motion.section
+      ref={ref}
+      style={{
+        scale: scrollYProgress,
+        opacity: scrollYProgress,
+      }}
+      className="bg-primary flex justify-center items-center"
+    >
       <div className="xl:max-w-[1280px] w-full">
         <section id="home" className="flex md:flex-row flex-col sm:py-16 py-6">
           <div className="flex-1 flex flex-col xl:px-0 sm:px-16 px-6 items-center text-center">
@@ -49,7 +75,7 @@ const HeroSection = () => {
           </div>
         </section>
       </div>
-    </div>
+    </motion.section>
   );
 };
 
