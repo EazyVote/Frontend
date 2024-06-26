@@ -12,7 +12,7 @@ const MustConnectWallet = () => {
 
   return (
     <div
-      className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${mustConnectWalletScale}`}
+      className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${mustConnectWalletScale} popup-visible`}
     >
       <div className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
         <div className="flex justify-between items-center">

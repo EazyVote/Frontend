@@ -18,7 +18,7 @@ const CreateNewFeedback = () => {
 
   return (
     <div
-      className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${createNewFeedbackScale}`}
+      className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${createNewFeedbackScale} popup-visible`}
     >
       <div className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
         <form className="flex flex-col" onSubmit={onClose} method="POST">
