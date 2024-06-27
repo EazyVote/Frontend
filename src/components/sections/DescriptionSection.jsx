@@ -40,6 +40,9 @@ const DescriptionSection = () => {
       if (window.innerWidth < 1024) {
         setOffset(["0 1", "0.5 1"])
       }
+      else if (window.innerWidth < 500) {
+        setOffset("0 1", "0.3 1")
+      }
     }
     handleResize()
   }, [])
