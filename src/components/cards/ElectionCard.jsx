@@ -5,14 +5,13 @@ const ElectionCard = ({ id, election }) => {
   return (
     <div>
       <div
-        id="elections"
-        className="font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient m-4 lg:w-78"
+        className="font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient m-4 lg:w-64 lg:h-66"
       >
         {/* <Link to={"/projects/" + project.index}> */}
         <img
           src={election.electionPicture}
           alt={election.electionTitle}
-          className="rounded-xl h-56 w-full object-cover md:h-64 lg:h-64"
+          className="rounded-xl h-48 w-full object-cover md:h-48 lg:h-48"
         />
         <div className="p-4">
           <h5 className="text-white font-semibold line-clamp-1">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import close from "../../assets/close.svg";
 import menu from "../../assets/menu.svg";
 import { navLinks } from "../../services/ContentList";
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   const [active, setActive] = useState("Home");
@@ -25,7 +26,7 @@ const NavigationBar = () => {
               } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
               onClick={() => setActive(nav.title)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              <Link to={`/${nav.id}`}>{nav.title}</Link>
             </li>
           ))}
         </ul>
@@ -61,7 +62,7 @@ const NavigationBar = () => {
                   } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
                   onClick={() => setActive(nav.title)}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  <Link to={`/${nav.id}`}>{nav.title}</Link>
                 </li>
               ))}
             </ul>

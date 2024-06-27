@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import ShowAllElection from "../components/details/ShowAllElection";
 
 const Elections = () => {
-  return (
-    <div>AllElections</div>
+  return(
+    <ShowAllElection />
   )
-}
+};
 
-export default Elections
+export default Elections;
