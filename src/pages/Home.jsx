@@ -8,14 +8,15 @@ import Footer from "../components/fixed/Footer";
 import CreateNewFeedback from "../components/popup/CreateNewFeedback";
 import MustConnectWallet from "../components/popup/MustConnectWallet";
 import CreateNewElection from "./CreateNewElection";
+import { dummyFeedbacks, elections } from "../services/ContentList";
 
 const Home = () => {
   return (
     <>
       <HeroSection />
       <DescriptionSection />
-      <ShowRecommendedElection />
-      <Feedbacks />
+      {elections.length == 0 ? <div></div> : <ShowRecommendedElection />}
+      {dummyFeedbacks.length == 0 ? <div></div> : <Feedbacks />}
     </>
   );
 };

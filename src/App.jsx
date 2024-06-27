@@ -12,7 +12,7 @@ import HistoryDetail from "./pages/HistoryDetail";
 
 const App = () => {
   return (
-    <div className="w-full overflow-hidden bg-primary sm:px-12 px-6">
+    <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
       <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/history/:id" element={<HistoryDetail />} />
       </Routes>
       <Footer />
+
       {/* <CreateNewElection /> */}
       <CreateNewFeedback />
       <MustConnectWallet />

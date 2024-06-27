@@ -34,7 +34,7 @@ const NavigationBar = () => {
         <div className="sm:flex hidden flex-1 flex justify-end">
           <button
             type="button"
-            className="px-6 py-2.5 text-white font-poppins font-normal text-[16px] rounded-full shadow-md border border-white border-opacity-50"
+            className="px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
           >
             Connect Wallet
           </button>
@@ -51,7 +51,7 @@ const NavigationBar = () => {
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+            } p-6 bg-black-gradient popup-visible absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
           >
             <ul className="list-none flex justify-end items-start flex-1 flex-col">
               {navLinks.map((nav, index) => (

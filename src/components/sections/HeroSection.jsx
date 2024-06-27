@@ -4,30 +4,8 @@ import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
-  const ref = useRef(null);
-  const [offset, setOffset] = useState(["0 1", "1 1"]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        setOffset(["0 1", "0.5 1"]);
-      }
-    };
-    handleResize();
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: offset,
-  });
-
   return (
-    <motion.section
-      ref={ref}
-      style={{
-        scale: scrollYProgress,
-        opacity: scrollYProgress,
-      }}
+    <section
       className="bg-primary flex justify-center items-center"
     >
       <div id="home" className="xl:max-w-[1280px] w-full">
@@ -75,7 +53,7 @@ const HeroSection = () => {
           </div>
         </section>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
