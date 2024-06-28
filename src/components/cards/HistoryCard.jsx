@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const ElectionCard = ({ id, election, notes, variants }) => {
+const HistoryCard = ({ id, election, notes, variants }) => {
   return (
     <div>
       <motion.div
@@ -11,7 +11,7 @@ const ElectionCard = ({ id, election, notes, variants }) => {
           notes == "showAllElection" ? "lg:w-78 lg:h-70" : "lg:w-64 lg:h-66"
         } `}
       >
-        <Link to={"/elections/" + election.electionId}>
+        <Link to={"/history/" + election.electionId}>
           <img
             src={election.electionPicture}
             alt={election.electionTitle}
@@ -54,4 +54,4 @@ const ElectionCard = ({ id, election, notes, variants }) => {
   );
 };
 
-export default ElectionCard;
+export default HistoryCard;
