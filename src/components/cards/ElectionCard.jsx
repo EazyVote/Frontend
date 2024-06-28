@@ -1,11 +1,15 @@
 import React from "react";
 // import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const ElectionCard = ({ id, election, notes }) => {
+const ElectionCard = ({ id, election, notes, variants }) => {
   return (
     <div>
-      <div
-        className={`font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient mr-4 mb-4 mt-4 ${notes == "showAllElection" ? "lg:w-78 lg:h-70" : "lg:w-64 lg:h-66"} `}
+      <motion.div
+        variants={variants}
+        className={`font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient mr-4 mb-4 mt-4 ${
+          notes == "showAllElection" ? "lg:w-78 lg:h-70" : "lg:w-64 lg:h-66"
+        } `}
       >
         {/* <Link to={"/projects/" + project.index}> */}
         <img
@@ -45,7 +49,7 @@ const ElectionCard = ({ id, election, notes }) => {
           </div>
         </div>
         {/* </Link> */}
-      </div>
+      </motion.div>
     </div>
   );
 };

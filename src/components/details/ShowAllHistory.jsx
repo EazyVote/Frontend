@@ -4,6 +4,22 @@ import { elections, history } from "../../services/ContentList";
 import cat404 from "../../assets/cat404.png";
 
 const ShowAllHistory = () => {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.5,
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
   return (
     <div id="elections" className="mb-16">
       <h1 className="text-white font-medium text-3xl mb-3"> All History </h1>
@@ -19,16 +35,20 @@ const ShowAllHistory = () => {
           </div>
         </div>
       ) : (
-        <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div 
+        variants={container}
+        initial="hidden"
+        animate="show" className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {history.map((history, index) => (
             <ElectionCard
               key={index}
               id={index}
               election={history}
               notes={"showAllElection"}
+              variants={item}
             />
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
