@@ -34,7 +34,7 @@ const NavigationBar = () => {
         <div className="sm:flex hidden flex-1 flex justify-end">
           <button
             type="button"
-            className="px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
+            className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
           >
             Connect Wallet
           </button>
