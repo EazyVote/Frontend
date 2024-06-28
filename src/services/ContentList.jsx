@@ -47,7 +47,7 @@ const elections = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel placerat lacus. Fusce sollicitudin non dolor in venenatis. Aenean a sem gravida risus ornare elementum. Vestibulum quis augue nulla. Phasellus tincidunt mauris pharetra ullamcorper suscipit. Sed mattis nulla vel urna scelerisque dignissim. Suspendisse at elementum urna. Donec id aliquet nulla, in tincidunt orci.",
   },
   {
-    electionTitle: "VOTE 1",
+    electionTitle: "VOTE 2",
     electionPicture:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrZtpQWrKnU6avtGUkqf2LzqlXmchzXPDbPg&s",
     electionCreator: "0x...789",
@@ -57,7 +57,7 @@ const elections = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel placerat lacus. Fusce sollicitudin non dolor in venenatis. Aenean a sem gravida risus ornare elementum. Vestibulum quis augue nulla. Phasellus tincidunt mauris pharetra ullamcorper suscipit. Sed mattis nulla vel urna scelerisque dignissim. Suspendisse at elementum urna. Donec id aliquet nulla, in tincidunt orci.",
   },
   {
-    electionTitle: "VOTE 1",
+    electionTitle: "VOTE 3",
     electionPicture:
       "https://cdn.britannica.com/56/193556-131-7D3D1EDD/Election---Button-Vote-stripes-politics-campaign.jpg?w=840&h=460&c=crop",
     electionCreator: "0x...790",
@@ -67,7 +67,7 @@ const elections = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel placerat lacus. Fusce sollicitudin non dolor in venenatis. Aenean a sem gravida risus ornare elementum. Vestibulum quis augue nulla. Phasellus tincidunt mauris pharetra ullamcorper suscipit. Sed mattis nulla vel urna scelerisque dignissim. Suspendisse at elementum urna. Donec id aliquet nulla, in tincidunt orci.",
   },
   {
-    electionTitle: "VOTE 1",
+    electionTitle: "LO",
     electionPicture:
       "https://saifulmujani.com/wp-content/uploads/2020/06/depositphotos_110340254-stock-illustration-election-campaign-election-vote-election.jpg",
     electionCreator: "0x...791",
@@ -77,7 +77,7 @@ const elections = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel placerat lacus. Fusce sollicitudin non dolor in venenatis. Aenean a sem gravida risus ornare elementum. Vestibulum quis augue nulla. Phasellus tincidunt mauris pharetra ullamcorper suscipit. Sed mattis nulla vel urna scelerisque dignissim. Suspendisse at elementum urna. Donec id aliquet nulla, in tincidunt orci.",
   },
   {
-    electionTitle: "VOTE 1",
+    electionTitle: "LALALA",
     electionPicture:
       "https://img.etimg.com/thumb/width-1600,height-900,imgsize-64666,resizemode-75,msid-108516210/news/elections/lok-sabha/india/general-elections-2024-schedule-to-be-announce-on-march-16.jpg",
     electionCreator: "0x...801",

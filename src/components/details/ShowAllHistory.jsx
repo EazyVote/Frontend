@@ -1,9 +1,8 @@
 import React from "react";
 import ElectionCard from "../cards/ElectionCard";
-import { elections, history } from "../../services/ContentList";
 import cat404 from "../../assets/cat404.png";
 
-const ShowAllHistory = () => {
+const ShowAllHistory = ({ history }) => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -35,10 +34,12 @@ const ShowAllHistory = () => {
           </div>
         </div>
       ) : (
-        <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show" className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {history.map((history, index) => (
             <ElectionCard
               key={index}
