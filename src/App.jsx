@@ -7,7 +7,6 @@ import NavigationBar from "./components/fixed/NavigationBar";
 import Footer from "./components/fixed/Footer";
 import CreateNewFeedback from "./components/popup/CreateNewFeedback";
 import MustConnectWallet from "./components/popup/MustConnectWallet";
-import HistoryDetail from "./pages/HistoryDetail";
 import ElectionDetail from "./pages/ElectionDetail";
 import CandidateDetail from "./components/popup/CandidateDetail";
 import SuccessfullyVote from "./components/popup/SuccessfullyVote";
@@ -21,7 +20,6 @@ const App = () => {
         <Route path="/elections" element={<Elections />} />
         <Route path="/elections/:id" element={<ElectionDetail />} />
         <Route path="/history" element={<History />} />
-        <Route path="/history/:id" element={<HistoryDetail />} />
       </Routes>
       <Footer />
 

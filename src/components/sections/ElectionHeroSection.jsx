@@ -46,22 +46,6 @@ const ElectionHeroSection = ({ election }) => {
         </section>
       </div>
     </section>
-    // <section className="flex items-center justify-center md:flex-row flex-col mb-16">
-    //   <div className="flex-1 flex justify-center items-center flex-col text-center lg:flex lg:justify-start lg:items-start lg:text-left mx-auto">
-    //     <BoxReveal boxColor={"#33bbcf"} duration={0.5}>
-    //       <h2 className="font-poppins font-semibold text-[40px] xs:text-[48px] text-white w-full mb-4">
-    //         <br className="sm:block hidden" />{" "}
-    //         <span className="text-gradient">{election.electionTitle}</span>
-    //       </h2>
-    //     </BoxReveal>
-
-    //     <BoxReveal boxColor={"#33bbcf"} duration={0.5}>
-    //       <p className="font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px] max-w-[470px] mt-5 mb-6">
-    //         {election.electionDescription}
-    //       </p>
-    //     </BoxReveal>
-    //   </div>
-    // </section>
   );
 };
 

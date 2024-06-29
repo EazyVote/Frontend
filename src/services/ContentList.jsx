@@ -2,7 +2,19 @@ import { FaShieldAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { FaPaperPlane } from "react-icons/fa";
 
-const history = []
+const history = [
+  {
+    electionId: 3,
+    electionTitle: "LO",
+    electionPicture:
+      "https://saifulmujani.com/wp-content/uploads/2020/06/depositphotos_110340254-stock-illustration-election-campaign-election-vote-election.jpg",
+    electionCreator: "0x...791",
+    electionStart: "Today at 18:00:00",
+    electionEnd: "Today at 23:00:00",
+    electionDescription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel placerat lacus. Fusce sollicitudin non dolor in venenatis. Aenean a sem gravida risus ornare elementum. Vestibulum quis augue nulla. Phasellus tincidunt mauris pharetra ullamcorper suscipit. Sed mattis nulla vel urna scelerisque dignissim. Suspendisse at elementum urna. Donec id aliquet nulla, in tincidunt orci.",
+  }
+]
 
 const dummyFeedbacks = [
   {

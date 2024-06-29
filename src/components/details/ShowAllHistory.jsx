@@ -1,6 +1,7 @@
 import React from "react";
 import cat404 from "../../assets/cat404.png";
 import HistoryCard from "../cards/HistoryCard";
+import { motion } from "framer-motion";
 
 const ShowAllHistory = ({ history }) => {
   const container = {
@@ -20,7 +21,7 @@ const ShowAllHistory = ({ history }) => {
   };
 
   return (
-    <div id="elections" className="mb-16">
+    <div id="history" className="mb-16">
       <h1 className="text-white font-medium text-3xl mb-3"> All History </h1>
       {history.length === 0 ? (
         <div>
@@ -44,8 +45,7 @@ const ShowAllHistory = ({ history }) => {
             <HistoryCard
               key={index}
               id={index}
-              election={history}
-              notes={"showAllElection"}
+              history={history}
               variants={item}
             />
           ))}
