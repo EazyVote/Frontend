@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { setGlobalState } from "../../services/Helper";
 
 const CandidateCard = ({ id, candidate, notes, variants }) => {
   return (
@@ -19,7 +20,11 @@ const CandidateCard = ({ id, candidate, notes, variants }) => {
           <h5 className="text-white text-xl text-center font-semibold line-clamp-1">
             {candidate.candidateName}
           </h5>
-          <button className="my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+          <button onClick={() => {
+            setGlobalState("candidateDetailScale", "scale-100")
+            setGlobalState("candidateId", candidate.id)
+          }}
+          className="my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
             <small>Show Candidate Detail</small>
           </button>
 

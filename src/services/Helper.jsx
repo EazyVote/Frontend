@@ -4,6 +4,8 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   createNewElectionScale: "scale-0",
   createNewFeedbackScale: "scale-0",
   mustConnectWalletScale: "scale-0",
+  candidateId: 0,
+  candidateDetailScale: "scale-0",
   connectedAccount: "",
   elections: [],
   candidates: [],

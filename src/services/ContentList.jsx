@@ -95,6 +95,7 @@ const elections = [
 
 const candidates = [
   {
+    id: 0,
     candidateName: "Thomas Alpha Edison",
     candidatePhoto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWEavBmbKd_5QrxjJv61uzO6Vd54P9H7Pgsg&s",
     candidateVision: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet bibendum velit. Aliquam semper lorem eu lectus efficitur, nec tincidunt ex luctus. Donec volutpat congue augue, eu maximus elit pulvinar nec. Mauris volutpat nulla at ipsum accumsan congue. Vivamus malesuada est dignissim ullamcorper lobortis. Proin consequat a velit sed gravida. Ut accumsan vel sapien vitae faucibus. Duis pulvinar, mi et posuere tincidunt, eros ante viverra dui, et feugiat nulla risus at sem. Suspendisse semper urna ac risus sollicitudin, ut imperdiet turpis dapibus. Vestibulum tempus purus ut malesuada accumsan.",
@@ -102,6 +103,7 @@ const candidates = [
     totalVote: 12
   },
   {
+    id: 1,
     candidateName: "Nicholas Tesla",
     candidatePhoto: "https://cdn0-production-images-kly.akamaized.net/aQK4Eqplwz15BRCLeR0_rFMhovk=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2360545/original/030301100_1537160924-800px-N.jpg",
     candidateVision: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet bibendum velit. Aliquam semper lorem eu lectus efficitur, nec tincidunt ex luctus. Donec volutpat congue augue, eu maximus elit pulvinar nec. Mauris volutpat nulla at ipsum accumsan congue. Vivamus malesuada est dignissim ullamcorper lobortis. Proin consequat a velit sed gravida. Ut accumsan vel sapien vitae faucibus. Duis pulvinar, mi et posuere tincidunt, eros ante viverra dui, et feugiat nulla risus at sem. Suspendisse semper urna ac risus sollicitudin, ut imperdiet turpis dapibus. Vestibulum tempus purus ut malesuada accumsan.",
@@ -109,6 +111,7 @@ const candidates = [
     totalVote: 13
   },
   {
+    id: 2,
     candidateName: "Albert Einstein",
     candidatePhoto: "https://cdn.britannica.com/77/142177-050-4E8010A9/Albert-Einstein-1947.jpg",
     candidateVision: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet bibendum velit. Aliquam semper lorem eu lectus efficitur, nec tincidunt ex luctus. Donec volutpat congue augue, eu maximus elit pulvinar nec. Mauris volutpat nulla at ipsum accumsan congue. Vivamus malesuada est dignissim ullamcorper lobortis. Proin consequat a velit sed gravida. Ut accumsan vel sapien vitae faucibus. Duis pulvinar, mi et posuere tincidunt, eros ante viverra dui, et feugiat nulla risus at sem. Suspendisse semper urna ac risus sollicitudin, ut imperdiet turpis dapibus. Vestibulum tempus purus ut malesuada accumsan.",
