@@ -1,6 +1,6 @@
 import React from "react";
-import ElectionCard from "../cards/ElectionCard";
 import cat404 from "../../assets/cat404.png";
+import HistoryCard from "../cards/HistoryCard";
 
 const ShowAllHistory = ({ history }) => {
   const container = {
@@ -41,7 +41,7 @@ const ShowAllHistory = ({ history }) => {
           className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
         >
           {history.map((history, index) => (
-            <ElectionCard
+            <HistoryCard
               key={index}
               id={index}
               election={history}

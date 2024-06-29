@@ -38,11 +38,6 @@ const ShowAllCandidates = ({ candidates }) => {
           </div>
         </div>
       ) : (
-        // <div class="grid grid-cols-[repeat(auto-fit,_16.666666%)] m-auto p-24 justify-center bg-slate-500">
-        //   <div class="w-full p-8 col-span-2 justify-center justify-self-center mx-auto bg-slate-900 text-white text-center text-lg">
-        //     2 cols, should be centered
-        //   </div>
-        // </div>
         <div className="place-items-center grid">
             <motion.div
           variants={container}

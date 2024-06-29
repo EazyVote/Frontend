@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 
-const HeroSection = () => {
+const HomeHeroSection = () => {
   return (
     <section
       className="bg-primary flex justify-center items-center"
@@ -57,4 +57,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HomeHeroSection;

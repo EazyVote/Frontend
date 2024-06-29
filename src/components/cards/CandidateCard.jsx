@@ -23,12 +23,12 @@ const CandidateCard = ({ id, candidate, notes, variants }) => {
             <small>Show Candidate Detail</small>
           </button>
 
-          <div className="flex justify-between items-center flex-wrap  font-semibold w-full">
-            <small className="text-white text-center w-full">
+          <div className="flex justify-between items-center flex-wrap text-sm font-semibold w-full">
+            <h1 className="text-white text-center w-full">
               {candidate.totalVote <= 1
                 ? `${candidate.totalVote} vote`
                 : `${candidate.totalVote} votes`}
-            </small>
+            </h1>
           </div>
         </div>
 

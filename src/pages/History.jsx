@@ -16,7 +16,7 @@ const History = () => {
 
   return (
     <div id="history">
-      <SearchBar query={query} handleSearch={handleSearch} />
+      <SearchBar query={query} handleSearch={handleSearch} message={"Search history..."} />
       <ShowAllHistory history={filteredElections} />
     </div>
   );

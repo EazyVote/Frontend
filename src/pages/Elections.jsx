@@ -16,7 +16,7 @@ const Elections = () => {
 
   return (
     <div id="elections">
-      <SearchBar query={query} handleSearch={handleSearch} />
+      <SearchBar query={query} handleSearch={handleSearch} message={"Search election..."} />
       <ShowAllElection elections={filteredElections} />
     </div>
   );

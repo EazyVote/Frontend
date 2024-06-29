@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-const SearchBar = ({query, handleSearch}) => {
+const SearchBar = ({query, handleSearch, message}) => {
 
   return (
     <div className="flex justify-end mt-2 mb-12">
@@ -10,7 +10,7 @@ const SearchBar = ({query, handleSearch}) => {
         htmlFor="search-bar"
       >
         <input
-          placeholder="Search election"
+          placeholder={message}
           className="pl-4 py-2 rounded-full flex-1 outline-none bg-white"
           value={query}
           onChange={handleSearch}

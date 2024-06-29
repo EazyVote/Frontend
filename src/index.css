@@ -18,6 +18,38 @@
   scroll-behavior: smooth;
 }
 
+
+.election-section-gradient {
+  padding: 14px 30px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+  cursor: pointer;
+}
+
+.election-section-gradient::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 19px;
+  background-color: #00040f;
+  z-index: -1;
+}
+
 .custom-text-placeholder::placeholder {
   color: #00040f;
   opacity: 1;
