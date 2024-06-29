@@ -19,7 +19,7 @@ const CandidateCard = ({ id, candidate, notes, variants }) => {
           <h5 className="text-white text-xl text-center font-semibold line-clamp-1">
             {candidate.candidateName}
           </h5>
-          <button className="hover:scale-105 duration-200 my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+          <button className="my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
             <small>Show Candidate Detail</small>
           </button>
 
