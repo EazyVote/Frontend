@@ -45,7 +45,7 @@ const CreateNewFeedback = () => {
           </div>
           <button
             type="submit"
-            className="inline-block px-6 py-2.5 mt-5 text-white font-medium rounded-full shadow-md bg-primary"
+            className="duration-200 hover:scale-105 inline-block px-6 py-2.5 mt-5 text-white font-medium rounded-full shadow-md bg-primary"
           >
             {" "}
             Send Feedback{" "}

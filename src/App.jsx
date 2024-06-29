@@ -10,6 +10,7 @@ import MustConnectWallet from "./components/popup/MustConnectWallet";
 import HistoryDetail from "./pages/HistoryDetail";
 import ElectionDetail from "./pages/ElectionDetail";
 import CandidateDetail from "./components/popup/CandidateDetail";
+import SuccessfullyVote from "./components/popup/SuccessfullyVote";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <CreateNewFeedback />
       <MustConnectWallet />
       <CandidateDetail />
+      <SuccessfullyVote />
     </div>
   );
 };
