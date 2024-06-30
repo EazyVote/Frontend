@@ -1,11 +1,18 @@
 import { useScroll } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import BoxReveal from "../magicui/BoxReveal";
 import { Link } from "react-router-dom";
+import { NavContext } from "../../context/Context";
 
 const HomeHeroSection = () => {
+  const { setActive } = useContext(NavContext);
+
+  const handleExploreClick = () => {
+    setActive("elections");
+  };
+
   return (
     <section className="bg-primary flex justify-center items-center">
       <div id="home" className="xl:max-w-[1280px] w-full">
@@ -59,11 +66,7 @@ const HomeHeroSection = () => {
             <BoxReveal boxColor={"#33bbcf"} duration={0.5}>
               <Link to={"/elections"}>
                 <button
-                  onChange={() =>
-                    document
-                      .getElementById("elections")
-                      .scrollIntoView({ behavior: "smooth" })
-                  }
+                  onClick={handleExploreClick}
                   className="mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg"
                 >
                   Explore Elections

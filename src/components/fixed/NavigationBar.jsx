@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import close from "../../assets/close.svg";
 import menu from "../../assets/menu.svg";
 import { navLinks } from "../../services/ContentList";
 import { Link } from "react-router-dom";
+import { setGlobalState } from "../../services/Helper";
+import { NavContext } from "../../context/Context";
 
 const NavigationBar = () => {
-  const [active, setActive] = useState("Home");
+  const { active, setActive } = useContext(NavContext);
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -69,9 +71,12 @@ const NavigationBar = () => {
                 className={`font-poppins font-medium mb-0 cursor-pointer text-[16px] ${
                   active === "signout" ? "text-white" : "text-dimWhite"
                 }`}
-                onClick={() => setActive("signout")}
+                onClick={() => {
+                  setActive("signout")
+                  setGlobalState("signOutConfirmationScale", "scale-100")
+                }}
               >
-                <Link to={`/signout`}>Sign Out</Link>
+                Sign Out
               </li>
             </ul>
           </div>

@@ -14,28 +14,31 @@ import CreateNewElection from "./pages/CreateNewElection";
 import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateElection";
 import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
+import { NavProvider } from "./context/Context";
 
 const App = () => {
   return (
-    <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
-      <NavigationBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/elections" element={<Elections />} />
-        <Route path="/elections/:id" element={<ElectionDetail />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/create_election" element={<CreateNewElection />} />
-      </Routes>
-      <Footer />
+    <NavProvider>
+      <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/elections" element={<Elections />} />
+          <Route path="/elections/:id" element={<ElectionDetail />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/create_election" element={<CreateNewElection />} />
+        </Routes>
+        <Footer />
 
-      <CreateNewFeedback />
-      <MustConnectWallet />
-      <CandidateDetail />
-      <SuccessfullyVote />
-      <SuccessfullyCreateElection />
-      <SuccessfullyGiveFeedback />
-      <SignOutConfirmation />
-    </div>
+        <CreateNewFeedback />
+        <MustConnectWallet />
+        <CandidateDetail />
+        <SuccessfullyVote />
+        <SuccessfullyCreateElection />
+        <SuccessfullyGiveFeedback />
+        <SignOutConfirmation />
+      </div>
+    </NavProvider>
   );
 };
 
