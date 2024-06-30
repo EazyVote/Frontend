@@ -1,80 +1,71 @@
 import React, { useState } from "react";
-import AddElectionDetail from "../components/multi_form/AddElectionDetail";
-import AddCandidateDetail from "../components/multi_form/AddCandidateDetail";
-import Stepper from "../components/multi_form/Stepper";
-import StepperControl from "../components/multi_form/StepperControl";
-import SuccessfullySaved from "../components/multi_form/SuccessfullySaved";
-import { StepperContext } from "../components/multi_form/context/StepperContext";
-
-const electionDetail = {
-  electionTitle: "",
-  electionPicture: "",
-  electionCreator: "",
-  electionStart: "",
-  eletionEnd: "",
-  electionDescription: "",
-  electionTotalCandidates: "",
-};
-
-const candidateDetail = {
-  candidateName: "",
-  candidatePhoto: "",
-  candidateVision: "",
-  candidateMission: "",
-};
-
-const candidateDetailArray = [];
-
-const steps = ["Election Detail", "Candidates Detail", "Complete"];
-
-const renderStep = (step) => {
-  switch (step) {
-    case 1:
-      return <AddElectionDetail />;
-    case 2:
-      return <AddCandidateDetail />;
-    case 3:
-      return <SuccessfullySaved />;
-    default:
-      null;
-  }
-};
+import AddCandidateForm from "../components/mini-form/AddCandidateForm";
+import ElectionForm from "../components/mini-form/ElectionForm";
+import { Link } from "react-router-dom";
 
 const CreateNewElection = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [addElectionDetail, setAddElectionDetail] = useState(electionDetail);
-  const [addCandidateDetail, setAddCandidateDetail] =
-    useState(candidateDetailArray);
+  const [electionData, setElectionData] = useState({
+    electionPicture: "",
+    electionTitle: "",
+    electionStart: "",
+    electionEnd: "",
+    electionDescription: "",
+    electionTotalCandidates: 0,
+  });
 
-  const handleClick = (direction) => {
-    let newStep = currentStep;
-    direction == "next" ? newStep++ : newStep--;
-    newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
+  const handleElectionChange = (field, value) => {
+    setElectionData({ ...electionData, [field]: value });
+  };
+
+  const [candidates, setCandidates] = useState([]);
+
+  const handleTotalCandidatesChange = (total) => {
+    setElectionData({ ...electionData, electionTotalCandidates: total });
+
+    const newCandidates = [];
+    for (let i = 0; i < total; i++) {
+      newCandidates.push({
+        name: "",
+        photo: "",
+        vision: "",
+        mission: "",
+      });
+    }
+
+    setCandidates(newCandidates);
+  };
+
+  const handleCandidateChange = (index, field, value) => {
+    const newCandidate = [...candidates];
+    newCandidate[index] = { ...newCandidate[index], [field]: value };
+    setCandidates(newCandidate);
   };
 
   return (
-    <div className="font-poppins shadow-xl rounded-2xl pb-2">
-      <div className="mt-5">
-        <Stepper steps={steps} currentStep={currentStep} />
-
-        <div>
-          <StepperContext.Provider
-            value={{
-              addElectionDetail,
-              setAddElectionDetail,
-              addCandidateDetail,
-              setAddCandidateDetail,
-            }}
-          >
-            {renderStep(currentStep)}
-          </StepperContext.Provider>
+    <div className="font-poppins shadow-xl rounded-2xl pb-2 mb-16">
+      <div className="rounded-xl w-full overflow-y-auto">
+        <div className="flex flex-col custom-text-placeholder">
+          <ElectionForm
+            electionData={electionData}
+            onElectionChange={handleElectionChange}
+            onTotalCandidatesChange={handleTotalCandidatesChange}
+          />
+          {candidates.map((candidate, index) => (
+            <AddCandidateForm
+              key={index}
+              index={index}
+              candidate={candidate}
+              handleCandidateChange={handleCandidateChange}
+            />
+          ))}
         </div>
       </div>
-      <StepperControl
-        handleClick={handleClick}
-        steps={steps}
-        currentStep={currentStep}
-      />
+      <div className="flex justify-end">
+        <button 
+        className={`${electionData.electionTotalCandidates == 0 ? "opacity-0 cursor-not-allowed" : "opacity-100 cursor-pointer"} hover:scale-105 duration-200 flex justify-end mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg`}>
+          Create Election
+        </button>
+      </div>
     </div>
   );
 };
