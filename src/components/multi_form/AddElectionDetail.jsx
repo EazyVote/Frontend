@@ -14,9 +14,9 @@ const AddElectionDetail = () => {
   };
 
   return (
-    <div className="bg-white shadow-xl shadow-black rounded-xl h-7/12 p-6 overflow-y-auto max-h-[calc(100vh-20px)]">
+    <div className="rounded-xl w-full overflow-y-auto">
       <div className="flex flex-col custom-text-placeholder">
-        <div className="flex justify-center items-center mt-5">
+        <div className="flex justify-center items-center">
           <div className="rounded-xl overflow-hidden w-36 h-36">
             <img
               src={
@@ -30,10 +30,10 @@ const AddElectionDetail = () => {
         </div>
         <div className="grid grid-cols-2 gap-4 mt-5">
           <div className="col-span-2">
-            <label className="text-primary">Election Title</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election Title</label>
+            <div className="flex justify-between items-center mt-4 rounded-xl bg-gray-300">
               <input
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="text"
                 name="electionTitle"
                 onChange={handleChange}
@@ -43,10 +43,10 @@ const AddElectionDetail = () => {
             </div>
           </div>
           <div>
-            <label className="text-primary">Election Picture</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election Picture (URL) </label>
+            <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
               <input
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="url"
                 name="electionPicture"
                 onChange={handleChange}
@@ -56,10 +56,10 @@ const AddElectionDetail = () => {
             </div>
           </div>
           <div>
-            <label className="text-primary">Election Total Candidates</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election Total Candidates</label>
+            <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
               <input
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="number"
                 step={1}
                 min={2}
@@ -71,10 +71,10 @@ const AddElectionDetail = () => {
             </div>
           </div>
           <div>
-            <label className="text-primary">Election Start</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election Start</label>
+            <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
               <input
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="date"
                 name="electionStart"
                 onChange={handleChange}
@@ -84,10 +84,10 @@ const AddElectionDetail = () => {
             </div>
           </div>
           <div>
-            <label className="text-primary">Election End</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election End</label>
+            <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
               <input
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="date"
                 name="electionEnd"
                 onChange={handleChange}
@@ -97,10 +97,10 @@ const AddElectionDetail = () => {
             </div>
           </div>
           <div className="col-span-2">
-            <label className="text-primary">Election Description</label>
-            <div className="flex justify-between items-center my-4 rounded-xl bg-gray-300">
+            <label className="text-white">Election Description</label>
+            <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
               <textarea
-                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-slate-500 focus:outline focus:ring-0"
+                className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
                 type="text"
                 name="electionDescription"
                 onChange={handleChange}

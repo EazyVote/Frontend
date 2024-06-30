@@ -53,32 +53,28 @@ const CreateNewElection = () => {
   };
 
   return (
-    <div className="">
-      <div className="fixed flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 popup-visible overflow-y-auto max-h-[calc(100vh-20px)]">
-        <div className="h-1/2 w-screen font-poppins shadow-xl rounded-2xl pb-2 bg-white">
-          <div className="mt-5">
-            <Stepper steps={steps} currentStep={currentStep} />
+    <div className="font-poppins shadow-xl rounded-2xl pb-2">
+      <div className="mt-5">
+        <Stepper steps={steps} currentStep={currentStep} />
 
-            <div className="my-10 p-10">
-              <StepperContext.Provider
-                value={{
-                  addElectionDetail,
-                  setAddElectionDetail,
-                  addCandidateDetail,
-                  setAddCandidateDetail,
-                }}
-              >
-                {renderStep(currentStep)}
-              </StepperContext.Provider>
-            </div>
-          </div>
-          <StepperControl
-            handleClick={handleClick}
-            steps={steps}
-            currentStep={currentStep}
-          />
+        <div>
+          <StepperContext.Provider
+            value={{
+              addElectionDetail,
+              setAddElectionDetail,
+              addCandidateDetail,
+              setAddCandidateDetail,
+            }}
+          >
+            {renderStep(currentStep)}
+          </StepperContext.Provider>
         </div>
       </div>
+      <StepperControl
+        handleClick={handleClick}
+        steps={steps}
+        currentStep={currentStep}
+      />
     </div>
   );
 };

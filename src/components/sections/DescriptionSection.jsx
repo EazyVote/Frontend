@@ -2,6 +2,7 @@ import { features, iconMap } from "../../services/ContentList";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const FeatureCard = ({ title, icon, content, index }) => {
   const IconComponent = iconMap[icon];
@@ -32,22 +33,21 @@ const FeatureCard = ({ title, icon, content, index }) => {
 };
 
 const DescriptionSection = () => {
-  const ref = useRef(null)
-  const [offset, setOffset] = useState(["0 1", "1.05 1"])
+  const ref = useRef(null);
+  const [offset, setOffset] = useState(["0 1", "1.05 1"]);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1024) {
-        setOffset(["0 1", "0.5 1"])
+        setOffset(["0 1", "0.5 1"]);
+      } else if (window.innerWidth < 500) {
+        setOffset("0 1", "0.3 1");
       }
-      else if (window.innerWidth < 500) {
-        setOffset("0 1", "0.3 1")
-      }
-    }
-    handleResize()
-  }, [])
+    };
+    handleResize();
+  }, []);
 
-  const { scrollYProgress }  = useScroll({
+  const { scrollYProgress } = useScroll({
     target: ref,
     offset: offset,
   });
@@ -73,9 +73,11 @@ const DescriptionSection = () => {
           security, and trust in elections. However, with many platforms
           available.
         </p>
-        <button className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
-          Create New Election
-        </button>
+        <Link to={"/create_election"}>
+          <button className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+            Create New Election
+          </button>
+        </Link>
       </div>
 
       <div

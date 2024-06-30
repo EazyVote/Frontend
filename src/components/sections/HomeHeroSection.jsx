@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import BoxReveal from "../magicui/BoxReveal";
+import { Link } from "react-router-dom";
 
 const HomeHeroSection = () => {
   return (
@@ -56,9 +57,11 @@ const HomeHeroSection = () => {
             </BoxReveal>
 
             <BoxReveal boxColor={"#33bbcf"} duration={0.5}>
-              <button className="mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg">
-                Explore Elections
-              </button>
+              <Link to={'/elections'}>
+                <button className="mt-5 text-white font-poppins font-normal rounded-lg btn-blue-gradient py-2 px-4 rounded-lg">
+                  Explore Elections
+                </button>
+              </Link>
             </BoxReveal>
           </div>
         </section>

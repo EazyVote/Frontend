@@ -10,6 +10,7 @@ import MustConnectWallet from "./components/popup/MustConnectWallet";
 import ElectionDetail from "./pages/ElectionDetail";
 import CandidateDetail from "./components/popup/CandidateDetail";
 import SuccessfullyVote from "./components/popup/SuccessfullyVote";
+import CreateNewElection from "./pages/CreateNewElection";
 
 const App = () => {
   return (
@@ -20,10 +21,10 @@ const App = () => {
         <Route path="/elections" element={<Elections />} />
         <Route path="/elections/:id" element={<ElectionDetail />} />
         <Route path="/history" element={<History />} />
+        <Route path="/create_election" element={<CreateNewElection />} />
       </Routes>
       <Footer />
 
-      {/* <CreateNewElection /> */}
       <CreateNewFeedback />
       <MustConnectWallet />
       <CandidateDetail />
