@@ -17,7 +17,7 @@ const NavigationBar = () => {
           </h1>
         </div>
 
-        <ul className="list-none flex sm:flex hidden justify-center items-center flex-1">
+        <ul className="list-none hidden justify-center items-center flex-1 lg:flex">
           {navLinks.map((nav, index) => (
             <li
               key={nav.id}
@@ -31,7 +31,7 @@ const NavigationBar = () => {
           ))}
         </ul>
 
-        <div className="sm:flex hidden flex-1 flex justify-end">
+        <div className="lg:flex hidden flex-1 flex justify-end">
           <button
             type="button"
             className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
@@ -40,7 +40,7 @@ const NavigationBar = () => {
           </button>
         </div>
 
-        <div className="sm:hidden flex flex-1 justify-end items-center">
+        <div className="lg:hidden flex flex-1 justify-end items-center">
           <img
             src={toggle ? close : menu}
             alt="menu"
@@ -57,14 +57,22 @@ const NavigationBar = () => {
               {navLinks.map((nav, index) => (
                 <li
                   key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                  className={`font-poppins font-medium mb-4 cursor-pointer text-[16px] ${
                     active === nav.title ? "text-white" : "text-dimWhite"
-                  } ${index === navLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                  }`}
                   onClick={() => setActive(nav.title)}
                 >
                   <Link to={`/${nav.id}`}>{nav.title}</Link>
                 </li>
               ))}
+              <li
+                className={`font-poppins font-medium mb-0 cursor-pointer text-[16px] ${
+                  active === "signout" ? "text-white" : "text-dimWhite"
+                }`}
+                onClick={() => setActive("signout")}
+              >
+                <Link to={`/signout`}>Sign Out</Link>
+              </li>
             </ul>
           </div>
         </div>

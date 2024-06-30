@@ -95,6 +95,29 @@
   border-image-slice: 1;
 }
 
+.confirm-gradient {
+  padding: 16px 30px;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  border-radius: 30px;
+  background:  #00040f;
+  cursor: pointer;
+}
+
+.confirm-gradient::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 30px;
+  background-color: white;
+  z-index: -1;
+}
+
 .connect-wallet-gradient {
   padding: 16px 30px;
   border: none;

@@ -7,6 +7,7 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   successfullyVoteScale: "scale-0",
   successfullyGiveFeedbackScale: "scale-0",
   successfullyCreateElectionScale: "scale-0",
+  signOutConfirmationScale: "scale-0",
   candidateId: 0,
   connectedAccount: "",
   elections: [],

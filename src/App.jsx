@@ -13,6 +13,7 @@ import SuccessfullyVote from "./components/popup/SuccessfullyVote";
 import CreateNewElection from "./pages/CreateNewElection";
 import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateElection";
 import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
+import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
       <SuccessfullyVote />
       <SuccessfullyCreateElection />
       <SuccessfullyGiveFeedback />
+      <SignOutConfirmation />
     </div>
   );
 };

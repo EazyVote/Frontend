@@ -9,7 +9,9 @@ const CreateNewFeedback = () => {
 
   const onClose = () => {
     setGlobalState("createNewFeedbackScale", "scale-0");
-    setGlobalState("successfullyGiveFeedbackScale", "scale-100")
+    if (feedback != "") {
+      setGlobalState("successfullyGiveFeedbackScale", "scale-100");
+    }
     reset();
   };
 
