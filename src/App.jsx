@@ -11,6 +11,8 @@ import ElectionDetail from "./pages/ElectionDetail";
 import CandidateDetail from "./components/popup/CandidateDetail";
 import SuccessfullyVote from "./components/popup/SuccessfullyVote";
 import CreateNewElection from "./pages/CreateNewElection";
+import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateElection";
+import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
       <MustConnectWallet />
       <CandidateDetail />
       <SuccessfullyVote />
+      <SuccessfullyCreateElection />
+      <SuccessfullyGiveFeedback />
     </div>
   );
 };

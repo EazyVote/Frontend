@@ -1,11 +1,12 @@
 import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
-  createNewElectionScale: "scale-0",
   createNewFeedbackScale: "scale-0",
   mustConnectWalletScale: "scale-0",
   candidateDetailScale: "scale-0",
   successfullyVoteScale: "scale-0",
+  successfullyGiveFeedbackScale: "scale-0",
+  successfullyCreateElectionScale: "scale-0",
   candidateId: 0,
   connectedAccount: "",
   elections: [],

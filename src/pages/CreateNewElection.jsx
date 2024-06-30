@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddCandidateForm from "../components/mini-form/AddCandidateForm";
 import ElectionForm from "../components/mini-form/ElectionForm";
 import { Link } from "react-router-dom";
+import { setGlobalState } from "../services/Helper";
 
 const CreateNewElection = () => {
   const [electionData, setElectionData] = useState({
@@ -62,6 +63,7 @@ const CreateNewElection = () => {
       </div>
       <div className="flex justify-end">
         <button 
+        onChange={() => setGlobalState("successfullyCreateElectionScale", "scale-100")}
         className={`${electionData.electionTotalCandidates == 0 ? "opacity-0 cursor-not-allowed" : "opacity-100 cursor-pointer"} hover:scale-105 duration-200 flex justify-end mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg`}>
           Create Election
         </button>
