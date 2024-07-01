@@ -1,0 +1,312 @@
+[
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "electionId", "type": "uint256" }
+    ],
+    "name": "ElectionIsNotOpen",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "voter", "type": "address" },
+      { "internalType": "uint256", "name": "electionId", "type": "uint256" }
+    ],
+    "name": "VoterAlreadyVote",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "electionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum EazyVote.Status",
+        "name": "electionStatus",
+        "type": "uint8"
+      }
+    ],
+    "name": "electionHasChangedStatus",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "electionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "candidateId",
+        "type": "uint256"
+      }
+    ],
+    "name": "newCandidateHasBeenAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "electionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "newElectionHasBeenCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "voter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "electionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "candidateId",
+        "type": "uint256"
+      }
+    ],
+    "name": "newVoteHasBeenAdded",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_electionId", "type": "uint256" },
+      { "internalType": "string", "name": "_candidateName", "type": "string" },
+      { "internalType": "string", "name": "_candidatePhoto", "type": "string" },
+      {
+        "internalType": "string",
+        "name": "_candidateVision",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_candidateMission",
+        "type": "string"
+      }
+    ],
+    "name": "addNewCandidate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_electionId", "type": "uint256" },
+      { "internalType": "string", "name": "_message", "type": "string" }
+    ],
+    "name": "changeElectionStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_electionTitle", "type": "string" },
+      {
+        "internalType": "string",
+        "name": "_electionPicture",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "_electionCreator",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_electionStart",
+        "type": "uint256"
+      },
+      { "internalType": "uint256", "name": "_electionEnd", "type": "uint256" },
+      {
+        "internalType": "string",
+        "name": "_electionDescription",
+        "type": "string"
+      }
+    ],
+    "name": "createNewElection",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCandidates",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "id", "type": "uint256" },
+          { "internalType": "uint256", "name": "totalVote", "type": "uint256" },
+          {
+            "internalType": "string",
+            "name": "candidateName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "candidatePhoto",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "candidateVision",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "candidateMission",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct EazyVote.Candidate[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_electionId", "type": "uint256" }
+    ],
+    "name": "getCandidatesIdInOneElection",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getElections",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "id", "type": "uint256" },
+          {
+            "internalType": "string",
+            "name": "electionTitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "electionPicture",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "electionCreator",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "electionStart",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "electionEnd",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "electionDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "enum EazyVote.Status",
+            "name": "electionStatus",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct EazyVote.Election[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getFeedbacks",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "id", "type": "uint256" },
+          { "internalType": "address", "name": "user", "type": "address" },
+          { "internalType": "string", "name": "textFeedback", "type": "string" }
+        ],
+        "internalType": "struct EazyVote.Feedback[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "getHistoryId",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_electionId", "type": "uint256" }
+    ],
+    "name": "getTotalVoterInOneElection",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" },
+      { "internalType": "string", "name": "_textFeedback", "type": "string" }
+    ],
+    "name": "giveFeedback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_voter", "type": "address" },
+      { "internalType": "uint256", "name": "_electionId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_candidateId", "type": "uint256" }
+    ],
+    "name": "voteCandidate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

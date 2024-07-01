@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import { Route, Router, Routes } from "react-router-dom";
 import History from "./pages/History";
@@ -17,6 +17,13 @@ import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
 
 const App = () => {
+
+  // const [connectedAccount] = localStorage.getItem("connectedAccount")
+  // useEffect(() => {
+  //   if (connectedAccount != null) {
+
+  //   }
+  // }, [connectedAccount, setConnectedAccount])
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
