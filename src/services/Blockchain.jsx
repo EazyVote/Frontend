@@ -1,5 +1,6 @@
 import contractAbi from "../abi/DeployedContract.json";
 import { AlchemyProvider, ethers } from "ethers";
+import { setGlobalState } from "./Helper";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
@@ -66,41 +67,31 @@ const createNewElection = async ({
 };
 
 const addNewCandidate = async ({
-    electionId,
-    candidateName,
-    candidatePhoto,
-    candidateVision,
-    candidateMission
+  electionId,
+  candidateName,
+  candidatePhoto,
+  candidateVision,
+  candidateMission,
 }) => {
-    try {
-        await contractWithSigner.addNewCandidate(
-            electionId,
-            candidateName,
-            candidatePhoto,
-            candidateVision,
-            candidateMission
-        );
-    }
-    catch (error) {
-        console.log(error.message);
-    }
+  try {
+    await contractWithSigner.addNewCandidate(
+      electionId,
+      candidateName,
+      candidatePhoto,
+      candidateVision,
+      candidateMission
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
-const voteCandidate = async ({
-    voter,
-    electionId,
-    candidateId
-}) => {
-    try {
-        await contractWithSigner.voteCandidate(
-            voter,
-            electionId,
-            candidateId
-        );
-    }
-    catch (error) {
-        console.log(error.message);
-    }
+const voteCandidate = async ({ voter, electionId, candidateId }) => {
+  try {
+    await contractWithSigner.voteCandidate(voter, electionId, candidateId);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const getAllCandidates = async (electionId) => {
@@ -117,7 +108,7 @@ const getAllCandidates = async (electionId) => {
 const getAllElections = async () => {
   try {
     const elections = await contractToLoadOnly.getElections();
-    structuredElections(elections);
+    structuredElections(elections, "elections");
   } catch (error) {
     console.log(error.message);
   }
@@ -135,17 +126,36 @@ const getAllFeedbacks = async () => {
 const getAllHistory = async (user) => {
   try {
     const historyId = await contractToLoadOnly.getHistory(user);
-    // structuredElections(history);
+    // structuredElections(history, "history");
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const structuredElections = async (elections) => {};
+const structuredElections = async (elections, message) => {
+  const electionList = elections.map((election) => ({
+    id: parseInt(election.id),
+    electionTitle: election.electionTitle,
+    electionPicture: election.electionPicture,
+    electionCreator: election.electionCreator.toString(),
+    electionStart: new Date(parseInt(election.electionStart)).getTime(),
+    electionEnd: new Date(parseInt(election.electionEnd)).getTime(),
+    electionDescription: election.electionDescription,
+    electionStatus: election.electionStatus.toString(),
+  }));
+  setGlobalState(message, electionList);
+};
 
 const structuredCandidates = async (candidates) => {};
 
-const structuredFeedbacks = async (feedbacks) => {};
+const structuredFeedbacks = async (feedbacks) => {
+  const feedbackList = feedbacks.map((feedback) => ({
+    id: parseInt(feedback.id),
+    user: feedback.user.toString(),
+    textFeedback: feedback.textFeedback,
+  }));
+  setGlobalState("feedbacks", feedbackList);
+};
 
 export {
   connectWallet,
