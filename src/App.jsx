@@ -15,15 +15,20 @@ import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateEle
 import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
+import { checkAndChangeElectionStatus, loadElections, loadFeedbacks, loadRecommendedElections } from "./services/Blockchain";
 
 const App = () => {
+  useEffect(() => {
+    setInterval(() => {
+      checkAndChangeElectionStatus();
+    }, 1000);
+  }, []);
+  useEffect(() => {
+    loadElections();
+    loadRecommendedElections();
+    loadFeedbacks();
+  }, []);
 
-  // const [connectedAccount] = localStorage.getItem("connectedAccount")
-  // useEffect(() => {
-  //   if (connectedAccount != null) {
-
-  //   }
-  // }, [connectedAccount, setConnectedAccount])
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">

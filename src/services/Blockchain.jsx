@@ -5,22 +5,28 @@ import { setGlobalState } from "./Helper";
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
 const apiKey = import.meta.env.VITE_SEPOLIA_RPC_URL;
-
 const { ethereum } = window;
-const contractProvider = new AlchemyProvider(network, apiKey);
-const contractToLoadOnly = new ethers.Contract(
-  contractAddress,
-  contractAbi,
-  contractProvider
-);
 
-const browserProvider = new ethers.BrowserProvider(ethereum);
-const signer = await browserProvider.getSigner();
-const contractWithSigner = new ethers.Contract(
-  contractAddress,
-  contractAbi,
-  signer
-);
+const getEthereumContractWithSigner = async () => {
+  const browserProvider = new ethers.BrowserProvider(ethereum);
+  const signer = await browserProvider.getSigner();
+  const contractWithSigner = new ethers.Contract(
+    contractAddress,
+    contractAbi,
+    signer
+  );
+  return contractWithSigner;
+};
+
+const getEthereumContractWithoutSigner = async () => {
+  const contractProvider = new AlchemyProvider(network, apiKey);
+  const contractToLoadOnly = new ethers.Contract(
+    contractAddress,
+    contractAbi,
+    contractProvider
+  );
+  return contractToLoadOnly;
+};
 
 const connectWallet = async () => {
   try {
@@ -33,7 +39,7 @@ const connectWallet = async () => {
     if (!accounts) {
       return alert("No accounts connected! Please connect a wallet!");
     }
-    const connectedAccount = accounts[0].toLowerCase();
+    const connectedAccount = accounts[0];
     localStorage.setItem("connectedAccount", connectedAccount);
   } catch (error) {
     console.log(error.message);
@@ -53,7 +59,8 @@ const createNewElection = async ({
   electionDescription,
 }) => {
   try {
-    await contractWithSigner.createNewElection(
+    const contract = await getEthereumContractWithSigner();
+    await contract.createNewElection(
       electionTitle,
       electionPicture,
       electionCreator,
@@ -74,7 +81,8 @@ const addNewCandidate = async ({
   candidateMission,
 }) => {
   try {
-    await contractWithSigner.addNewCandidate(
+    const contract = await getEthereumContractWithSigner();
+    await contract.addNewCandidate(
       electionId,
       candidateName,
       candidatePhoto,
@@ -86,53 +94,77 @@ const addNewCandidate = async ({
   }
 };
 
+const checkAndChangeElectionStatus = async () => {
+  try {
+    const contract = await getEthereumContractWithoutSigner();
+    await contract.checkAndChangeElectionStatus();
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const voteCandidate = async ({ voter, electionId, candidateId }) => {
   try {
-    await contractWithSigner.voteCandidate(voter, electionId, candidateId);
+    const contract = await getEthereumContractWithoutSigner();
+    await contract.voteCandidate(voter, electionId, candidateId);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getAllCandidates = async (electionId) => {
+const loadCandidates = async (electionId) => {
   try {
-    const candidates = await contractToLoadOnly.getCandidates();
-    const candidatesId = await contractToLoadOnly.getCandidatesIdInOneElection(
+    const contract = await getEthereumContractWithoutSigner();
+    const candidates = await contract.getCandidates();
+    const candidatesId = await contract.getCandidatesIdInOneElection(
       electionId
     );
+    const filteredCandidates = candidates.filter((candidate) =>
+      candidatesId.includes(candidate.id)
+    );
+    structuredCandidates(filteredCandidates);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getAllElections = async () => {
+const loadElections = async () => {
   try {
-    const elections = await contractToLoadOnly.getElections();
+    const contract = await getEthereumContractWithoutSigner();
+    const elections = await contract.getElections();
     structuredElections(elections, "elections");
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getAllFeedbacks = async () => {
+const loadRecommendedElections = async () => {};
+
+const loadFeedbacks = async () => {
   try {
-    const feedbacks = await contractToLoadOnly.getFeedbacks();
+    const contract = await getEthereumContractWithoutSigner();
+    const feedbacks = await contract.getFeedbacks();
     structuredFeedbacks(feedbacks);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getAllHistory = async (user) => {
+const loadHistory = async (user) => {
   try {
-    const historyId = await contractToLoadOnly.getHistory(user);
-    // structuredElections(history, "history");
+    const contract = await getEthereumContractWithoutSigner();
+    const elections = await contract.getElections();
+    const historyId = await contract.getHistory(user);
+    const history = elections.filter((election) =>
+      historyId.includes(history.id)
+    );
+    structuredElections(history, "history");
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const structuredElections = async (elections, message) => {
+const structuredElections = (elections, message) => {
   const electionList = elections.map((election) => ({
     id: parseInt(election.id),
     electionTitle: election.electionTitle,
@@ -146,9 +178,19 @@ const structuredElections = async (elections, message) => {
   setGlobalState(message, electionList);
 };
 
-const structuredCandidates = async (candidates) => {};
+const structuredCandidates = (candidates) => {
+  const candidateList = candidates.map((candidate) => ({
+    id: parseInt(candidate.id),
+    totalVote: parseInt(candidate.totalVote),
+    candidateName: candidate.candidateName,
+    candidatePhoto: candidate.candidatePhoto,
+    candidateVision: candidate.candidateVision,
+    candidateMission: candidate.candidateMission,
+  }));
+  setGlobalState("candidates", candidateList);
+};
 
-const structuredFeedbacks = async (feedbacks) => {
+const structuredFeedbacks = (feedbacks) => {
   const feedbackList = feedbacks.map((feedback) => ({
     id: parseInt(feedback.id),
     user: feedback.user.toString(),
@@ -159,12 +201,14 @@ const structuredFeedbacks = async (feedbacks) => {
 
 export {
   connectWallet,
+  checkAndChangeElectionStatus,
   disconnectWallet,
   createNewElection,
   addNewCandidate,
   voteCandidate,
-  getAllCandidates,
-  getAllFeedbacks,
-  getAllHistory,
-  getAllElections,
+  loadCandidates,
+  loadFeedbacks,
+  loadHistory,
+  loadElections,
+  loadRecommendedElections,
 };

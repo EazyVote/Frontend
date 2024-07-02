@@ -1,14 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import close from "../../assets/close.svg";
 import menu from "../../assets/menu.svg";
 import { navLinks } from "../../services/ContentList";
 import { Link } from "react-router-dom";
-import { setGlobalState } from "../../services/Helper";
+import { setGlobalState, truncate } from "../../services/Helper";
 import { NavContext } from "../../context/Context";
+import { connectWallet } from "../../services/Blockchain";
 
 const NavigationBar = () => {
   const { active, setActive } = useContext(NavContext);
   const [toggle, setToggle] = useState(false);
+  const [connectedAccount, setConnectedAccount] = useState("");
+
+  const handleConnectWallet = () => {
+    connectWallet();
+  };
+
+  useEffect(() => {
+    const account = localStorage.getItem("connectedAccount");
+    if (account) {
+      setConnectedAccount(account);
+    }
+  }, []);
 
   return (
     <div className="xl:max-w-[1280px] w-full">
@@ -34,12 +47,22 @@ const NavigationBar = () => {
         </ul>
 
         <div className="lg:flex hidden flex-1 flex justify-end">
-          <button
-            type="button"
-            className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
-          >
-            Connect Wallet
-          </button>
+          {connectedAccount ? (
+            <button
+              type="button"
+              className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
+            >
+              {truncate(connectedAccount, 4, 4, 11)}
+            </button>
+          ) : (
+            <button
+              onClick={handleConnectWallet}
+              type="button"
+              className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
+            >
+              Connect Wallet
+            </button>
+          )}
         </div>
 
         <div className="lg:hidden flex flex-1 justify-end items-center">
@@ -72,8 +95,8 @@ const NavigationBar = () => {
                   active === "signout" ? "text-white" : "text-dimWhite"
                 }`}
                 onClick={() => {
-                  setActive("signout")
-                  setGlobalState("signOutConfirmationScale", "scale-100")
+                  setActive("signout");
+                  setGlobalState("signOutConfirmationScale", "scale-100");
                 }}
               >
                 Sign Out

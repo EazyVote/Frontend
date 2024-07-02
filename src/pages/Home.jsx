@@ -4,6 +4,7 @@ import Feedbacks from "../components/details/ShowFeedbacks";
 import ShowRecommendedElection from "../components/details/ShowRecommendedElection";
 import { dummyFeedbacks, elections } from "../services/ContentList";
 import HomeHeroSection from "../components/sections/HomeHeroSection";
+import { loadElections, loadFeedbacks, loadRecommendedElections } from "../services/Blockchain";
 
 const Home = () => {
   return (
