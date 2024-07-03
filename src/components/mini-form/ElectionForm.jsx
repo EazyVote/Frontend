@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ElectionForm = ({
   electionData,
   onElectionChange,
   onTotalCandidatesChange,
 }) => {
+  const [minDateTime, setMinDateTime] = useState("")
+
+  useEffect(() => {
+    const now = new Date();
+    const formatedDateTime = now.toISOString().slice(0, 16)
+    setMinDateTime(formatedDateTime);
+  }, [])
+
   return (
     <div>
       <h1 className="text-white font-semibold text-lg mb-10">
@@ -75,11 +83,12 @@ const ElectionForm = ({
           <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
             <input
               className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
-              type="date"
+              type="datetime-local"
               name="electionStart"
               onChange={(e) =>
                 onElectionChange("electionStart", e.target.value)
               }
+              min={minDateTime}
               value={electionData.electionStart}
               required
             />
@@ -90,8 +99,9 @@ const ElectionForm = ({
           <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
             <input
               className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
-              type="date"
+              type="datetime-local"
               name="electionEnd"
+              min={electionData.electionStart}
               onChange={(e) => onElectionChange("electionEnd", e.target.value)}
               value={electionData.electionEnd}
               required

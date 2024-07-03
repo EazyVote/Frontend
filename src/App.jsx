@@ -25,6 +25,7 @@ import {
 import { useGlobalState } from "./services/Helper";
 
 const App = () => {
+  const connectedAccount = localStorage.getItem("connectedAccount")
   const elections = useGlobalState("elections");
   const recommended = useGlobalState("recommended");
   const feedbacks = useGlobalState("feedbacks");
@@ -44,8 +45,8 @@ const App = () => {
     if (feedbacks) {
       loadFeedbacks();
     }
-    if (history && localStorage.getItem("connectedAccount")) {
-      loadHistory(localStorage.getItem("connectedAccount"));
+    if (history && connectedAccount) {
+      loadHistory(connectedAccount);
     }
   }, []);
 
