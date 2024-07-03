@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { setGlobalState } from "../../services/Helper";
 import { dummyFeedbacks } from "../../services/ContentList";
 
-const ShowFeedbacks = () => {
+const ShowFeedbacks = ({ feedbacks }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -74,11 +74,15 @@ const ShowFeedbacks = () => {
   }, []);
 
   return (
-    <motion.section ref={ref}
-    style={{
-      scale: scrollYProgress,
-      opacity: scrollYProgress,
-    }} id="feedbacks" className="py-6 sm:pb-32">
+    <motion.section
+      ref={ref}
+      style={{
+        scale: scrollYProgress,
+        opacity: scrollYProgress,
+      }}
+      id="feedbacks"
+      className="py-6 sm:pb-32"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100">
           <div className="mb-12 space-y-5 md:mb-16 text-center">
@@ -92,14 +96,17 @@ const ShowFeedbacks = () => {
               Here's what <span className="text-gradient">others</span> have to
               say about us.
             </p>
-            <button 
-            onClick={() => setGlobalState("createNewFeedbackScale", "scale-100")}
-            className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
-             Add Yours
+            <button
+              onClick={() =>
+                setGlobalState("createNewFeedbackScale", "scale-100")
+              }
+              className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg"
+            >
+              Add Yours
             </button>
           </div>
         </div>
-        <div className="slider-container">
+        <div className={`slider-container ${feedbacks == null ? "scale-0" : "scale-100"}`}>
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
             {dummyFeedbacks.map((feedback, index) => (
               <FeedbackCard

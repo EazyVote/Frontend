@@ -15,18 +15,38 @@ import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateEle
 import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
-import { checkAndChangeElectionStatus, loadElections, loadFeedbacks, loadRecommendedElections } from "./services/Blockchain";
+import {
+  checkAndChangeElectionStatus,
+  loadElections,
+  loadFeedbacks,
+  loadHistory,
+  loadRecommendedElections,
+} from "./services/Blockchain";
+import { useGlobalState } from "./services/Helper";
 
 const App = () => {
+  const elections = useGlobalState("elections");
+  const recommended = useGlobalState("recommended");
+  const feedbacks = useGlobalState("feedbacks");
+  const history = useGlobalState("history")
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     checkAndChangeElectionStatus();
+  //   }, 1000);
+  // }, []);
   useEffect(() => {
-    setInterval(() => {
-      checkAndChangeElectionStatus();
-    }, 1000);
-  }, []);
-  useEffect(() => {
-    loadElections();
-    loadRecommendedElections();
-    loadFeedbacks();
+    if (elections) {
+      loadElections();
+    }
+    if (recommended) {
+      loadRecommendedElections();
+    }
+    if (feedbacks) {
+      loadFeedbacks();
+    }
+    if (history && localStorage.getItem("connectedAccount")) {
+      loadHistory(localStorage.getItem("connectedAccount"));
+    }
   }, []);
 
   return (
@@ -34,10 +54,10 @@ const App = () => {
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
         <NavigationBar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/elections" element={<Elections />} />
+          <Route path="/" element={<Home />} recommended={recommended} feedbacks={feedbacks}/>
+          <Route path="/elections" element={<Elections />} elections={elections}/>
           <Route path="/elections/:id" element={<ElectionDetail />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<History />} history={history} />
           <Route path="/create_election" element={<CreateNewElection />} />
         </Routes>
         <Footer />

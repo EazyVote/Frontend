@@ -39,8 +39,7 @@ const connectWallet = async () => {
     if (!accounts) {
       return alert("No accounts connected! Please connect a wallet!");
     }
-    const connectedAccount = accounts[0];
-    localStorage.setItem("connectedAccount", connectedAccount);
+    localStorage.setItem("connectedAccount", accounts[0]);
   } catch (error) {
     console.log(error.message);
   }
