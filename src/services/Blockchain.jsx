@@ -6,6 +6,14 @@ const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
 const apiKey = import.meta.env.VITE_SEPOLIA_RPC_URL;
 const { ethereum } = window;
+let cachedSigner = null;
+
+const getCachedEthereumContractWithSigner = async () => {
+  if (!cachedSigner) {
+    cachedSigner = getEthereumContractWithSigner();
+  }
+  return cachedSigner;
+};
 
 const getEthereumContractWithSigner = async () => {
   const browserProvider = new ethers.BrowserProvider(ethereum);
@@ -58,7 +66,7 @@ const createNewElection = async ({
   electionDescription,
 }) => {
   try {
-    const contract = await getEthereumContractWithSigner();
+    const contract = await getCachedEthereumContractWithSigner();
     await contract.createNewElection(
       electionTitle,
       electionPicture,
@@ -80,7 +88,7 @@ const addNewCandidate = async ({
   candidateMission,
 }) => {
   try {
-    const contract = await getEthereumContractWithSigner();
+    const contract = await getCachedEthereumContractWithSigner();
     await contract.addNewCandidate(
       electionId,
       candidateName,
