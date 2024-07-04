@@ -5,14 +5,15 @@ import "slick-carousel/slick/slick-theme.css";
 import FeedbackCard from "../cards/FeedbackCard";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
-import { setGlobalState } from "../../services/Helper";
-import { dummyFeedbacks } from "../../services/ContentList";
+import { setGlobalState, useGlobalState } from "../../services/Helper";
+import { loadFeedbacks } from "../../services/Blockchain";
 
-const ShowFeedbacks = ({ feedbacks }) => {
+const ShowFeedbacks = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
+  const [feedbacks] = useGlobalState("feedbacks");
 
   let sliderRef = useRef(null);
   const play = () => {
@@ -72,6 +73,14 @@ const ShowFeedbacks = ({ feedbacks }) => {
   const handleClick = () => {
     setGlobalState("createNewFeedbackScale", "scale-100");
   };
+
+  useEffect(() => {
+    const loadData = async() => {
+      await loadFeedbacks();
+    }
+    loadData();
+    console.log(feedbacks);
+  }, [feedbacks]);
 
   useEffect(() => {
     play();

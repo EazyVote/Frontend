@@ -6,7 +6,7 @@ import HomeHeroSection from "../components/sections/HomeHeroSection";
 import { useGlobalState } from "../services/Helper";
 import ShowFeedbacks from "../components/details/ShowFeedbacks";
 
-const Home = ({ recommended, feedbacks }) => {
+const Home = () => {
   return (
     <>
       <HomeHeroSection />
@@ -14,9 +14,9 @@ const Home = ({ recommended, feedbacks }) => {
       {elections.length == 0 ? (
         <div></div>
       ) : (
-        <ShowRecommendedElection recommended={recommended} />
+        <ShowRecommendedElection />
       )}
-      <ShowFeedbacks feedbacks={feedbacks} />
+      <ShowFeedbacks />
     </>
   );
 };

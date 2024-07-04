@@ -25,42 +25,26 @@ import {
 import { useGlobalState } from "./services/Helper";
 
 const App = () => {
-  const connectedAccount = localStorage.getItem("connectedAccount")
-  const elections = useGlobalState("elections");
-  const recommended = useGlobalState("recommended");
-  const history = useGlobalState("history")
-  const [feedbacks, setFeedbacks] = useState([]);
   // useEffect(() => {
   //   setInterval(() => {
   //     checkAndChangeElectionStatus();
   //   }, 1000);
   // }, []);
-  useEffect(() => {
-    const feedbacks = useGlobalState("feedbacks");
-    if (elections) {
-      loadElections();
-    }
-    if (recommended) {
-      loadRecommendedElections();
-    }
-    if (feedbacks) {
-      setFeedbacks(feedbacks)
-      loadFeedbacks();
-    }
-    if (history && connectedAccount) {
-      loadHistory(connectedAccount);
-    }
-  }, []);
-
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
         <NavigationBar />
         <Routes>
-          <Route path="/" element={<Home />} recommended={recommended} feedbacks={feedbacks}/>
-          <Route path="/elections" element={<Elections />} elections={elections}/>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/elections"
+            element={<Elections />}
+          />
           <Route path="/elections/:id" element={<ElectionDetail />} />
-          <Route path="/history" element={<History />} history={history} />
+          <Route path="/history" element={<History />} />
           <Route path="/create_election" element={<CreateNewElection />} />
         </Routes>
         <Footer />

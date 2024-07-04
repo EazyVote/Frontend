@@ -7,7 +7,9 @@ const CreateNewFeedback = () => {
   const [createNewFeedbackScale] = useGlobalState("createNewFeedbackScale");
   const [feedback, setFeedback] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     const connectedAccount = localStorage.getItem("connectedAccount");
     if (connectedAccount) {
       console.log(connectedAccount);
@@ -34,7 +36,7 @@ const CreateNewFeedback = () => {
     <div
       className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${createNewFeedbackScale} popup-visible`}
     >
-      <div className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
+      <form className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6" method="POST" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <p className="font-bold">Give Feedback</p>
@@ -58,7 +60,7 @@ const CreateNewFeedback = () => {
             />
           </div>
           <button
-            onClick={handleSubmit}
+            type="submit"
             disabled={feedback == ""}
             className="duration-200 hover:scale-105 inline-block px-6 py-2.5 mt-5 text-white font-medium rounded-full shadow-md bg-primary"
           >
@@ -66,7 +68,7 @@ const CreateNewFeedback = () => {
             Send Feedback{" "}
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

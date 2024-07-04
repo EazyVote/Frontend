@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { elections } from "../../services/ContentList";
-
-
+import { useGlobalState } from "../../services/Helper";
+import { loadRecommendedElections } from "../../services/Blockchain";
 
 const ShowRecommendedElection = () => {
   let sliderRef = useRef(null);
   const play = () => {
     sliderRef.slickPlay();
   };
+
+  const [recommended, setRecommended] = useGlobalState("recommended")
 
   const settings = {
     dots: false,
@@ -64,6 +66,11 @@ const ShowRecommendedElection = () => {
   useEffect(() => {
     play();
   }, []);
+
+  useEffect(() => {
+    loadRecommendedElections();
+  }, [recommended, setRecommended])
+  
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

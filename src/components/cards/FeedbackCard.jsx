@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 import React from "react";
-import { getRandomId } from "../../services/Helper";
+import { getRandomId, truncate } from "../../services/Helper";
 
-const FeedbackCard = ({ id, feedback,  isExpanded, toggleExpand }) => {
+const FeedbackCard = ({ id, feedback, isExpanded, toggleExpand }) => {
   const names = Array.from({ length: 20 }, () => faker.person.fullName());
   const randId = getRandomId(0, 19);
 
@@ -22,8 +22,8 @@ const FeedbackCard = ({ id, feedback,  isExpanded, toggleExpand }) => {
                 alt="avatar"
               />
               <div>
-                <h3 className="text-md font-semibold text-white lg:text-lg md:text-lg">
-                  {feedback.name}
+                <h3 className="text-sm font-medium text-white lg:text-lg md:text-md">
+                  {truncate(feedback.user, 4, 4, 11)}
                 </h3>
               </div>
             </div>
@@ -32,7 +32,7 @@ const FeedbackCard = ({ id, feedback,  isExpanded, toggleExpand }) => {
                 isExpanded ? "" : "line-clamp-1"
               }`}
             >
-              {feedback.feedbacks}
+              {feedback.textFeedback}
             </p>
           </div>
         </a>

@@ -113,8 +113,6 @@ const giveFeedback = async (user, textFeedback) => {
   try {
     const contract = await getEthereumContractWithSigner();
     await contract.giveFeedback(user, textFeedback);
-    console.log("done")
-    loadFeedbacks();
   }
   catch (error) {
     console.log(error.message);
@@ -125,22 +123,6 @@ const voteCandidate = async ({ voter, electionId, candidateId }) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     await contract.voteCandidate(voter, electionId, candidateId);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const loadCandidates = async (electionId) => {
-  try {
-    const contract = await getEthereumContractWithoutSigner();
-    const candidates = await contract.getCandidates();
-    const candidatesId = await contract.getCandidatesIdInOneElection(
-      electionId
-    );
-    const filteredCandidates = candidates.filter((candidate) =>
-      candidatesId.includes(candidate.id)
-    );
-    structuredCandidates(filteredCandidates);
   } catch (error) {
     console.log(error.message);
   }
@@ -164,8 +146,6 @@ const loadFeedbacks = async () => {
     const contract = await getEthereumContractWithoutSigner();
     const feedbacks = await contract.getFeedbacks();
     structuredFeedbacks(feedbacks);
-    const temp = useGlobalState("feedbacks");
-    console.log(temp.length);
   } catch (error) {
     console.log(error.message);
   }
@@ -180,6 +160,22 @@ const loadHistory = async (user) => {
       historyId.includes(history.id)
     );
     structuredElections(history, "history");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const loadCandidates = async (electionId) => {
+  try {
+    const contract = await getEthereumContractWithoutSigner();
+    const candidates = await contract.getCandidates();
+    const candidatesId = await contract.getCandidatesIdInOneElection(
+      electionId
+    );
+    const filteredCandidates = candidates.filter((candidate) =>
+      candidatesId.includes(candidate.id)
+    );
+    structuredCandidates(filteredCandidates);
   } catch (error) {
     console.log(error.message);
   }
