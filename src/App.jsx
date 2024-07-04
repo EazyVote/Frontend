@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import { Route, Router, Routes } from "react-router-dom";
 import History from "./pages/History";
@@ -28,14 +28,15 @@ const App = () => {
   const connectedAccount = localStorage.getItem("connectedAccount")
   const elections = useGlobalState("elections");
   const recommended = useGlobalState("recommended");
-  const feedbacks = useGlobalState("feedbacks");
   const history = useGlobalState("history")
+  const [feedbacks, setFeedbacks] = useState([]);
   // useEffect(() => {
   //   setInterval(() => {
   //     checkAndChangeElectionStatus();
   //   }, 1000);
   // }, []);
   useEffect(() => {
+    const feedbacks = useGlobalState("feedbacks");
     if (elections) {
       loadElections();
     }
@@ -43,6 +44,7 @@ const App = () => {
       loadRecommendedElections();
     }
     if (feedbacks) {
+      setFeedbacks(feedbacks)
       loadFeedbacks();
     }
     if (history && connectedAccount) {

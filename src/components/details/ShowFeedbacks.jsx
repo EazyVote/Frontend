@@ -69,6 +69,10 @@ const ShowFeedbacks = ({ feedbacks }) => {
     offset: ["0 1", "0.7 1"],
   });
 
+  const handleClick = () => {
+    setGlobalState("createNewFeedbackScale", "scale-100");
+  };
+
   useEffect(() => {
     play();
   }, []);
@@ -97,26 +101,32 @@ const ShowFeedbacks = ({ feedbacks }) => {
               say about us.
             </p>
             <button
-              onClick={() =>
-                setGlobalState("createNewFeedbackScale", "scale-100")
-              }
+              onClick={handleClick}
               className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg"
             >
               Add Yours
             </button>
           </div>
         </div>
-        <div className={`slider-container ${feedbacks == null ? "scale-0" : "scale-100"}`}>
+        <div
+          className={`slider-container ${
+            feedbacks == null ? "scale-0" : "scale-100"
+          }`}
+        >
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
-            {dummyFeedbacks.map((feedback, index) => (
-              <FeedbackCard
-                key={index}
-                id={index}
-                feedback={feedback}
-                isExpanded={expandedIndex === index}
-                toggleExpand={toggleExpand}
-              />
-            ))}
+            {feedbacks == null ? (
+              <div></div>
+            ) : (
+              feedbacks.map((feedback, index) => (
+                <FeedbackCard
+                  key={index}
+                  id={index}
+                  feedback={feedback}
+                  isExpanded={expandedIndex === index}
+                  toggleExpand={toggleExpand}
+                />
+              ))
+            )}
           </Slider>
         </div>
       </div>

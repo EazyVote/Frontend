@@ -1,11 +1,10 @@
 import contractAbi from "../abi/DeployedContract.json";
-import { AlchemyProvider, ethers } from "ethers";
-import { setGlobalState } from "./Helper";
+import { ethers, AlchemyProvider } from "ethers";
+import { setGlobalState, useGlobalState } from "./Helper";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
-const apiKey = import.meta.env.VITE_SEPOLIA_RPC_URL;
-const { ethereum } = window;
+const apiKey = import.meta.env.VITE_SEPOLIA_RPC;
 let cachedSigner = null;
 
 const getCachedEthereumContractWithSigner = async () => {
@@ -16,8 +15,8 @@ const getCachedEthereumContractWithSigner = async () => {
 };
 
 const getEthereumContractWithSigner = async () => {
-  const browserProvider = new ethers.BrowserProvider(ethereum);
-  const signer = await browserProvider.getSigner();
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  const signer = await provider.getSigner();
   const contractWithSigner = new ethers.Contract(
     contractAddress,
     contractAbi,
@@ -27,7 +26,7 @@ const getEthereumContractWithSigner = async () => {
 };
 
 const getEthereumContractWithoutSigner = async () => {
-  const contractProvider = new AlchemyProvider(network, apiKey);
+  const contractProvider = new ethers.AlchemyProvider(network, apiKey);
   const contractToLoadOnly = new ethers.Contract(
     contractAddress,
     contractAbi,
@@ -110,6 +109,18 @@ const checkAndChangeElectionStatus = async () => {
   }
 };
 
+const giveFeedback = async (user, textFeedback) => {
+  try {
+    const contract = await getEthereumContractWithSigner();
+    await contract.giveFeedback(user, textFeedback);
+    console.log("done")
+    loadFeedbacks();
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+}
+
 const voteCandidate = async ({ voter, electionId, candidateId }) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
@@ -137,6 +148,7 @@ const loadCandidates = async (electionId) => {
 
 const loadElections = async () => {
   try {
+    console.log(ethers.version)
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
     structuredElections(elections, "elections");
@@ -152,6 +164,8 @@ const loadFeedbacks = async () => {
     const contract = await getEthereumContractWithoutSigner();
     const feedbacks = await contract.getFeedbacks();
     structuredFeedbacks(feedbacks);
+    const temp = useGlobalState("feedbacks");
+    console.log(temp.length);
   } catch (error) {
     console.log(error.message);
   }
@@ -213,6 +227,7 @@ export {
   createNewElection,
   addNewCandidate,
   voteCandidate,
+  giveFeedback,
   loadCandidates,
   loadFeedbacks,
   loadHistory,

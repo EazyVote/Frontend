@@ -36,7 +36,7 @@ const SuccessfullyGiveFeedback = () => {
           <h1>Hooray!</h1>
         </div>
         <div className="font-semibold text-lg flex justify-center items-center">
-          <h1>Your new election is live and ready to go! </h1>
+          <h1>We appreciate a lot about your feedback! </h1>
         </div>
         <div className="mt-4 flex justify-center items-center">
           <button

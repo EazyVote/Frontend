@@ -73,7 +73,7 @@ const CreateNewElection = () => {
     };
     console.log(electionParam);
 
-    const validCandidate = true;
+    let validCandidate = true;
     candidates.forEach((candidate, index) => {
       if (
         !candidate.name ||
