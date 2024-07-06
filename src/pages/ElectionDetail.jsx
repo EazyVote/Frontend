@@ -1,31 +1,25 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
-import ShowAllCandidates from '../components/details/ShowAllCandidates';
-import { candidates, elections } from '../services/ContentList';
-import SearchBar from '../components/small/SearchBar';
-import ElectionHeroSection from '../components/sections/ElectionHeroSection';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ShowAllCandidates from "../components/details/ShowAllCandidates";
+import { candidates } from "../services/ContentList";
+import SearchBar from "../components/small/SearchBar";
+import ElectionHeroSection from "../components/sections/ElectionHeroSection";
+import { loadCandidates, loadElections } from "../services/Blockchain";
 
 const ElectionDetail = () => {
   const { id } = useParams();
-  const [query, setQuery] = useState("");
+  const elections = JSON.parse(localStorage.getItem("elections"));
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const filteredCandidates = candidates.filter((candidate) =>
-    candidate.candidateName.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const election = elections[id]
+  useEffect(() => {
+    loadElections();
+  }, []);
 
   return (
     <div id="elections">
-      <ElectionHeroSection election={election}/>
-      <SearchBar query={query} handleSearch={handleSearch} message={"Search candidate..."} />
-      <ShowAllCandidates candidates={filteredCandidates} />
+      <ElectionHeroSection election={elections[id]} />
+      <ShowAllCandidates id={id} />
     </div>
   );
-}
+};
 
-export default ElectionDetail
+export default ElectionDetail;

@@ -13,13 +13,12 @@ const ShowFeedbacks = () => {
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
-  const [feedbacks] = useGlobalState("feedbacks")
-  let inc = 0
-
   let sliderRef = useRef(null);
   const play = () => {
     sliderRef.slickPlay();
   };
+
+  const [feedbacks, setFeedbacks] = useState([]);
 
   const settings = {
     dots: false,
@@ -76,12 +75,18 @@ const ShowFeedbacks = () => {
   };
 
   useEffect(() => {
-    loadFeedbacks();
+    prepareFeedbacks();
     const intervalId = setInterval(() => {
-      loadFeedbacks();
+      prepareFeedbacks();
     }, 10000);
     return () => clearInterval(intervalId);
   }, []);
+
+  const prepareFeedbacks = () => {
+    loadFeedbacks();
+    const convertedFeedbacks = JSON.parse(localStorage.getItem("feedbacks"));
+    setFeedbacks(convertedFeedbacks);
+  };
 
   useEffect(() => {
     play();

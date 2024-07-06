@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cat404 from "../../assets/cat404.png";
 import { motion } from "framer-motion";
 import CandidateCard from "../cards/CandidateCard";
+import { loadCandidates } from "../../services/Blockchain";
 
-const ShowAllCandidates = ({ candidates }) => {
+const ShowAllCandidates = ({ id }) => {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -18,6 +19,21 @@ const ShowAllCandidates = ({ candidates }) => {
   const item = {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
+  };
+
+  const [candidates, setCandidates] = useState([]);
+
+  useEffect(() => {
+    prepareElectionDetail();
+    const intervalId = setInterval(() => {
+      prepareElectionDetail();
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const prepareElectionDetail = () => {
+    loadCandidates(id);
+    setCandidates(JSON.parse(localStorage.getItem("candidates")));
   };
 
   return (
@@ -39,23 +55,22 @@ const ShowAllCandidates = ({ candidates }) => {
         </div>
       ) : (
         <div className="place-items-center grid">
-            <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {candidates.map((candidate, index) => (
-            <CandidateCard
-              key={index}
-              id={index}
-              candidate={candidate}
-              variants={item}
-            />
-          ))}
-        </motion.div>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {candidates.map((candidate, index) => (
+              <CandidateCard
+                key={index}
+                id={index}
+                candidate={candidate}
+                variants={item}
+              />
+            ))}
+          </motion.div>
         </div>
-        
       )}
     </div>
   );

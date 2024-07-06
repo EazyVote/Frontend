@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { setGlobalState, useGlobalState } from "../../services/Helper";
 import { FaTimes } from "react-icons/fa";
-import { candidates } from "../../services/ContentList";
+import { loadCandidates } from "../../services/Blockchain";
 
 const CandidateDetail = () => {
   const [candidateDetailScale] = useGlobalState("candidateDetailScale");
   const [candidateId] = useGlobalState("candidateId");
+  const candidates = JSON.parse(localStorage.getItem("candidates"));
 
   const onClose = () => {
     setGlobalState("candidateDetailScale", "scale-0");
   };
+
+  useEffect(() => {
+    console.log(candidates);
+    console.log(candidateId);
+    loadCandidates(candidateId);
+    const intervalId = setInterval(() => {
+      loadCandidates(candidateId);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div

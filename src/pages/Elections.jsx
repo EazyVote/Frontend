@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
 import ShowAllElection from "../components/details/ShowAllElection";
 import SearchBar from "../components/small/SearchBar";
-import { useGlobalState } from "../services/Helper";
 import { loadElections } from "../services/Blockchain";
 
 const Elections = () => {
   const [query, setQuery] = useState("");
-  const [elections, setElections] = useGlobalState("elections");
   const [filteredElections, setFilteredElections] = useState([]);
-
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
 
   useEffect(() => {
+    loadElections();
     const intervalId = setInterval(() => {
       loadElections();
-    }, 10000);
+    }, 1000);
     return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
-    if (elections) {
-      const filtered = elections.filter((election) =>
+    const storedElections = JSON.parse(localStorage.getItem("elections"));
+    if (storedElections) {
+      const filtered = storedElections.filter((election) =>
         election.electionTitle.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredElections(filtered);

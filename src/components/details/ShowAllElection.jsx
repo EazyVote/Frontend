@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ElectionCard from "../cards/ElectionCard";
 import cat404 from "../../assets/cat404.png";
 import { motion } from "framer-motion";

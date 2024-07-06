@@ -13,7 +13,6 @@ const ElectionCard = ({ id, election, notes, variants }) => {
       setTotalElectionVoter(totalVoter);
     };
     loadToGetTotalVoter();
-    console.log(totalElectionVoter)
   }, []);
 
   return (
@@ -24,7 +23,7 @@ const ElectionCard = ({ id, election, notes, variants }) => {
           notes == "showAllElection" ? "lg:w-78 lg:h-70" : "lg:w-64 lg:h-66"
         } `}
       >
-        <Link to={"/elections/" + election.electionId}>
+        <Link to={"/elections/" + election.id}>
           <img
             src={election.electionPicture}
             alt={election.electionTitle}

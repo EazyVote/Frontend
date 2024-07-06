@@ -103,14 +103,13 @@ const voteCandidate = async (voter, electionId, candidateId) => {
 
 const getTotalVoterInOneElection = async (electionId) => {
   try {
-    const contract = await getEthereumContractWithoutSigner()
-    const totalVoter = await contract.getTotalVoterInOneElection(electionId)
+    const contract = await getEthereumContractWithoutSigner();
+    const totalVoter = await contract.getTotalVoterInOneElection(electionId);
     return parseInt(totalVoter);
+  } catch (error) {
+    return console.log(error.message);
   }
-  catch (error) {
-    return console.log(error.message)
-  }
-}
+};
 
 // done
 const loadElections = async () => {
@@ -177,7 +176,7 @@ const structuredElections = (elections, message) => {
     electionDescription: election.electionDescription,
     electionStatus: election.electionStatus.toString(),
   }));
-  setGlobalState(message, electionList);
+  localStorage.setItem(message, JSON.stringify(electionList));
 };
 
 const structuredCandidates = (candidates) => {
@@ -189,7 +188,7 @@ const structuredCandidates = (candidates) => {
     candidateVision: candidate.candidateVision,
     candidateMission: candidate.candidateMission,
   }));
-  setGlobalState("candidates", candidateList);
+  localStorage.setItem("candidates", JSON.stringify(candidateList));
 };
 
 // done
@@ -199,7 +198,7 @@ const structuredFeedbacks = (feedbacks) => {
     user: feedback.user.toString(),
     textFeedback: feedback.textFeedback,
   }));
-  setGlobalState("feedbacks", feedbackList);
+  localStorage.setItem("feedbacks", JSON.stringify(feedbackList));
 };
 
 export {
