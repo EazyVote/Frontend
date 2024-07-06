@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { truncate } from "../../services/Helper";
+import { getTotalVoterInOneElection } from "../../services/Blockchain";
 
 const ElectionCard = ({ id, election, notes, variants }) => {
+  const [totalElectionVoter, setTotalElectionVoter] = useState(0);
+
+  useEffect(() => {
+    const loadToGetTotalVoter = async () => {
+      const totalVoter = await getTotalVoterInOneElection(id);
+      setTotalElectionVoter(totalVoter);
+    };
+    loadToGetTotalVoter();
+    console.log(totalElectionVoter)
+  }, []);
+
   return (
     <div>
       <motion.div
@@ -30,7 +43,7 @@ const ElectionCard = ({ id, election, notes, variants }) => {
                 />
                 <small className="text-dimWhite">
                   {" "}
-                  {election.electionCreator}
+                  {truncate(election.electionCreator, 4, 4, 11)}
                 </small>
               </div>
               <small className="text-white my-2 block">
@@ -42,9 +55,17 @@ const ElectionCard = ({ id, election, notes, variants }) => {
             </div>
 
             <div className="flex justify-between items-center flex-wrap mt-4 mb-2 text-gray-500 font-semibold">
-              <small className="text-white">10 person has vote</small>
+              <small className="text-white">{totalElectionVoter} voters have voted</small>
               <div>
-                <small className="text-green-600">OPEN</small>
+                <small
+                  className={`${
+                    election.electionStatus == 0
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {election.electionStatus == 0 ? "OPEN" : "CLOSED"}
+                </small>
               </div>
             </div>
           </div>

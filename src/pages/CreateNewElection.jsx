@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import AddCandidateForm from "../components/mini-form/AddCandidateForm";
 import ElectionForm from "../components/mini-form/ElectionForm";
-import { Link } from "react-router-dom";
-import { setGlobalState, useGlobalState } from "../services/Helper";
-import { addNewCandidate, createNewElection } from "../services/Blockchain";
+import { setGlobalState } from "../services/Helper";
+import { createNewElection } from "../services/Blockchain";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewElection = () => {
+  const navigate = useNavigate();
   const [electionData, setElectionData] = useState({
     electionPicture: "",
     electionTitle: "",
     electionStart: "",
     electionEnd: "",
     electionDescription: "",
-    electionTotalCandidates: 0,
+    electionTotalCandidates: "",
   });
 
   const handleElectionChange = (field, value) => {
@@ -22,7 +23,11 @@ const CreateNewElection = () => {
   const [candidates, setCandidates] = useState([]);
 
   const handleTotalCandidatesChange = (total) => {
-    setElectionData({ ...electionData, electionTotalCandidates: total });
+    console.log(total);
+    setElectionData({
+      ...electionData,
+      electionTotalCandidates: parseInt(total),
+    });
 
     const newCandidates = [];
     for (let i = 0; i < total; i++) {
@@ -43,11 +48,6 @@ const CreateNewElection = () => {
   };
 
   const handleSubmit = async (e) => {
-    action(e);
-    reset();
-  };
-
-  const action = async (e) => {
     const connectedAccount = localStorage.getItem("connectedAccount");
 
     e.preventDefault();
@@ -59,9 +59,11 @@ const CreateNewElection = () => {
       !electionData.electionEnd ||
       !electionData.electionDescription ||
       electionData.electionTotalCandidates == 0
-    )
-      return;
+    ) {
+      return setGlobalState("errorPopup", "scale-100");
+    }
 
+    let isValid = true;
     for (let i = 0; i < candidates.length; i++) {
       const candidate = candidates[i];
       if (
@@ -70,16 +72,19 @@ const CreateNewElection = () => {
         !candidate.vision ||
         !candidate.mission
       ) {
-        return;
+        isValid = false;
       }
+    }
+    if (!isValid) {
+      return setGlobalState("errorPopup", "scale-100");
     }
 
     const electionParam = {
       electionTitle: electionData.electionTitle,
       electionPicture: electionData.electionPicture,
       electionCreator: connectedAccount,
-      electionStart: electionData.electionStart,
-      electionEnd: electionData.electionEnd,
+      electionStart: Math.floor(new Date(electionData.electionStart).getTime() / 1000),
+      electionEnd: Math.floor(new Date(electionData.electionEnd).getTime() / 1000),
       electionDescription: electionData.electionDescription,
       candidatesName: candidates.map((candidate) => candidate.name),
       candidatesPhoto: candidates.map((candidate) => candidate.photo),
@@ -88,6 +93,8 @@ const CreateNewElection = () => {
     };
     console.log(electionParam);
     await createNewElection(electionParam);
+    reset();
+    navigate("/");
   };
 
   const reset = () => {
@@ -124,9 +131,7 @@ const CreateNewElection = () => {
       </div>
       <div className="flex justify-end">
         <button
-          onChange={() => {
-            handleSubmit;
-          }}
+          onClick={handleSubmit}
           className={`${
             electionData.electionTotalCandidates == 0
               ? "opacity-0 cursor-not-allowed"

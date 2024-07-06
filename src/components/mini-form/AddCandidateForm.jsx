@@ -67,7 +67,7 @@ const AddCandidateForm = ({ index, candidate, handleCandidateChange }) => {
         <div className="col-span-2">
           <label className="text-white">Candidate Mission</label>
           <div className="flex justify-between items-center mt-4 rounded-xl bg-gray-300">
-            <input
+            <textarea
               className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
               type="text"
               name="electionTitle"

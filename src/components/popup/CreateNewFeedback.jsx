@@ -7,15 +7,16 @@ const CreateNewFeedback = () => {
   const [createNewFeedbackScale] = useGlobalState("createNewFeedbackScale");
   const [feedback, setFeedback] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const connectedAccount = localStorage.getItem("connectedAccount");
     if (connectedAccount) {
-      console.log(feedback);
-      await giveFeedback(connectedAccount, feedback);
-      onClose();
-      setGlobalState("successfullyGiveFeedbackScale", "scale-100");
+      try {
+        addFeedback(connectedAccount);
+      } catch (error) {
+        console.log(error.message);
+      }
     } else {
       onClose();
       setGlobalState("mustConnectWalletScale", "scale-100");
@@ -23,9 +24,14 @@ const CreateNewFeedback = () => {
     reset();
   };
 
+  const addFeedback = async (connectedAccount) => {
+    await giveFeedback(connectedAccount, feedback);
+    onClose();
+    setGlobalState("successfullyGiveFeedbackScale", "scale-100");
+  };
+
   const onClose = () => {
     setGlobalState("createNewFeedbackScale", "scale-0");
-    setGlobalState("newEvent", true);
   };
 
   const reset = () => {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Home from "./pages/Home";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import History from "./pages/History";
 import Elections from "./pages/Elections";
 import NavigationBar from "./components/fixed/NavigationBar";
@@ -15,23 +15,9 @@ import SuccessfullyCreateElection from "./components/popup/SuccessfullyCreateEle
 import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedback";
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
-import {
-  checkAndChangeElectionStatus,
-  loadElections,
-  loadFeedbacks,
-  loadHistory,
-  loadRecommendedElections,
-} from "./services/Blockchain";
-import { useGlobalState } from "./services/Helper";
+import ErrorPopup from "./components/popup/ErrorPopup";
 
 const App = () => {
-  useEffect(() => {
-    const interval = setInterval(() => {
-      checkAndChangeElectionStatus();
-    }, 60000);
-    return () => clearInterval(interval);
-  }, []);
-  
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
@@ -51,6 +37,7 @@ const App = () => {
         <SuccessfullyVote />
         <SuccessfullyCreateElection />
         <SuccessfullyGiveFeedback />
+        <ErrorPopup />
         <SignOutConfirmation />
       </div>
     </NavProvider>

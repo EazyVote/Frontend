@@ -14,8 +14,11 @@ const Elections = () => {
   };
 
   useEffect(() => {
-    loadElections();
-  }, [elections, setElections])
+    const intervalId = setInterval(() => {
+      loadElections();
+    }, 10000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     if (elections) {
@@ -24,7 +27,7 @@ const Elections = () => {
       );
       setFilteredElections(filtered);
     }
-  }, []);
+  }, [query]);
 
   return (
     <div id="elections">

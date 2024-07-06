@@ -5,13 +5,13 @@ const ElectionForm = ({
   onElectionChange,
   onTotalCandidatesChange,
 }) => {
-  const [minDateTime, setMinDateTime] = useState("")
+  const [minDateTime, setMinDateTime] = useState("");
 
   useEffect(() => {
     const now = new Date();
-    const formatedDateTime = now.toISOString().slice(0, 16)
+    const formatedDateTime = now.toISOString().slice(0, 16);
     setMinDateTime(formatedDateTime);
-  }, [])
+  }, []);
 
   return (
     <div>
