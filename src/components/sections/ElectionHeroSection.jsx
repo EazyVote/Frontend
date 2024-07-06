@@ -3,6 +3,12 @@ import BoxReveal from "../magicui/BoxReveal";
 
 const ElectionHeroSection = ({ election }) => {
 
+  if (!election) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
   return (
     <section className="flex justify-center items-center mb-8">
       <div id="electionDetail" className="xl:max-w-[1280px] w-full">

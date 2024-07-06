@@ -1,23 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShowAllCandidates from "../components/details/ShowAllCandidates";
-import { candidates } from "../services/ContentList";
-import SearchBar from "../components/small/SearchBar";
 import ElectionHeroSection from "../components/sections/ElectionHeroSection";
-import { loadCandidates, loadElections } from "../services/Blockchain";
+import { getElections, loadCandidates } from "../services/Blockchain";
 
 const ElectionDetail = () => {
   const { id } = useParams();
-  const elections = JSON.parse(localStorage.getItem("elections"));
+  const [electionData, setElectionData] = useState(null);
 
   useEffect(() => {
-    loadElections();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const data = await getElections();
+        const indexedData = data.find(
+          (election) => election.id === parseInt(id)
+        );
+        console.log(indexedData);
+        setElectionData(indexedData || {});
+      } catch (error) {
+        console.log(error.message);
+        setElectionData({});
+      }
+      console.log(electionData);
+    };
+    fetchData();
+  }, [id]);
+
+  if (!electionData) {
+    return (
+      <div>Loading...</div>
+    )
+  }
 
   return (
     <div id="elections">
-      <ElectionHeroSection election={elections[id]} />
-      <ShowAllCandidates id={id} />
+      <ElectionHeroSection election={electionData} />
+      {/* <ShowAllCandidates id={id} /> */}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import cat404 from "../../assets/cat404.png";
 import { motion } from "framer-motion";
 import CandidateCard from "../cards/CandidateCard";
 import { loadCandidates } from "../../services/Blockchain";
+import { useGlobalState } from "../../services/Helper";
 
 const ShowAllCandidates = ({ id }) => {
   const container = {
@@ -21,19 +22,19 @@ const ShowAllCandidates = ({ id }) => {
     show: { opacity: 1 },
   };
 
-  const [candidates, setCandidates] = useState([]);
+const [candidates] = useGlobalState("candidates");
 
   useEffect(() => {
     prepareElectionDetail();
-    const intervalId = setInterval(() => {
-      prepareElectionDetail();
-    }, 1000);
-    return () => clearInterval(intervalId);
+    // const intervalId = setInterval(() => {
+    //   prepareElectionDetail();
+    // }, 1000);
+    // return () => clearInterval(intervalId);
   }, []);
 
   const prepareElectionDetail = () => {
     loadCandidates(id);
-    setCandidates(JSON.parse(localStorage.getItem("candidates")));
+    console.log(candidates)
   };
 
   return (

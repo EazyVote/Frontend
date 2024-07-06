@@ -1,6 +1,6 @@
 import contractAbi from "../abi/DeployedContract.json";
 import { ethers } from "ethers";
-import { setGlobalState } from "./Helper";
+import { setGlobalState, useGlobalState } from "./Helper";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
@@ -112,13 +112,19 @@ const getTotalVoterInOneElection = async (electionId) => {
 };
 
 // done
+const getElections = async () => {
+  return await loadElections();
+};
+
+// done
 const loadElections = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    structuredElections(elections, "elections");
+    return structuredElections(elections, "elections");
   } catch (error) {
     console.log(error.message);
+    return [];
   }
 };
 
@@ -150,19 +156,19 @@ const loadHistory = async (user) => {
 };
 
 const loadCandidates = async (electionId) => {
-  try {
-    const contract = await getEthereumContractWithoutSigner();
-    const candidates = await contract.getCandidates();
-    const candidatesId = await contract.getCandidatesIdInOneElection(
-      electionId
-    );
-    const filteredCandidates = candidates.filter((candidate) =>
-      candidatesId.includes(candidate.id)
-    );
-    structuredCandidates(filteredCandidates);
-  } catch (error) {
-    console.log(error.message);
-  }
+  // try {
+  //   const contract = await getEthereumContractWithoutSigner();
+  //   const candidates = await contract.getCandidates();
+  //   const candidatesId = await contract.getCandidatesIdInOneElection(
+  //     electionId
+  //   );
+  //   const filteredCandidates = candidates.filter((candidate) =>
+  //     candidatesId.includes(candidate.id)
+  //   );
+  //   structuredCandidates(filteredCandidates);
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
 };
 
 const structuredElections = (elections, message) => {
@@ -176,7 +182,7 @@ const structuredElections = (elections, message) => {
     electionDescription: election.electionDescription,
     electionStatus: election.electionStatus.toString(),
   }));
-  localStorage.setItem(message, JSON.stringify(electionList));
+  return electionList;
 };
 
 const structuredCandidates = (candidates) => {
@@ -188,7 +194,8 @@ const structuredCandidates = (candidates) => {
     candidateVision: candidate.candidateVision,
     candidateMission: candidate.candidateMission,
   }));
-  localStorage.setItem("candidates", JSON.stringify(candidateList));
+  useGlobalState("candidates", candidateList);
+  // localStorage.setItem("candidates", JSON.stringify(candidateList));
 };
 
 // done
@@ -211,6 +218,6 @@ export {
   loadCandidates,
   loadFeedbacks,
   loadHistory,
-  loadElections,
+  getElections,
   loadRecommendedElections,
 };
