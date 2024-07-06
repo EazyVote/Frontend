@@ -33,7 +33,8 @@
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.4",
     "tailwind-merge": "^2.3.0",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "web3": "^4.10.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",

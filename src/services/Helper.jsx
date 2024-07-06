@@ -14,7 +14,8 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   candidates: [],
   feedbacks: [],
   recommended: [],
-  history: []
+  history: [],
+  newEvent: false
 });
 
 const truncate = (text, startChar, endChar, maxLength) => {

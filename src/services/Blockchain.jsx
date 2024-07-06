@@ -1,18 +1,11 @@
 import contractAbi from "../abi/DeployedContract.json";
 import { ethers, AlchemyProvider } from "ethers";
 import { setGlobalState, useGlobalState } from "./Helper";
+import { WebSocketProvider } from "ethers";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
 const apiKey = import.meta.env.VITE_SEPOLIA_RPC;
-let cachedSigner = null;
-
-const getCachedEthereumContractWithSigner = async () => {
-  if (!cachedSigner) {
-    cachedSigner = getEthereumContractWithSigner();
-  }
-  return cachedSigner;
-};
 
 const getEthereumContractWithSigner = async () => {
   const provider = new ethers.BrowserProvider(window.ethereum);
@@ -56,44 +49,31 @@ const disconnectWallet = async () => {
   localStorage.removeItem("connectedAccount");
 };
 
-const createNewElection = async ({
+const createNewElection = async (
   electionTitle,
   electionPicture,
   electionCreator,
   electionStart,
   electionEnd,
   electionDescription,
-}) => {
+  candidatesName,
+  candidatesPhoto,
+  candidatesVision,
+  candidatesMission
+) => {
   try {
-    const contract = await getCachedEthereumContractWithSigner();
+    const contract = await getEthereumContractWithSigner();
     await contract.createNewElection(
       electionTitle,
       electionPicture,
       electionCreator,
       electionStart,
       electionEnd,
-      electionDescription
-    );
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const addNewCandidate = async ({
-  electionId,
-  candidateName,
-  candidatePhoto,
-  candidateVision,
-  candidateMission,
-}) => {
-  try {
-    const contract = await getCachedEthereumContractWithSigner();
-    await contract.addNewCandidate(
-      electionId,
-      candidateName,
-      candidatePhoto,
-      candidateVision,
-      candidateMission
+      electionDescription,
+      candidatesName,
+      candidatesPhoto,
+      candidatesVision,
+      candidatesMission
     );
   } catch (error) {
     console.log(error.message);
@@ -113,13 +93,12 @@ const giveFeedback = async (user, textFeedback) => {
   try {
     const contract = await getEthereumContractWithSigner();
     await contract.giveFeedback(user, textFeedback);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
   }
-}
+};
 
-const voteCandidate = async ({ voter, electionId, candidateId }) => {
+const voteCandidate = async (voter, electionId, candidateId) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     await contract.voteCandidate(voter, electionId, candidateId);
@@ -130,7 +109,7 @@ const voteCandidate = async ({ voter, electionId, candidateId }) => {
 
 const loadElections = async () => {
   try {
-    console.log(ethers.version)
+    console.log(ethers.version);
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
     structuredElections(elections, "elections");
@@ -155,11 +134,11 @@ const loadHistory = async (user) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    const historyId = await contract.getHistory(user);
-    const history = elections.filter((election) =>
+    const historyId = await contract.getHistoryId(user);
+    const userHistory = elections.filter((history) =>
       historyId.includes(history.id)
     );
-    structuredElections(history, "history");
+    structuredElections(userHistory, "history");
   } catch (error) {
     console.log(error.message);
   }
@@ -221,7 +200,6 @@ export {
   checkAndChangeElectionStatus,
   disconnectWallet,
   createNewElection,
-  addNewCandidate,
   voteCandidate,
   giveFeedback,
   loadCandidates,

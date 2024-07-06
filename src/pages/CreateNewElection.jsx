@@ -33,7 +33,6 @@ const CreateNewElection = () => {
         mission: "",
       });
     }
-
     setCandidates(newCandidates);
   };
 
@@ -63,6 +62,18 @@ const CreateNewElection = () => {
     )
       return;
 
+    for (let i = 0; i < candidates.length; i++) {
+      const candidate = candidates[i];
+      if (
+        !candidate.name ||
+        !candidate.photo ||
+        !candidate.vision ||
+        !candidate.mission
+      ) {
+        return;
+      }
+    }
+
     const electionParam = {
       electionTitle: electionData.electionTitle,
       electionPicture: electionData.electionPicture,
@@ -70,37 +81,13 @@ const CreateNewElection = () => {
       electionStart: electionData.electionStart,
       electionEnd: electionData.electionEnd,
       electionDescription: electionData.electionDescription,
+      candidatesName: candidates.map((candidate) => candidate.name),
+      candidatesPhoto: candidates.map((candidate) => candidate.photo),
+      candidatesVision: candidates.map((candidate) => candidate.vision),
+      candidatesMission: candidates.map((candidate) => candidate.mission),
     };
     console.log(electionParam);
-
-    let validCandidate = true;
-    candidates.forEach((candidate, index) => {
-      if (
-        !candidate.name ||
-        !candidate.photo ||
-        !candidate.vision ||
-        !candidate.mission
-      ) {
-        validCandidate = false;
-      }
-    });
-
-    if (validCandidate) {
-      await createNewElection(electionParam);
-      const elections = useGlobalState("elections");
-      const electionId = elections.length - 1;
-
-      for (const candidate of candidates) {
-        const candidateParam = {
-          electionId: electionId,
-          candidateName: candidate.name,
-          candidatePhoto: candidate.photo,
-          candidateVision: candidate.vision,
-          candidateMission: candidate.mission,
-        };
-        await addNewCandidate(candidateParam);
-      }
-    }
+    await createNewElection(electionParam);
   };
 
   const reset = () => {
@@ -138,7 +125,7 @@ const CreateNewElection = () => {
       <div className="flex justify-end">
         <button
           onChange={() => {
-            handleSubmit
+            handleSubmit;
           }}
           className={`${
             electionData.electionTotalCandidates == 0

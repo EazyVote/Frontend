@@ -9,10 +9,9 @@ const CreateNewFeedback = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const connectedAccount = localStorage.getItem("connectedAccount");
     if (connectedAccount) {
-      console.log(connectedAccount);
       console.log(feedback);
       await giveFeedback(connectedAccount, feedback);
       onClose();
@@ -26,6 +25,7 @@ const CreateNewFeedback = () => {
 
   const onClose = () => {
     setGlobalState("createNewFeedbackScale", "scale-0");
+    setGlobalState("newEvent", true);
   };
 
   const reset = () => {
@@ -36,7 +36,11 @@ const CreateNewFeedback = () => {
     <div
       className={`fixed font-poppins flex items-center justify-center w-screen h-screen inset-0 bg-black bg-opacity-50 transform transition-transform duration-300 ${createNewFeedbackScale} popup-visible`}
     >
-      <form className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6" method="POST" onSubmit={handleSubmit}>
+      <form
+        className="bg-white shadow-xl shadow-black rounded-xl w-11/12 md:w-2/5 h-7/12 p-6"
+        method="POST"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
             <p className="font-bold">Give Feedback</p>

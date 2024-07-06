@@ -6,7 +6,7 @@ import { loadHistory } from "../services/Blockchain";
 
 const History = () => {
   const [query, setQuery] = useState("");
-  const [history, setHistory] = useGlobalState("history");
+  const [history] = useGlobalState("history");
   const [filteredHistory, setFilteredHistory] = useState([]);
 
   const handleSearch = (e) => {
@@ -17,8 +17,12 @@ const History = () => {
     const connectedAccount = localStorage.getItem("connectedAccount")
     if (connectedAccount) {
       loadHistory(connectedAccount)
+      const intervalId = setInterval(() => {
+        loadHistory(connectedAccount);
+      }, 10000);
+      return () => clearInterval(intervalId);
     }
-  }, [history, setHistory])
+  }, [])
   
   useEffect(() => {
     if (history) {
@@ -27,7 +31,7 @@ const History = () => {
       );
       setFilteredHistory(filtered);
     }
-  }, []);
+  }, [query]);
 
   return (
     <div id="history">

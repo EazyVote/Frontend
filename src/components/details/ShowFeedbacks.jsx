@@ -13,7 +13,8 @@ const ShowFeedbacks = () => {
   const toggleExpand = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
-  const [feedbacks] = useGlobalState("feedbacks");
+  const [feedbacks] = useGlobalState("feedbacks")
+  let inc = 0
 
   let sliderRef = useRef(null);
   const play = () => {
@@ -75,12 +76,12 @@ const ShowFeedbacks = () => {
   };
 
   useEffect(() => {
-    const loadData = async() => {
-      await loadFeedbacks();
-    }
-    loadData();
-    console.log(feedbacks);
-  }, [feedbacks]);
+    loadFeedbacks();
+    const intervalId = setInterval(() => {
+      loadFeedbacks();
+    }, 10000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     play();

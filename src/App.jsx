@@ -25,24 +25,20 @@ import {
 import { useGlobalState } from "./services/Helper";
 
 const App = () => {
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     checkAndChangeElectionStatus();
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      checkAndChangeElectionStatus();
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
         <NavigationBar />
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/elections"
-            element={<Elections />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/elections" element={<Elections />} />
           <Route path="/elections/:id" element={<ElectionDetail />} />
           <Route path="/history" element={<History />} />
           <Route path="/create_election" element={<CreateNewElection />} />
