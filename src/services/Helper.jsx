@@ -70,7 +70,7 @@ const unixTimestampConverter = (unixTimestamp) => {
     dayLabel = `${day} ${month} ${year}`;
   }
 
-  const formatedDateTime = `${dayLabel} ${hours}:${minutes}`;
+  const formatedDateTime = `${dayLabel} at ${hours}:${minutes}`;
   return formatedDateTime;
 };
 
