@@ -1,16 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { setGlobalState } from "../../services/Helper";
 
-const CandidateCard = ({ id, candidate, notes, variants }) => {
+const CandidateCard = ({ candidate, variants }) => {
+
+  const handleClick = () => {
+    console.log("haha")
+    sessionStorage.setItem("candidateId", candidate.id);
+    setGlobalState("candidateDetailScale", "scale-100");
+    console.log("candidateDetailScale set to scale-100");
+  };
+
   return (
     <div>
       <motion.div
         variants={variants}
         className={`font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient mr-4 mb-4 mt-4 lg:w-80 lg:78`}
       >
-        {/* <Link to={"/elections/" + election.electionId}> */}
         <img
           src={candidate.candidatePhoto}
           alt={candidate.candidateName}
@@ -20,11 +26,10 @@ const CandidateCard = ({ id, candidate, notes, variants }) => {
           <h5 className="text-white text-xl text-center font-semibold line-clamp-1">
             {candidate.candidateName}
           </h5>
-          <button onClick={() => {
-            setGlobalState("candidateDetailScale", "scale-100")
-            setGlobalState("candidateId", candidate.id)
-          }}
-          className="my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
+          <button
+            onClick={handleClick}
+            className="my-3 text-white font-normal rounded-lg btn-blue-gradient-2 rounded-lg"
+          >
             <small>Show Candidate Detail</small>
           </button>
 
@@ -37,7 +42,6 @@ const CandidateCard = ({ id, candidate, notes, variants }) => {
           </div>
         </div>
 
-        {/* </Link> */}
       </motion.div>
     </div>
   );

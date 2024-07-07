@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import cat404 from "../../assets/cat404.png";
 import { motion } from "framer-motion";
 import CandidateCard from "../cards/CandidateCard";
-import { loadCandidates } from "../../services/Blockchain";
-import { useGlobalState } from "../../services/Helper";
+import { getCandidatesInOneElection } from "../../services/Blockchain";
 
 const ShowAllCandidates = ({ id }) => {
+  const [candidatesData, setCandidatesData] = useState([]);
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -22,20 +23,22 @@ const ShowAllCandidates = ({ id }) => {
     show: { opacity: 1 },
   };
 
-const [candidates] = useGlobalState("candidates");
-
   useEffect(() => {
-    prepareElectionDetail();
-    // const intervalId = setInterval(() => {
-    //   prepareElectionDetail();
-    // }, 1000);
-    // return () => clearInterval(intervalId);
+    const fetchData = async () => {
+      try {
+        const data = await getCandidatesInOneElection(id);
+        setCandidatesData(data);
+      } catch (error) {
+        console.log(error.message);
+        setCandidatesData([]);
+      }
+    };
+    fetchData();
   }, []);
 
-  const prepareElectionDetail = () => {
-    loadCandidates(id);
-    console.log(candidates)
-  };
+  if (!candidatesData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="candidates" className="mb-16">
@@ -43,7 +46,7 @@ const [candidates] = useGlobalState("candidates");
         {" "}
         All Candidates{" "}
       </h1>
-      {candidates.length === 0 ? (
+      {candidatesData.length === 0 ? (
         <div>
           <div className="flex justify-center items-center">
             <img src={cat404} className="h-60 w-60 my-10" />
@@ -62,7 +65,7 @@ const [candidates] = useGlobalState("candidates");
             animate="show"
             className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {candidates.map((candidate, index) => (
+            {candidatesData.map((candidate, index) => (
               <CandidateCard
                 key={index}
                 id={index}

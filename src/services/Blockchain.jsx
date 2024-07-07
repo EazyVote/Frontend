@@ -117,11 +117,31 @@ const getElections = async () => {
 };
 
 // done
+const getCandidatesInOneElection = async (electionId) => {
+  return await loadSpecificCandidates(electionId);
+};
+
+const getCandidates = async () => {
+  return await loadAllCandidates();
+};
+
+const loadAllCandidates = async () => {
+  try {
+    const contract = await getEthereumContractWithoutSigner();
+    const candidates = await contract.getCandidates();
+    return structuredCandidates(candidates);
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
+};
+
+// done
 const loadElections = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    return structuredElections(elections, "elections");
+    return structuredElections(elections);
   } catch (error) {
     console.log(error.message);
     return [];
@@ -149,29 +169,30 @@ const loadHistory = async (user) => {
     const userHistory = elections.filter((history) =>
       historyId.includes(history.id)
     );
-    structuredElections(userHistory, "history");
+    structuredElections(userHistory);
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const loadCandidates = async (electionId) => {
-  // try {
-  //   const contract = await getEthereumContractWithoutSigner();
-  //   const candidates = await contract.getCandidates();
-  //   const candidatesId = await contract.getCandidatesIdInOneElection(
-  //     electionId
-  //   );
-  //   const filteredCandidates = candidates.filter((candidate) =>
-  //     candidatesId.includes(candidate.id)
-  //   );
-  //   structuredCandidates(filteredCandidates);
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
+const loadSpecificCandidates = async (electionId) => {
+  try {
+    const contract = await getEthereumContractWithoutSigner();
+    const candidates = await contract.getCandidates();
+    const candidatesId = await contract.getCandidatesIdInOneElection(
+      electionId
+    );
+    const filteredCandidates = candidates.filter((candidate) =>
+      candidatesId.includes(candidate.id)
+    );
+    return structuredCandidates(filteredCandidates);
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
 };
 
-const structuredElections = (elections, message) => {
+const structuredElections = (elections) => {
   const electionList = elections.map((election) => ({
     id: parseInt(election.id),
     electionTitle: election.electionTitle,
@@ -194,8 +215,7 @@ const structuredCandidates = (candidates) => {
     candidateVision: candidate.candidateVision,
     candidateMission: candidate.candidateMission,
   }));
-  useGlobalState("candidates", candidateList);
-  // localStorage.setItem("candidates", JSON.stringify(candidateList));
+  return candidateList;
 };
 
 // done
@@ -215,7 +235,8 @@ export {
   voteCandidate,
   giveFeedback,
   getTotalVoterInOneElection,
-  loadCandidates,
+  getCandidatesInOneElection,
+  getCandidates,
   loadFeedbacks,
   loadHistory,
   getElections,

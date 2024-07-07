@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShowAllCandidates from "../components/details/ShowAllCandidates";
 import ElectionHeroSection from "../components/sections/ElectionHeroSection";
-import { getElections, loadCandidates } from "../services/Blockchain";
+import { getElections } from "../services/Blockchain";
 
 const ElectionDetail = () => {
   const { id } = useParams();
@@ -16,6 +16,7 @@ const ElectionDetail = () => {
           (election) => election.id === parseInt(id)
         );
         console.log(indexedData);
+        sessionStorage.setItem("electionId", id);
         setElectionData(indexedData || {});
       } catch (error) {
         console.log(error.message);
@@ -35,7 +36,7 @@ const ElectionDetail = () => {
   return (
     <div id="elections">
       <ElectionHeroSection election={electionData} />
-      {/* <ShowAllCandidates id={id} /> */}
+      <ShowAllCandidates id={id} />
     </div>
   );
 };

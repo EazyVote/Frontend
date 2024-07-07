@@ -6,7 +6,7 @@ import { getElections } from "../services/Blockchain";
 const Elections = () => {
   const [query, setQuery] = useState("");
   const [filteredElections, setFilteredElections] = useState([]);
-  const [electionData, setElectionData] = useState([]);
+  const [electionsData, setElectionsData] = useState([]);
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
@@ -23,23 +23,23 @@ const Elections = () => {
     const fetchData = async () => {
       try {
         const data = await getElections();
-        setElectionData(data || []);
+        setElectionsData(data || []);
       } catch (error) {
         console.log(error.message);
-        setElectionData([]);
+        setElectionsData([]);
       }
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (electionData) {
-      const filtered = electionData.filter((election) =>
+    if (electionsData) {
+      const filtered = electionsData.filter((election) =>
         election.electionTitle.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredElections(filtered);
     }
-  }, [query, electionData]);
+  }, [query, electionsData]);
 
   return (
     <div id="elections">
