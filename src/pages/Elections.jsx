@@ -7,6 +7,8 @@ const Elections = () => {
   const [query, setQuery] = useState("");
   const [filteredElections, setFilteredElections] = useState([]);
   const [electionsData, setElectionsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
@@ -21,12 +23,15 @@ const Elections = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const data = await getElections();
         setElectionsData(data || []);
       } catch (error) {
         console.log(error.message);
         setElectionsData([]);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -40,6 +45,10 @@ const Elections = () => {
       setFilteredElections(filtered);
     }
   }, [query, electionsData]);
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div id="elections">

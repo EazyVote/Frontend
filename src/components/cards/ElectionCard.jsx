@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { truncate } from "../../services/Helper";
+import { truncate, unixTimestampConverter } from "../../services/Helper";
 import { getTotalVoterInOneElection } from "../../services/Blockchain";
 
 const ElectionCard = ({ id, election, notes, variants }) => {
   const [totalElectionVoter, setTotalElectionVoter] = useState(0);
 
   useEffect(() => {
-    const loadToGetTotalVoter = async () => {
-      const totalVoter = await getTotalVoterInOneElection(id);
-      setTotalElectionVoter(totalVoter);
+    const fetchData = async () => {
+      try {
+        const data = await getTotalVoterInOneElection(id);
+        setTotalElectionVoter(data);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-    loadToGetTotalVoter();
+    fetchData();
   }, []);
 
   return (
@@ -46,15 +50,17 @@ const ElectionCard = ({ id, election, notes, variants }) => {
                 </small>
               </div>
               <small className="text-white my-2 block">
-                Start : {election.electionStart}
+                Start : {unixTimestampConverter(election.electionStart)}
               </small>
               <small className="text-white mb-2 block">
-                End : {election.electionEnd}
+                End : {unixTimestampConverter(election.electionEnd)}
               </small>
             </div>
 
             <div className="flex justify-between items-center flex-wrap mt-4 mb-2 text-gray-500 font-semibold">
-              <small className="text-white">{totalElectionVoter} voters have voted</small>
+              <small className="text-white">
+                {totalElectionVoter} voters have voted
+              </small>
               <div>
                 <small
                   className={`${
