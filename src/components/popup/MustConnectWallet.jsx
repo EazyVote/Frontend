@@ -2,9 +2,15 @@ import React from "react";
 import { setGlobalState, useGlobalState } from "../../services/Helper";
 import { FaTimes } from "react-icons/fa";
 import bitcoinLock from "../../assets/bitcoinLock.mp4";
+import { connectWallet } from "../../services/Blockchain";
 
 const MustConnectWallet = () => {
   const [mustConnectWalletScale] = useGlobalState("mustConnectWalletScale");
+
+  const handleClick = async () => {
+    connectWallet();
+    onClose();
+  }
 
   const onClose = () => {
     setGlobalState("mustConnectWalletScale", "scale-0");
@@ -44,6 +50,7 @@ const MustConnectWallet = () => {
         </div>
         <div className="mt-4 flex justify-center items-center">
           <button
+            onClick={handleClick}
             type="button"
             className="duration-200 hover:scale-105 w-full font-bold shadow-sm rounded-full py-4 bg-primary text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
           >

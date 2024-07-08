@@ -1,6 +1,5 @@
 import React from "react";
 import cat404 from "../../assets/cat404.png";
-import HistoryCard from "../cards/HistoryCard";
 import { motion } from "framer-motion";
 import ElectionCard from "../cards/ElectionCard";
 

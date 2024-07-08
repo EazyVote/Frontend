@@ -48,7 +48,7 @@ const CreateNewElection = () => {
   };
 
   const handleSubmit = async (e) => {
-    const connectedAccount = localStorage.getItem("connectedAccount");
+    const connectedAccount = sessionStorage.getItem("connectedAccount");
 
     e.preventDefault();
 

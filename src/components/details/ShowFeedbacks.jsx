@@ -71,7 +71,13 @@ const ShowFeedbacks = () => {
   });
 
   const handleClick = () => {
-    setGlobalState("createNewFeedbackScale", "scale-100");
+    const connectedAccount = sessionStorage.getItem("connectedAccount")
+    if (connectedAccount) {
+      setGlobalState("createNewFeedbackScale", "scale-100");
+    }
+    else {
+      setGlobalState("mustConnectWalletScale", "scale-100")
+    }
   };
 
   useEffect(() => {

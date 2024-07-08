@@ -7,21 +7,9 @@ import { setGlobalState, truncate } from "../../services/Helper";
 import { NavContext } from "../../context/Context";
 import { connectWallet } from "../../services/Blockchain";
 
-const NavigationBar = () => {
+const NavigationBar = ({connectedAccount, handleClick}) => {
   const { active, setActive } = useContext(NavContext);
   const [toggle, setToggle] = useState(false);
-  const [connectedAccount, setConnectedAccount] = useState("");
-
-  const handleConnectWallet = () => {
-    connectWallet();
-  };
-
-  useEffect(() => {
-    const account = localStorage.getItem("connectedAccount");
-    if (account) {
-      setConnectedAccount(account);
-    }
-  }, []);
 
   return (
     <div className="xl:max-w-[1280px] w-full">
@@ -56,7 +44,7 @@ const NavigationBar = () => {
             </button>
           ) : (
             <button
-              onClick={handleConnectWallet}
+              onClick={handleClick}
               type="button"
               className="hover:scale-105 duration-200 px-6 py-2.5 text-white font-poppins font-normal text-[16px] shadow-md border connect-wallet-gradient"
             >

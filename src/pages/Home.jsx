@@ -7,7 +7,6 @@ import { getRecommendedElections } from "../services/Blockchain";
 
 const Home = () => {
   const [recommendedElectionsData, setRecommendedElectionsData] = useState([]);
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {

@@ -16,7 +16,7 @@ const History = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const connectedAccount = localStorage.getItem("connectedAccount");
+        const connectedAccount = sessionStorage.getItem("connectedAccount");
         if (connectedAccount) {
           const data = await getHistory(connectedAccount);
           setHistoryData(data);

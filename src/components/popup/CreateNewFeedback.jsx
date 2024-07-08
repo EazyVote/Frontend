@@ -10,7 +10,7 @@ const CreateNewFeedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const connectedAccount = localStorage.getItem("connectedAccount");
+    const connectedAccount = sessionStorage.getItem("connectedAccount");
     if (connectedAccount) {
       try {
         addFeedback(connectedAccount);

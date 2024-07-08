@@ -40,16 +40,17 @@ const connectWallet = async () => {
     if (!accounts) {
       return alert("No accounts connected! Please connect a wallet!");
     }
-    localStorage.setItem("connectedAccount", accounts[0]);
+    sessionStorage.setItem("connectedAccount", accounts[0]);
   } catch (error) {
     console.log(error.message);
   }
 };
 
 const disconnectWallet = async () => {
-  localStorage.removeItem("connectedAccount");
+  sessionStorage.removeItem("connectedAccount");
 };
 
+// done
 const createNewElection = async ({
   electionTitle,
   electionPicture,

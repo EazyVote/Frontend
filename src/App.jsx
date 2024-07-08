@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import History from "./pages/History";
@@ -16,12 +16,36 @@ import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedbac
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
 import ErrorPopup from "./components/popup/ErrorPopup";
+import { connectWallet } from "./services/Blockchain";
+import { setGlobalState } from "./services/Helper";
 
 const App = () => {
+  const [connectedAccount, setConnectedAccount] = useState(sessionStorage.getItem("connectedAccount") || "");
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedAccount = sessionStorage.getItem("connectedAccount");
+      if (updatedAccount !== connectedAccount) {
+        setConnectedAccount(updatedAccount || "");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [connectedAccount]);
+
+  const handleClick = async () => {
+    await connectWallet();
+    setGlobalState("mustConnectWalletScale", "scale-0");
+  };
+
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
-        <NavigationBar />
+        <NavigationBar handleClick={handleClick} connectedAccount={connectedAccount}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/elections" element={<Elections />} />

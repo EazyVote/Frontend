@@ -1,40 +1,25 @@
-import { features, iconMap } from "../../services/ContentList";
+import { features } from "../../services/ContentList";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-
-const FeatureCard = ({ title, icon, content, index }) => {
-  const IconComponent = iconMap[icon];
-  return (
-    <div
-      className={`flex flex-row p-6 rounded-[20px] ${
-        index !== features.length - 1 ? "mb-6" : "mb-0"
-      } feature-card`}
-    >
-      <div
-        className={`w-[64px] h-[64px] mr-2 rounded-full flex justify-center items-center bg-dimBlue`}
-      >
-        <IconComponent
-          color="#33bbcf"
-          className="w-[50%] h-[50%] object-contain"
-        />
-      </div>
-      <div className="flex-1 flex flex-col ml-3">
-        <h4 className="font-poppins font-semibold text-white text-[18px] leading-[23.4px] mb-1">
-          {title}
-        </h4>
-        <p className="font-poppins font-normal text-dimWhite text-[16px] leading-[24px]">
-          {content}
-        </p>
-      </div>
-    </div>
-  );
-};
+import { Link, useNavigate } from "react-router-dom";
+import FeatureCard from "../cards/FeatureCard";
+import { setGlobalState } from "../../services/Helper";
 
 const DescriptionSection = () => {
   const ref = useRef(null);
   const [offset, setOffset] = useState(["0 1", "1.05 1"]);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const connectedAccount = sessionStorage.getItem("connectedAccount");
+    if (connectedAccount) {
+      navigate("/create_election");
+    } 
+    else {
+      setGlobalState("mustConnectWalletScale", "scale-100");
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,11 +58,12 @@ const DescriptionSection = () => {
           security, and trust in elections. However, with many platforms
           available.
         </p>
-        <Link to={"/create_election"}>
-          <button className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg">
-            Create New Election
-          </button>
-        </Link>
+        <button
+          onClick={handleClick}
+          className="hover:scale-105 duration-200 mt-6 text-white font-poppins font-normal rounded-lg btn-blue-gradient-2 rounded-lg"
+        >
+          Create New Election
+        </button>
       </div>
 
       <div
