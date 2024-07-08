@@ -1,6 +1,5 @@
 import contractAbi from "../abi/DeployedContract.json";
 import { ethers } from "ethers";
-import { setGlobalState, useGlobalState } from "./Helper";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
@@ -101,6 +100,7 @@ const voteCandidate = async (voter, electionId, candidateId) => {
   }
 };
 
+// done
 const getTotalVoterInOneElection = async (electionId) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
@@ -121,10 +121,27 @@ const getCandidatesInOneElection = async (electionId) => {
   return await loadSpecificCandidates(electionId);
 };
 
+// done
+const getRecommendedElections = async () => {
+  return await loadRecommendedElections();
+};
+
+// done
 const getCandidates = async () => {
   return await loadAllCandidates();
 };
 
+// done
+const getFeedbacks = async () => {
+  return await loadFeedbacks();
+};
+
+// done
+const getHistory = async () => {
+  return await loadHistory();
+}
+
+// done
 const loadAllCandidates = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
@@ -148,19 +165,39 @@ const loadElections = async () => {
   }
 };
 
-const loadRecommendedElections = async () => {};
+// done
+const loadRecommendedElections = async () => {
+  try {
+    const contract = await getEthereumContractWithoutSigner();
+    const elections = await contract.getElections();
+    const currentTime = Math.floor(Date.now() / 1000);
+    const upcomingElections = elections.filter(
+      (election) => election.electionEnd > currentTime
+    );
+    const sortElections = upcomingElections.sort(
+      (a, b) => a.electionEnd - b.electionEnd
+    );
+    const recommendedElections = sortElections.slice(0, 10);
+    return structuredElections(recommendedElections);
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
+};
 
 // done
 const loadFeedbacks = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const feedbacks = await contract.getFeedbacks();
-    structuredFeedbacks(feedbacks);
+    return structuredFeedbacks(feedbacks);
   } catch (error) {
     console.log(error.message);
+    return [];
   }
 };
 
+// done
 const loadHistory = async (user) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
@@ -169,12 +206,14 @@ const loadHistory = async (user) => {
     const userHistory = elections.filter((history) =>
       historyId.includes(history.id)
     );
-    structuredElections(userHistory);
+    return structuredElections(userHistory);
   } catch (error) {
     console.log(error.message);
+    return []
   }
 };
 
+// done
 const loadSpecificCandidates = async (electionId) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
@@ -192,6 +231,7 @@ const loadSpecificCandidates = async (electionId) => {
   }
 };
 
+// done
 const structuredElections = (elections) => {
   const electionList = elections.map((election) => ({
     id: parseInt(election.id),
@@ -206,6 +246,7 @@ const structuredElections = (elections) => {
   return electionList;
 };
 
+// done
 const structuredCandidates = (candidates) => {
   const candidateList = candidates.map((candidate) => ({
     id: parseInt(candidate.id),
@@ -225,7 +266,7 @@ const structuredFeedbacks = (feedbacks) => {
     user: feedback.user.toString(),
     textFeedback: feedback.textFeedback,
   }));
-  localStorage.setItem("feedbacks", JSON.stringify(feedbackList));
+  return feedbackList;
 };
 
 export {
@@ -237,7 +278,9 @@ export {
   getTotalVoterInOneElection,
   getCandidatesInOneElection,
   getCandidates,
-  loadFeedbacks,
+  getFeedbacks,
+  getRecommendedElections,
+  getHistory,
   loadHistory,
   getElections,
   loadRecommendedElections,

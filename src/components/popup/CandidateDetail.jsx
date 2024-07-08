@@ -52,7 +52,7 @@ const CandidateDetail = () => {
     fetchData();
   }, [candidateId, electionId]);
 
-  if (loading) {
+  if (loading || !candidateData) {
     return <div>Loading...</div>;
   }
 

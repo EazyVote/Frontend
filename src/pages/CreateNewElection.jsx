@@ -58,7 +58,7 @@ const CreateNewElection = () => {
       !electionData.electionStart ||
       !electionData.electionEnd ||
       !electionData.electionDescription ||
-      electionData.electionTotalCandidates == 0
+      electionData.electionTotalCandidates <= 1
     ) {
       return setGlobalState("errorPopup", "scale-100");
     }

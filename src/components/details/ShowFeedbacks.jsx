@@ -5,8 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import FeedbackCard from "../cards/FeedbackCard";
 import { useScroll } from "framer-motion";
 import { motion } from "framer-motion";
-import { setGlobalState, useGlobalState } from "../../services/Helper";
-import { loadFeedbacks } from "../../services/Blockchain";
+import { setGlobalState } from "../../services/Helper";
+import { getFeedbacks } from "../../services/Blockchain";
 
 const ShowFeedbacks = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -18,7 +18,7 @@ const ShowFeedbacks = () => {
     sliderRef.slickPlay();
   };
 
-  const [feedbacks, setFeedbacks] = useState([]);
+  const [feedbacksData, setFeedbacksData] = useState([]);
 
   const settings = {
     dots: false,
@@ -75,22 +75,21 @@ const ShowFeedbacks = () => {
   };
 
   useEffect(() => {
-    prepareFeedbacks();
-    const intervalId = setInterval(() => {
-      prepareFeedbacks();
-    }, 10000);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const prepareFeedbacks = () => {
-    loadFeedbacks();
-    const convertedFeedbacks = JSON.parse(localStorage.getItem("feedbacks"));
-    setFeedbacks(convertedFeedbacks);
-  };
+    play();
+  }, [])
 
   useEffect(() => {
-    play();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const data = await getFeedbacks();
+        setFeedbacksData(data);
+      } catch (error) {
+        console.log(error.message);
+        setFeedbacksData([]);
+      }
+    };
+    fetchData();
+  }, [feedbacksData]);
 
   return (
     <motion.section
@@ -125,14 +124,14 @@ const ShowFeedbacks = () => {
         </div>
         <div
           className={`slider-container ${
-            feedbacks == null ? "scale-0" : "scale-100"
+            feedbacksData == null ? "scale-0" : "scale-100"
           }`}
         >
           <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
-            {feedbacks == null ? (
+            {feedbacksData == null ? (
               <div></div>
             ) : (
-              feedbacks.map((feedback, index) => (
+              feedbacksData.map((feedback, index) => (
                 <FeedbackCard
                   key={index}
                   id={index}

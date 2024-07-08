@@ -19,6 +19,7 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
 });
 
 const truncate = (text, startChar, endChar, maxLength) => {
+  console.log(text)
   if (text.length > maxLength) {
     let start = text.substring(0, startChar);
     let end = text.substring(text.length - endChar, text.length);
@@ -70,14 +71,8 @@ const unixTimestampConverter = (unixTimestamp) => {
     dayLabel = `${day} ${month} ${year}`;
   }
 
-  const formatedDateTime = `${dayLabel} at ${hours}:${minutes}`;
+  const formatedDateTime = `${dayLabel} at ${hours}:${minutes} UTC`;
   return formatedDateTime;
-};
-
-const getRandomId = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.ceil(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const remainingTime = () => {};
@@ -88,6 +83,5 @@ export {
   setGlobalState,
   useGlobalState,
   getGlobalState,
-  getRandomId,
   unixTimestampConverter,
 };

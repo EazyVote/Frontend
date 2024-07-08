@@ -1,10 +1,8 @@
 import { faker } from "@faker-js/faker";
 import React from "react";
-import { getRandomId, truncate } from "../../services/Helper";
+import { truncate } from "../../services/Helper";
 
 const FeedbackCard = ({ id, feedback, isExpanded, toggleExpand }) => {
-  const names = Array.from({ length: 20 }, () => faker.person.fullName());
-  const randId = getRandomId(0, 19);
 
   return (
     <div>
@@ -17,7 +15,7 @@ const FeedbackCard = ({ id, feedback, isExpanded, toggleExpand }) => {
           <div className="relative p-6 space-y-6 leading-none rounded-lg">
             <div className="flex items-center space-x-2">
               <img
-                src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${names[randId]}`}
+                src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${feedback.user}`}
                 className="w-6 h-6 bg-center md:w-16 md:-12 lg:w-12 lg:h-12"
                 alt="avatar"
               />

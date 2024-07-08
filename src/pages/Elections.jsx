@@ -13,20 +13,12 @@ const Elections = () => {
     setQuery(e.target.value);
   };
 
-  // useEffect(() => {
-  //   loadElections();
-  //   const intervalId = setInterval(() => {
-  //     loadElections();
-  //   }, 1000);
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const data = await getElections();
-        setElectionsData(data || []);
+        setElectionsData(data);
       } catch (error) {
         console.log(error.message);
         setElectionsData([]);
@@ -46,9 +38,9 @@ const Elections = () => {
     }
   }, [query, electionsData]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (!filteredElections) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="elections">

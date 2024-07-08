@@ -16,9 +16,14 @@ const ElectionCard = ({ id, election, notes, variants }) => {
         console.log(error.message);
       }
     };
+    console.log(election)
     fetchData();
   }, []);
 
+  if (!election) {
+    return <div>Loading..</div>
+  }
+  
   return (
     <div>
       <motion.div

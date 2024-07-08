@@ -1,20 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DescriptionSection from "../components/sections/DescriptionSection";
 import ShowRecommendedElection from "../components/details/ShowRecommendedElection";
-import { elections } from "../services/ContentList";
 import HomeHeroSection from "../components/sections/HomeHeroSection";
-import { useGlobalState } from "../services/Helper";
 import ShowFeedbacks from "../components/details/ShowFeedbacks";
+import { getRecommendedElections } from "../services/Blockchain";
 
 const Home = () => {
+  const [recommendedElectionsData, setRecommendedElectionsData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getRecommendedElections();
+        setRecommendedElectionsData(data);
+      }
+      catch (error) {
+        console.log(error.message)
+        setRecommendedElectionsData([])
+      }
+    }
+    fetchData()
+  }, [])
+
   return (
     <>
       <HomeHeroSection />
       <DescriptionSection />
-      {elections.length == 0 ? (
+      {recommendedElectionsData.length == 0 ? (
         <div></div>
       ) : (
-        <ShowRecommendedElection />
+        <ShowRecommendedElection elections={recommendedElectionsData} />
       )}
       <ShowFeedbacks />
     </>
