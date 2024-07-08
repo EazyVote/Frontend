@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import ShowAllHistory from "../components/details/ShowAllHistory";
 import SearchBar from "../components/small/SearchBar";
 import { useGlobalState } from "../services/Helper";
-import { loadHistory } from "../services/Blockchain";
+import { getHistory } from "../services/Blockchain";
 
 const History = () => {
   const [query, setQuery] = useState("");
-  const [history] = useGlobalState("history");
+  const [historyData, setHistoryData] = useState([]);
   const [filteredHistory, setFilteredHistory] = useState([]);
 
   const handleSearch = (e) => {
@@ -14,24 +14,29 @@ const History = () => {
   };
 
   useEffect(() => {
-    const connectedAccount = localStorage.getItem("connectedAccount")
-    if (connectedAccount) {
-      loadHistory(connectedAccount)
-      const intervalId = setInterval(() => {
-        loadHistory(connectedAccount);
-      }, 10000);
-      return () => clearInterval(intervalId);
-    }
-  }, [])
-  
+    const fetchData = async () => {
+      try {
+        const connectedAccount = localStorage.getItem("connectedAccount");
+        if (connectedAccount) {
+          const data = await getHistory(connectedAccount);
+          setHistoryData(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+        setHistoryData([]);
+      }
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => {
-    if (history) {
-      const filtered = history.filter((history) =>
+    if (historyData) {
+      const filtered = historyData.filter((history) =>
         history.electionTitle.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredHistory(filtered);
     }
-  }, [query]);
+  }, [query, historyData]);
 
   return (
     <div id="history">

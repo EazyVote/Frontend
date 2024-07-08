@@ -137,8 +137,8 @@ const getFeedbacks = async () => {
 };
 
 // done
-const getHistory = async () => {
-  return await loadHistory();
+const getHistory = async (user) => {
+  return await loadHistory(user);
 };
 
 // done

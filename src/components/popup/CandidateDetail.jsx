@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { setGlobalState, useGlobalState } from "../../services/Helper";
 import { FaTimes } from "react-icons/fa";
-import { getCandidates, voteCandidate } from "../../services/Blockchain";
+import {
+  getCandidates,
+  getElections,
+  voteCandidate,
+} from "../../services/Blockchain";
 import { useNavigate } from "react-router-dom";
 
 const CandidateDetail = () => {
@@ -11,6 +15,7 @@ const CandidateDetail = () => {
   const connectedAccount = localStorage.getItem("connectedAccount");
   const [candidateData, setCandidateData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [electionStatus, setElectionStatus] = useState(1);
   const navigate = useNavigate();
 
   const onClose = () => {
@@ -42,6 +47,12 @@ const CandidateDetail = () => {
         const indexedData = data.find(
           (candidate) => candidate.id === parseInt(candidateId)
         );
+        const elections = await getElections();
+        const indexedElections = elections.find(
+          (election) => election.id === parseInt(electionId)
+        );
+        const electionStatus = indexedElections.electionStatus;
+        setElectionStatus(parseInt(electionStatus));
         setCandidateData(indexedData);
       } catch (error) {
         console.log(error.message);
@@ -83,13 +94,17 @@ const CandidateDetail = () => {
               <p className="text-sm">{candidateData.candidateMission}</p>
             </div>
           </div>
-          <button
-            onClick={handleClick}
-            type="submit"
-            className="duration-200 hover:scale-105 inline-block px-6 py-2.5 mt-2 text-white font-medium rounded-full shadow-md bg-primary"
-          >
-            Vote {candidateData.candidateName}
-          </button>
+          {electionStatus == 0 ? (
+            <button
+              onClick={handleClick}
+              type="submit"
+              className="duration-200 hover:scale-105 inline-block px-6 py-2.5 mt-2 text-white font-medium rounded-full shadow-md bg-primary"
+            >
+              Vote {candidateData.candidateName}
+            </button>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

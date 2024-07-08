@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { truncate, unixTimestampConverter } from "../../services/Helper";
 
 const HistoryCard = ({ id, history, notes, variants }) => {
+  
   return (
     <div>
       <motion.div
@@ -26,14 +28,14 @@ const HistoryCard = ({ id, history, notes, variants }) => {
                 />
                 <small className="text-dimWhite">
                   {" "}
-                  {history.electionCreator}
+                  {truncate(history.electionCreator, 4, 4, 11)}
                 </small>
               </div>
               <small className="text-white my-2 block">
-                Start : {history.electionStart}
+                Start : {unixTimestampConverter(history.electionStart)}
               </small>
               <small className="text-white mb-2 block">
-                End : {history.electionEnd}
+                End : {unixTimestampConverter(history.electionEnd)}
               </small>
             </div>
 

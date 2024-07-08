@@ -2,6 +2,7 @@ import React from "react";
 import cat404 from "../../assets/cat404.png";
 import HistoryCard from "../cards/HistoryCard";
 import { motion } from "framer-motion";
+import ElectionCard from "../cards/ElectionCard";
 
 const ShowAllHistory = ({ history }) => {
   const container = {
@@ -42,10 +43,11 @@ const ShowAllHistory = ({ history }) => {
           className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
         >
           {history.map((history, index) => (
-            <HistoryCard
+            <ElectionCard
               key={index}
               id={index}
-              history={history}
+              election={history}
+              notes={"showAllElection"}
               variants={item}
             />
           ))}
