@@ -79,7 +79,7 @@ const ElectionForm = ({
           </div>
         </div>
         <div className="col-span-2 lg:col-span-1">
-          <label className="text-white">Election Start (UTC)</label>
+          <label className="text-white">Election Start </label>
           <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
             <input
               className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"
@@ -95,7 +95,7 @@ const ElectionForm = ({
           </div>
         </div>
         <div className="col-span-2 lg:col-span-1">
-          <label className="text-white">Election End (UTC)</label>
+          <label className="text-white">Election End </label>
           <div className="flex justify-between mt-4 items-center rounded-xl bg-gray-300">
             <input
               className="block w-full bg-transparent border-0 text-sm py-3 px-3 text-primary focus:outline focus:ring-0"

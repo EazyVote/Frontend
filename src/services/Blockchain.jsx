@@ -93,7 +93,7 @@ const giveFeedback = async (user, textFeedback) => {
 
 const voteCandidate = async (voter, electionId, candidateId) => {
   try {
-    const contract = await getEthereumContractWithoutSigner();
+    const contract = await getEthereumContractWithSigner();
     await contract.voteCandidate(voter, electionId, candidateId);
   } catch (error) {
     console.log(error.message);
@@ -139,7 +139,7 @@ const getFeedbacks = async () => {
 // done
 const getHistory = async () => {
   return await loadHistory();
-}
+};
 
 // done
 const loadAllCandidates = async () => {
@@ -170,14 +170,12 @@ const loadRecommendedElections = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
+    console.log("elec", elections)
     const currentTime = Math.floor(Date.now() / 1000);
     const upcomingElections = elections.filter(
-      (election) => election.electionEnd > currentTime
+      (election) => Number(election.electionEnd) > currentTime
     );
-    const sortElections = upcomingElections.sort(
-      (a, b) => a.electionEnd - b.electionEnd
-    );
-    const recommendedElections = sortElections.slice(0, 10);
+    const recommendedElections = upcomingElections.slice(0, 10);
     return structuredElections(recommendedElections);
   } catch (error) {
     console.log(error.message);
@@ -209,7 +207,7 @@ const loadHistory = async (user) => {
     return structuredElections(userHistory);
   } catch (error) {
     console.log(error.message);
-    return []
+    return [];
   }
 };
 

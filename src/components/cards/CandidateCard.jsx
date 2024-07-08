@@ -5,7 +5,6 @@ import { setGlobalState } from "../../services/Helper";
 const CandidateCard = ({ candidate, variants }) => {
 
   const handleClick = () => {
-    console.log("haha")
     sessionStorage.setItem("candidateId", candidate.id);
     setGlobalState("candidateDetailScale", "scale-100");
     console.log("candidateDetailScale set to scale-100");

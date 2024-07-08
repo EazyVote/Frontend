@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { setGlobalState, useGlobalState } from "../../services/Helper";
 import { FaTimes } from "react-icons/fa";
 import { getCandidates, voteCandidate } from "../../services/Blockchain";
+import { useNavigate } from "react-router-dom";
 
 const CandidateDetail = () => {
   const [candidateDetailScale] = useGlobalState("candidateDetailScale");
@@ -10,6 +11,7 @@ const CandidateDetail = () => {
   const connectedAccount = localStorage.getItem("connectedAccount");
   const [candidateData, setCandidateData] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const onClose = () => {
     setGlobalState("candidateDetailScale", "scale-0");
@@ -19,6 +21,7 @@ const CandidateDetail = () => {
     try {
       await voteCandidate(connectedAccount, electionId, candidateId);
       reset();
+      navigate("/elections");
     } catch (error) {
       console.log(error.message);
     }
@@ -40,8 +43,6 @@ const CandidateDetail = () => {
           (candidate) => candidate.id === parseInt(candidateId)
         );
         setCandidateData(indexedData);
-        console.log(electionId);
-        console.log(candidateId);
       } catch (error) {
         console.log(error.message);
         setCandidateData({});

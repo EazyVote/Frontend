@@ -6,21 +6,22 @@ import ShowFeedbacks from "../components/details/ShowFeedbacks";
 import { getRecommendedElections } from "../services/Blockchain";
 
 const Home = () => {
-  const [recommendedElectionsData, setRecommendedElectionsData] = useState([])
+  const [recommendedElectionsData, setRecommendedElectionsData] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getRecommendedElections();
         setRecommendedElectionsData(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error.message);
+        setRecommendedElectionsData([]);
       }
-      catch (error) {
-        console.log(error.message)
-        setRecommendedElectionsData([])
-      }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   return (
     <>

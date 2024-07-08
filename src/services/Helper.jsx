@@ -19,7 +19,6 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
 });
 
 const truncate = (text, startChar, endChar, maxLength) => {
-  console.log(text)
   if (text.length > maxLength) {
     let start = text.substring(0, startChar);
     let end = text.substring(text.length - endChar, text.length);
@@ -71,7 +70,7 @@ const unixTimestampConverter = (unixTimestamp) => {
     dayLabel = `${day} ${month} ${year}`;
   }
 
-  const formatedDateTime = `${dayLabel} at ${hours}:${minutes} UTC`;
+  const formatedDateTime = `${dayLabel} at ${hours}:${minutes}`;
   return formatedDateTime;
 };
 
