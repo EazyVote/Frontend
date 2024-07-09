@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import cat404 from "../../assets/cat404.png";
 import { motion } from "framer-motion";
 import CandidateCard from "../cards/CandidateCard";
-import { getCandidatesInOneElection } from "../../services/Blockchain";
+import { getCandidatesInOneElection, getNewEvent } from "../../services/Blockchain";
 
 const ShowAllCandidates = ({ id }) => {
   const [candidatesData, setCandidatesData] = useState([]);
@@ -34,7 +34,7 @@ const ShowAllCandidates = ({ id }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [getNewEvent]);
 
   if (!candidatesData) {
     return <div>Loading...</div>;
@@ -58,7 +58,7 @@ const ShowAllCandidates = ({ id }) => {
           </div>
         </div>
       ) : (
-        <div className="place-items-center grid">
+        <div className="grid place-items-center">
           <motion.div
             variants={container}
             initial="hidden"

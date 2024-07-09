@@ -67,11 +67,8 @@ const unixTimestampConverter = (unixTimestamp) => {
   return formatedDateTime;
 };
 
-const remainingTime = () => {};
-
 export {
   truncate,
-  remainingTime,
   setGlobalState,
   useGlobalState,
   getGlobalState,

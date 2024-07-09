@@ -29,7 +29,9 @@ const ElectionDetail = () => {
 
   if (!electionData) {
     return (
-      <div>Loading...</div>
+      <div className="h-screen">
+        
+      </div>
     )
   }
 

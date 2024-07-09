@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import { setGlobalState, useGlobalState } from "../../services/Helper";
 import { FaTimes } from "react-icons/fa";
 import question from "../../assets/question.mp4";
+import { disconnectWallet } from "../../services/Blockchain";
 
 const SignOutConfirmation = () => {
-  const [signOutConfirmationScale] = useGlobalState(
-    "signOutConfirmationScale"
-  );
+  const [signOutConfirmationScale] = useGlobalState("signOutConfirmationScale");
+
+  const handleClick = () => {
+    disconnectWallet();
+    onClose();
+  };
 
   const onClose = () => {
     setGlobalState("signOutConfirmationScale", "scale-0");
@@ -40,7 +44,7 @@ const SignOutConfirmation = () => {
         </div>
         <div className="mt-4 flex justify-center items-center">
           <button
-            onClick={onClose}
+            onClick={handleClick}
             type="button"
             className="mr-6 duration-200 hover:scale-105 w-full font-bold shadow-sm rounded-full py-4 bg-primary text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
           >

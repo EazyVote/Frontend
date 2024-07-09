@@ -7,7 +7,7 @@ import { setGlobalState, truncate } from "../../services/Helper";
 import { NavContext } from "../../context/Context";
 import { connectWallet } from "../../services/Blockchain";
 
-const NavigationBar = ({connectedAccount, handleClick}) => {
+const NavigationBar = ({ connectedAccount, handleClick }) => {
   const { active, setActive } = useContext(NavContext);
   const [toggle, setToggle] = useState(false);
 
@@ -78,17 +78,27 @@ const NavigationBar = ({connectedAccount, handleClick}) => {
                   <Link to={`/${nav.id}`}>{nav.title}</Link>
                 </li>
               ))}
-              <li
-                className={`font-poppins font-medium mb-0 cursor-pointer text-[16px] ${
-                  active === "signout" ? "text-white" : "text-dimWhite"
-                }`}
-                onClick={() => {
-                  setActive("signout");
-                  setGlobalState("signOutConfirmationScale", "scale-100");
-                }}
-              >
-                Sign Out
-              </li>
+              {connectedAccount ? (
+                <li
+                  className={`font-poppins font-medium mb-0 cursor-pointer text-[16px] ${
+                    active === "signout" ? "text-white" : "text-dimWhite"
+                  }`}
+                  onClick={() => {
+                    setGlobalState("signOutConfirmationScale", "scale-100");
+                  }}
+                >
+                  Sign Out
+                </li>
+              ) : (
+                <li
+                  className={`font-poppins font-medium mb-0 cursor-pointer text-[16px] ${
+                    active === "signout" ? "text-white" : "text-dimWhite"
+                  }`}
+                  onClick={handleClick}
+                >
+                  Connect Wallet
+                </li>
+              )}
             </ul>
           </div>
         </div>

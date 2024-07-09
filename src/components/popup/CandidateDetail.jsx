@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import {
   getCandidates,
   getElections,
+  setNewEvent,
   voteCandidate,
 } from "../../services/Blockchain";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,7 @@ const CandidateDetail = () => {
   const handleClick = async () => {
     try {
       await voteCandidate(connectedAccount, electionId, candidateId);
+      setNewEvent();
       reset();
       navigate("/elections");
     } catch (error) {
@@ -66,6 +68,10 @@ const CandidateDetail = () => {
 
   if (candidateDetailScale == "scale-100") {
     if (loading || !candidateData) {
+      return <div>Loading...</div>;
+    }
+  } else {
+    if (!candidateData) {
       return <div>Loading...</div>;
     }
   }
