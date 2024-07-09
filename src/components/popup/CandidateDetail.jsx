@@ -64,8 +64,10 @@ const CandidateDetail = () => {
     fetchData();
   }, [candidateId, electionId]);
 
-  if (loading || !candidateData) {
-    return <div>Loading...</div>;
+  if (candidateDetailScale == "scale-100") {
+    if (loading || !candidateData) {
+      return <div>Loading...</div>;
+    }
   }
 
   return (
