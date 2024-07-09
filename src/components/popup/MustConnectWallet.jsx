@@ -4,13 +4,8 @@ import { FaTimes } from "react-icons/fa";
 import bitcoinLock from "../../assets/bitcoinLock.mp4";
 import { connectWallet } from "../../services/Blockchain";
 
-const MustConnectWallet = () => {
+const MustConnectWallet = ({ handleClick }) => {
   const [mustConnectWalletScale] = useGlobalState("mustConnectWalletScale");
-
-  const handleClick = async () => {
-    connectWallet();
-    onClose();
-  }
 
   const onClose = () => {
     setGlobalState("mustConnectWalletScale", "scale-0");

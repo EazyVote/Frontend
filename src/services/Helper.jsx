@@ -9,13 +9,6 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   successfullyCreateElectionScale: "scale-0",
   signOutConfirmationScale: "scale-0",
   errorPopup: "scale-0",
-  candidateId: 0,
-  connectedAccount: "",
-  elections: [],
-  candidates: [],
-  feedbacks: [],
-  recommended: [],
-  history: [],
 });
 
 const truncate = (text, startChar, endChar, maxLength) => {

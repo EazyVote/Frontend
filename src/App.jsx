@@ -16,36 +16,33 @@ import SuccessfullyGiveFeedback from "./components/popup/SuccessfullyGiveFeedbac
 import SignOutConfirmation from "./components/popup/SignOutConfirmation";
 import { NavProvider } from "./context/Context";
 import ErrorPopup from "./components/popup/ErrorPopup";
-import { connectWallet } from "./services/Blockchain";
+import { connectWallet, getConnectedAccount } from "./services/Blockchain";
 import { setGlobalState } from "./services/Helper";
 
 const App = () => {
-  const [connectedAccount, setConnectedAccount] = useState(sessionStorage.getItem("connectedAccount") || "");
+  const [connectedAccount, setConnectedAccount] = useState("");
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      const updatedAccount = sessionStorage.getItem("connectedAccount");
-      if (updatedAccount !== connectedAccount) {
-        setConnectedAccount(updatedAccount || "");
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    const storedAccount = sessionStorage.getItem("connectedAccount");
+    if (storedAccount) {
+      setConnectedAccount(storedAccount);
+    }
+    console.log("he");
   }, [connectedAccount]);
 
   const handleClick = async () => {
     await connectWallet();
+    setConnectedAccount(getConnectedAccount());
     setGlobalState("mustConnectWalletScale", "scale-0");
   };
 
   return (
     <NavProvider>
       <div className="w-full font-poppins overflow-hidden bg-primary sm:px-12 px-6">
-        <NavigationBar handleClick={handleClick} connectedAccount={connectedAccount}/>
+        <NavigationBar
+          handleClick={handleClick}
+          connectedAccount={connectedAccount}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/elections" element={<Elections />} />
@@ -56,7 +53,7 @@ const App = () => {
         <Footer />
 
         <CreateNewFeedback />
-        <MustConnectWallet />
+        <MustConnectWallet handleClick={handleClick} />
         <CandidateDetail />
         <SuccessfullyVote />
         <SuccessfullyCreateElection />

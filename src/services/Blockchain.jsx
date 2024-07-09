@@ -92,6 +92,7 @@ const giveFeedback = async (user, textFeedback) => {
   }
 };
 
+// done
 const voteCandidate = async (voter, electionId, candidateId) => {
   try {
     const contract = await getEthereumContractWithSigner();
@@ -110,6 +111,10 @@ const getTotalVoterInOneElection = async (electionId) => {
   } catch (error) {
     return console.log(error.message);
   }
+};
+
+const getConnectedAccount = () => {
+  return sessionStorage.getItem("connectedAccount");
 };
 
 // done
@@ -171,7 +176,7 @@ const loadRecommendedElections = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    console.log("elec", elections)
+    console.log("elec", elections);
     const currentTime = Math.floor(Date.now() / 1000);
     const upcomingElections = elections.filter(
       (election) => Number(election.electionEnd) > currentTime
@@ -274,13 +279,13 @@ export {
   createNewElection,
   voteCandidate,
   giveFeedback,
+  getConnectedAccount,
   getTotalVoterInOneElection,
   getCandidatesInOneElection,
   getCandidates,
   getFeedbacks,
   getRecommendedElections,
   getHistory,
-  loadHistory,
   getElections,
   loadRecommendedElections,
 };
