@@ -28,7 +28,7 @@ const CandidateDetail = () => {
       await voteCandidate(connectedAccount, electionId, candidateId);
       setNewEvent();
       reset();
-      navigate("/elections");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }

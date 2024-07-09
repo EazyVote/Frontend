@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const network = import.meta.env.VITE_NETWORK;
 const apiKey = import.meta.env.VITE_SEPOLIA_RPC;
-let counterEvent = 0;
 
 // done
 const getEthereumContractWithSigner = async () => {
@@ -115,12 +114,18 @@ const getTotalVoterInOneElection = async (electionId) => {
 };
 
 const setNewEvent = () => {
-  counterEvent += 1;
+  if (sessionStorage.getItem("event")) {
+    const number = sessionStorage.getItem("event");
+    sessionStorage.setItem("event", number + 1);
+  }
+  else {
+    sessionStorage.setItem("event", 1)
+  }
+  console.log(sessionStorage.getItem("event"))
 };
 
 const getNewEvent = () => {
-  console.log(counterEvent);
-  return counterEvent;
+  return sessionStorage.getItem("event");
 };
 
 // done

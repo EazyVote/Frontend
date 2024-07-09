@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { truncate, unixTimestampConverter } from "../../services/Helper";
-import { getTotalVoterInOneElection } from "../../services/Blockchain";
+import { getNewEvent, getTotalVoterInOneElection } from "../../services/Blockchain";
 
 const ElectionCard = ({ id, election, notes, variants }) => {
   const [totalElectionVoter, setTotalElectionVoter] = useState(0);

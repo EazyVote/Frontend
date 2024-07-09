@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ShowAllElection from "../components/details/ShowAllElection";
 import SearchBar from "../components/small/SearchBar";
-import { getElections } from "../services/Blockchain";
+import { getElections, getNewEvent } from "../services/Blockchain";
 
 const Elections = () => {
   const [query, setQuery] = useState("");
@@ -27,7 +27,7 @@ const Elections = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [getNewEvent]);
 
   useEffect(() => {
     if (electionsData) {
