@@ -18,7 +18,7 @@ const History = () => {
       try {
         const connectedAccount = sessionStorage.getItem("connectedAccount");
         if (connectedAccount) {
-          const data = await getHistory();
+          const data = await getHistory(connectedAccount);
           setHistoryData(data);
         }
       } catch (error) {
@@ -27,7 +27,7 @@ const History = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [historyData]);
 
   useEffect(() => {
     if (historyData) {

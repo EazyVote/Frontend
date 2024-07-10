@@ -115,11 +115,10 @@ const setNewEvent = () => {
   if (sessionStorage.getItem("event")) {
     const number = sessionStorage.getItem("event");
     sessionStorage.setItem("event", number + 1);
+  } else {
+    sessionStorage.setItem("event", 1);
   }
-  else {
-    sessionStorage.setItem("event", 1)
-  }
-  console.log(sessionStorage.getItem("event"))
+  console.log(sessionStorage.getItem("event"));
 };
 
 const getNewEvent = () => {
@@ -157,8 +156,8 @@ const getFeedbacks = async () => {
 };
 
 // done
-const getHistory = async () => {
-  return await loadHistory();
+const getHistory = async (user) => {
+  return await loadHistory(user);
 };
 
 // done
@@ -215,11 +214,11 @@ const loadFeedbacks = async () => {
 };
 
 // done
-const loadHistory = async () => {
+const loadHistory = async (user) => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    const historyId = await contract.getHistoryId();
+    const historyId = await contract.getHistoryId(user);
     const userHistory = elections.filter((history) =>
       historyId.includes(history.id)
     );

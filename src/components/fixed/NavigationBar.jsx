@@ -24,9 +24,7 @@ const NavigationBar = ({ connectedAccount, handleClick }) => {
           {navLinks.map((nav, index) => (
             <li
               key={nav.id}
-              className={`font-poppins font-normal cursor-pointer text-[16px] ${
-                active === nav.title ? "text-white" : "text-dimWhite"
-              } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
+              className={`font-poppins font-normal cursor-pointer text-[16px] text-white ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
               onClick={() => setActive(nav.title)}
             >
               <Link to={`/${nav.id}`}>{nav.title}</Link>

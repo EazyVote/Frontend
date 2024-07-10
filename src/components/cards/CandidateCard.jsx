@@ -7,7 +7,6 @@ const CandidateCard = ({ candidate, variants }) => {
   const handleClick = () => {
     sessionStorage.setItem("candidateId", candidate.id);
     setGlobalState("candidateDetailScale", "scale-100");
-    console.log("candidateDetailScale set to scale-100");
   };
 
   return (

@@ -13,7 +13,6 @@ const Home = () => {
       try {
         const data = await getRecommendedElections();
         setRecommendedElectionsData(data);
-        console.log(data);
       } catch (error) {
         console.log(error.message);
         setRecommendedElectionsData([]);

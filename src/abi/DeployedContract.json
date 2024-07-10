@@ -278,7 +278,9 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
     "name": "getHistoryId",
     "outputs": [
       { "internalType": "uint256[]", "name": "", "type": "uint256[]" }

@@ -46,7 +46,7 @@ const ShowAllHistory = ({ history }) => {
               key={index}
               id={index}
               election={history}
-              notes={"showAllElection"}
+              notes={"showHistory"}
               variants={item}
             />
           ))}

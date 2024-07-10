@@ -15,7 +15,6 @@ const ElectionDetail = () => {
         const indexedData = data.find(
           (election) => election.id === parseInt(id)
         );
-        console.log(indexedData);
         sessionStorage.setItem("electionId", id);
         setElectionData(indexedData || {});
       } catch (error) {

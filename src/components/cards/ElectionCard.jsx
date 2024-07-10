@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { truncate, unixTimestampConverter } from "../../services/Helper";
-import { getNewEvent, getTotalVoterInOneElection } from "../../services/Blockchain";
+import {
+  getNewEvent,
+  getTotalVoterInOneElection,
+} from "../../services/Blockchain";
 
 const ElectionCard = ({ id, election, notes, variants }) => {
   const [totalElectionVoter, setTotalElectionVoter] = useState(0);
@@ -17,19 +20,17 @@ const ElectionCard = ({ id, election, notes, variants }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [totalElectionVoter]);
 
   if (!election) {
-    return <div>Loading..</div>
+    return <div>Loading..</div>;
   }
 
   return (
     <div>
       <motion.div
         variants={variants}
-        className={`font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient mr-4 mb-4 mt-4 ${
-          notes == "showAllElection" ? "lg:w-78 lg:h-70" : "lg:w-64 lg:h-66"
-        } `}
+        className={`font-poppins rounded-lg hover:scale-105 duration-500 shadow-lg election-gradient mr-4 mb-4 mt-4 lg:w-78 lg:h-70`}
       >
         <Link to={"/elections/" + election.id}>
           <img
@@ -61,22 +62,26 @@ const ElectionCard = ({ id, election, notes, variants }) => {
               </small>
             </div>
 
-            <div className="flex justify-between items-center flex-wrap mt-4 mb-2 text-gray-500 font-semibold">
-              <small className="text-white">
-                {totalElectionVoter} voters have voted
-              </small>
-              <div>
-                <small
-                  className={`${
-                    election.electionStatus == 0
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {election.electionStatus == 0 ? "OPEN" : "CLOSED"}
+            {notes == "showHistory" ? (
+              <div></div>
+            ) : (
+              <div className="flex justify-between items-center flex-wrap mt-4 mb-2 text-gray-500 font-semibold">
+                <small className="text-white">
+                  {totalElectionVoter} voters have voted
                 </small>
+                <div>
+                  <small
+                    className={`${
+                      election.electionStatus == 0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {election.electionStatus == 0 ? "OPEN" : "CLOSED"}
+                  </small>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </Link>
       </motion.div>
