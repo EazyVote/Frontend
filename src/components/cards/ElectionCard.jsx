@@ -20,7 +20,7 @@ const ElectionCard = ({ id, election, notes, variants }) => {
       }
     };
     fetchData();
-  }, [totalElectionVoter]);
+  }, [totalElectionVoter, election]);
 
   if (!election) {
     return <div>Loading..</div>;
