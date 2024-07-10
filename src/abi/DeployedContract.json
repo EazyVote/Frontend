@@ -124,11 +124,6 @@
         "type": "string"
       },
       {
-        "internalType": "address",
-        "name": "_electionCreator",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "_electionStart",
         "type": "uint256"
@@ -283,9 +278,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
-    ],
+    "inputs": [],
     "name": "getHistoryId",
     "outputs": [
       { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
@@ -304,7 +297,6 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" },
       { "internalType": "string", "name": "_textFeedback", "type": "string" }
     ],
     "name": "giveFeedback",
@@ -314,7 +306,6 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_voter", "type": "address" },
       { "internalType": "uint256", "name": "_electionId", "type": "uint256" },
       { "internalType": "uint256", "name": "_candidateId", "type": "uint256" }
     ],

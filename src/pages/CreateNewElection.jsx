@@ -48,8 +48,6 @@ const CreateNewElection = () => {
   };
 
   const handleSubmit = async (e) => {
-    const connectedAccount = sessionStorage.getItem("connectedAccount");
-
     e.preventDefault();
 
     if (
@@ -82,7 +80,6 @@ const CreateNewElection = () => {
     const electionParam = {
       electionTitle: electionData.electionTitle,
       electionPicture: electionData.electionPicture,
-      electionCreator: connectedAccount,
       electionStart: Math.floor(new Date(electionData.electionStart).getTime() / 1000),
       electionEnd: Math.floor(new Date(electionData.electionEnd).getTime() / 1000),
       electionDescription: electionData.electionDescription,

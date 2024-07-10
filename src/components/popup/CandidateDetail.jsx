@@ -13,7 +13,6 @@ const CandidateDetail = () => {
   const [candidateDetailScale] = useGlobalState("candidateDetailScale");
   const candidateId = sessionStorage.getItem("candidateId");
   const electionId = sessionStorage.getItem("electionId");
-  const connectedAccount = localStorage.getItem("connectedAccount");
   const [candidateData, setCandidateData] = useState({});
   const [loading, setLoading] = useState(true);
   const [electionStatus, setElectionStatus] = useState(1);
@@ -25,7 +24,7 @@ const CandidateDetail = () => {
 
   const handleClick = async () => {
     try {
-      await voteCandidate(connectedAccount, electionId, candidateId);
+      await voteCandidate(electionId, candidateId);
       setNewEvent();
       reset();
       navigate("/");

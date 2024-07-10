@@ -18,7 +18,7 @@ const History = () => {
       try {
         const connectedAccount = sessionStorage.getItem("connectedAccount");
         if (connectedAccount) {
-          const data = await getHistory(connectedAccount);
+          const data = await getHistory();
           setHistoryData(data);
         }
       } catch (error) {

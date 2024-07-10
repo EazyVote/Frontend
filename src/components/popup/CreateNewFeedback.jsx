@@ -13,7 +13,7 @@ const CreateNewFeedback = () => {
     const connectedAccount = sessionStorage.getItem("connectedAccount");
     if (connectedAccount) {
       try {
-        addFeedback(connectedAccount);
+        addFeedback();
       } catch (error) {
         console.log(error.message);
       }
@@ -24,8 +24,8 @@ const CreateNewFeedback = () => {
     reset();
   };
 
-  const addFeedback = async (connectedAccount) => {
-    await giveFeedback(connectedAccount, feedback);
+  const addFeedback = async () => {
+    await giveFeedback(feedback);
     onClose();
     setGlobalState("successfullyGiveFeedbackScale", "scale-100");
   };

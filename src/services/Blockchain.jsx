@@ -54,7 +54,6 @@ const disconnectWallet = async () => {
 const createNewElection = async ({
   electionTitle,
   electionPicture,
-  electionCreator,
   electionStart,
   electionEnd,
   electionDescription,
@@ -68,7 +67,6 @@ const createNewElection = async ({
     await contract.createNewElection(
       electionTitle,
       electionPicture,
-      electionCreator,
       electionStart,
       electionEnd,
       electionDescription,
@@ -83,20 +81,20 @@ const createNewElection = async ({
 };
 
 // done
-const giveFeedback = async (user, textFeedback) => {
+const giveFeedback = async (textFeedback) => {
   try {
     const contract = await getEthereumContractWithSigner();
-    await contract.giveFeedback(user, textFeedback);
+    await contract.giveFeedback(textFeedback);
   } catch (error) {
     console.log(error.message);
   }
 };
 
 // done
-const voteCandidate = async (voter, electionId, candidateId) => {
+const voteCandidate = async (electionId, candidateId) => {
   try {
     const contract = await getEthereumContractWithSigner();
-    await contract.voteCandidate(voter, electionId, candidateId);
+    await contract.voteCandidate(electionId, candidateId);
   } catch (error) {
     console.log(error.message);
   }
@@ -159,8 +157,8 @@ const getFeedbacks = async () => {
 };
 
 // done
-const getHistory = async (user) => {
-  return await loadHistory(user);
+const getHistory = async () => {
+  return await loadHistory();
 };
 
 // done
@@ -192,7 +190,6 @@ const loadRecommendedElections = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    console.log("elec", elections);
     const currentTime = Math.floor(Date.now() / 1000);
     const upcomingElections = elections.filter(
       (election) => Number(election.electionEnd) > currentTime
@@ -218,11 +215,11 @@ const loadFeedbacks = async () => {
 };
 
 // done
-const loadHistory = async (user) => {
+const loadHistory = async () => {
   try {
     const contract = await getEthereumContractWithoutSigner();
     const elections = await contract.getElections();
-    const historyId = await contract.getHistoryId(user);
+    const historyId = await contract.getHistoryId();
     const userHistory = elections.filter((history) =>
       historyId.includes(history.id)
     );

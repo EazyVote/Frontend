@@ -27,7 +27,7 @@ const Elections = () => {
       }
     };
     fetchData();
-  }, [getNewEvent]);
+  }, [getNewEvent, electionsData]);
 
   useEffect(() => {
     if (electionsData) {
